@@ -1,0 +1,526 @@
+[
+ {
+  "Code": "sk",
+  "Name": "الصورة الكبيرة"
+ },
+ {
+  "Code": "hz",
+  "Name": "حزم"
+ },
+ {
+  "Code": "oh",
+  "Name": "أم حارتين"
+ },
+ {
+  "Code": "kh",
+  "Name": "خلخلة"
+ },
+ {
+  "Code": "th",
+  "Name": "ذكير"
+ },
+ {
+  "Code": "so",
+  "Name": "الصورة"
+ },
+ {
+  "Code": "rd",
+  "Name": "رضيمة اللواء"
+ },
+ {
+  "Code": "ka",
+  "Name": "الخالدية"
+ },
+ {
+  "Code": "sa",
+  "Name": "السالمية"
+ },
+ {
+  "Code": "hk",
+  "Name": "الحقف"
+ },
+ {
+  "Code": "ks",
+  "Name": "القصر"
+ },
+ {
+  "Code": "bt",
+  "Name": "البثينة"
+ },
+ {
+  "Code": "ta",
+  "Name": "تعلا"
+ },
+ {
+  "Code": "la",
+  "Name": "لاهثة"
+ },
+ {
+  "Code": "dd",
+  "Name": "دير داما"
+ },
+ {
+  "Code": "bs",
+  "Name": "البستان"
+ },
+ {
+  "Code": "da",
+  "Name": "داما"
+ },
+ {
+  "Code": "gr",
+  "Name": "جرين"
+ },
+ {
+  "Code": "lb",
+  "Name": "لبين"
+ },
+ {
+  "Code": "hr",
+  "Name": "حران"
+ },
+ {
+  "Code": "ok",
+  "Name": "وقم"
+ },
+ {
+  "Code": "sm",
+  "Name": "صميد"
+ },
+ {
+  "Code": "kr",
+  "Name": "الخرسا"
+ },
+ {
+  "Code": "ar",
+  "Name": "عريقة"
+ },
+ {
+  "Code": "mg",
+  "Name": "مجادل"
+ },
+ {
+  "Code": "gd",
+  "Name": "جديا"
+ },
+ {
+  "Code": "sl",
+  "Name": "صلاخد"
+ },
+ {
+  "Code": "mt",
+  "Name": "المتونة"
+ },
+ {
+  "Code": "se",
+  "Name": "السويمرة"
+ },
+ {
+  "Code": "oz",
+  "Name": "أم الزيتون"
+ },
+ {
+  "Code": "he",
+  "Name": "الهيات"
+ },
+ {
+  "Code": "am",
+  "Name": "عمرة"
+ },
+ {
+  "Code": "sh",
+  "Name": "شقا"
+ },
+ {
+  "Code": "gn",
+  "Name": "الجنينة"
+ },
+ {
+  "Code": "ba",
+  "Name": "بارك"
+ },
+ {
+  "Code": "rs",
+  "Name": "الرضيمة الشرقية"
+ },
+ {
+  "Code": "ag",
+  "Name": "عراجة"
+ },
+ {
+  "Code": "do",
+  "Name": "دوما"
+ },
+ {
+  "Code": "te",
+  "Name": "تيما"
+ },
+ {
+  "Code": "tr",
+  "Name": "طربا"
+ },
+ {
+  "Code": "kb",
+  "Name": "الكسيب"
+ },
+ {
+  "Code": "od",
+  "Name": "أم ضبيب"
+ },
+ {
+  "Code": "ns",
+  "Name": "نمرة شهبا"
+ },
+ {
+  "Code": "sb",
+  "Name": "شهبا"
+ },
+ {
+  "Code": "gh",
+  "Name": "غيضة نمرة"
+ },
+ {
+  "Code": "mr",
+  "Name": "مردك"
+ },
+ {
+  "Code": "br",
+  "Name": "بريكة"
+ },
+ {
+  "Code": "re",
+  "Name": "ريمة اللحف"
+ },
+ {
+  "Code": "nj",
+  "Name": "نجران"
+ },
+ {
+  "Code": "dw",
+  "Name": "الدويرة"
+ },
+ {
+  "Code": "ta",
+  "Name": "تعارة"
+ },
+ {
+  "Code": "ka",
+  "Name": "قراصة"
+ },
+ {
+  "Code": "do",
+  "Name": "الدور"
+ },
+ {
+  "Code": "sm",
+  "Name": "سميع"
+ },
+ {
+  "Code": "sh",
+  "Name": "صما الهنيدات"
+ },
+ {
+  "Code": "ta",
+  "Name": "الطيرة"
+ },
+ {
+  "Code": "sk",
+  "Name": "سكاكي"
+ },
+ {
+  "Code": "da",
+  "Name": "الدارة"
+ },
+ {
+  "Code": "tl",
+  "Name": "الثعلة"
+ },
+ {
+  "Code": "mz",
+  "Name": "المزرعة"
+ },
+ {
+  "Code": "md",
+  "Name": "المجدل"
+ },
+ {
+  "Code": "kf",
+  "Name": "كفر اللحف"
+ },
+ {
+  "Code": "rh",
+  "Name": "ريمة حازم"
+ },
+ {
+  "Code": "wl",
+  "Name": "ولغا"
+ },
+ {
+  "Code": "at",
+  "Name": "عتيل"
+ },
+ {
+  "Code": "sl",
+  "Name": "سليم"
+ },
+ {
+  "Code": "mf",
+  "Name": "مفعلة"
+ },
+ {
+  "Code": "kn",
+  "Name": "قنوات"
+ },
+ {
+  "Code": "se",
+  "Name": "سيع"
+ },
+ {
+  "Code": "sw",
+  "Name": "السويداء"
+ },
+ {
+  "Code": "rh",
+  "Name": "الرحى"
+ },
+ {
+  "Code": "tb",
+  "Name": "الطيبة"
+ },
+ {
+  "Code": "ms",
+  "Name": "المشنف"
+ },
+ {
+  "Code": "or",
+  "Name": "أم رواق"
+ },
+ {
+  "Code": "ag",
+  "Name": "العجيلات"
+ },
+ {
+  "Code": "gh",
+  "Name": "الغيضة"
+ },
+ {
+  "Code": "ra",
+  "Name": "رامي"
+ },
+ {
+  "Code": "sr",
+  "Name": "الشريحي"
+ },
+ {
+  "Code": "sb",
+  "Name": "شبكي"
+ },
+ {
+  "Code": "sa",
+  "Name": "اسعنا"
+ },
+ {
+  "Code": "bo",
+  "Name": "بوسان"
+ },
+ {
+  "Code": "rsh",
+  "Name": "الرشيدة"
+ },
+ {
+  "Code": "sha",
+  "Name": "شعف"
+ },
+ {
+  "Code": "har",
+  "Name": "الحريسة"
+ },
+ {
+  "Code": "hw",
+  "Name": "الهويا"
+ },
+ {
+  "Code": "ki",
+  "Name": "قيصما"
+ },
+ {
+  "Code": "shb",
+  "Name": "الشعاب"
+ },
+ {
+  "Code": "bh",
+  "Name": "بهم"
+ },
+ {
+  "Code": "az",
+  "Name": "أبو زريق"
+ },
+ {
+  "Code": "tle",
+  "Name": "طليلين"
+ },
+ {
+  "Code": "tn",
+  "Name": "تل اللوز"
+ },
+ {
+  "Code": "sal",
+  "Name": "سالة"
+ },
+ {
+  "Code": "mi",
+  "Name": "مياماس"
+ },
+ {
+  "Code": "skh",
+  "Name": "سهوة الخضر"
+ },
+ {
+  "Code": "kfr",
+  "Name": "الكفر"
+ },
+ {
+  "Code": "sbl",
+  "Name": "سهوة بلاطة"
+ },
+ {
+  "Code": "rsa",
+  "Name": "رساس"
+ },
+ {
+  "Code": "knk",
+  "Name": "كناكر"
+ },
+ {
+  "Code": "osl",
+  "Name": "الاصلحا"
+ },
+ {
+  "Code": "era",
+  "Name": "عرى"
+ },
+ {
+  "Code": "jb",
+  "Name": "جبيب"
+ },
+ {
+  "Code": "khr",
+  "Name": "خربا"
+ },
+ {
+  "Code": "mjr",
+  "Name": "المجيمر"
+ },
+ {
+  "Code": "af",
+  "Name": "العفينة"
+ },
+ {
+  "Code": "ho",
+  "Name": "حبران"
+ },
+ {
+  "Code": "kry",
+  "Name": "القريا"
+ },
+ {
+  "Code": "nkr",
+  "Name": "نمرة القريا"
+ },
+ {
+  "Code": "brd",
+  "Name": "برد"
+ },
+ {
+  "Code": "bk",
+  "Name": "بكا"
+ },
+ {
+  "Code": "hw",
+  "Name": "حوط"
+ },
+ {
+  "Code": "thb",
+  "Name": "ذيبين"
+ },
+ {
+  "Code": "orm",
+  "Name": "أم الرمان"
+ },
+ {
+  "Code": "gha",
+  "Name": "الغارية"
+ },
+ {
+  "Code": "raf",
+  "Name": "الرافقة"
+ },
+ {
+  "Code": "mnt",
+  "Name": "المنيذرة"
+ },
+ {
+  "Code": "oy",
+  "Name": "عيون"
+ },
+ {
+  "Code": "krs",
+  "Name": "الكارس"
+ },
+ {
+  "Code": "sld",
+  "Name": "صلخد"
+ },
+ {
+  "Code": "mok",
+  "Name": "المشقوق"
+ },
+ {
+  "Code": "anz",
+  "Name": "عنز"
+ },
+ {
+  "Code": "mgh",
+  "Name": "المغير"
+ },
+ {
+  "Code": "kaw",
+  "Name": "خربة عواد"
+ },
+ {
+  "Code": "snr",
+  "Name": "شنيرة"
+ },
+ {
+  "Code": "sma",
+  "Name": "صما البردان"
+ },
+ {
+  "Code": "tho",
+  "Name": "تحولا"
+ },
+ {
+  "Code": "ows",
+  "Name": "عوس"
+ },
+ {
+  "Code": "orn",
+  "Name": "عرمان"
+ },
+ {
+  "Code": "mtn",
+  "Name": "متان"
+ },
+ {
+  "Code": "aa",
+  "Name": "العانات"
+ },
+ {
+  "Code": "kzm",
+  "Name": "خازمة"
+ },
+ {
+  "Code": "mlh",
+  "Name": "ملح"
+ }
+]
