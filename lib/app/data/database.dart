@@ -1,9 +1,9 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:vollect/app/classes/beneficiary.dart';
 
 import 'package:vollect/app/data/beneficiary_table.dart';
+import 'package:vollect/core/enums.dart';
 
 part 'database.g.dart';
 

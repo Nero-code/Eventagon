@@ -2,9 +2,9 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vollect/app/classes/beneficiary.dart';
 import 'package:vollect/app/data/database.dart';
 import 'package:vollect/app/data/database_extensions.dart';
+import 'package:vollect/core/enums.dart';
 import 'package:vollect/di.dart';
 
 class EditScreen extends StatefulWidget {
