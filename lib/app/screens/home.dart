@@ -340,7 +340,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         return ListTile(
                           title: Text(report.fullName),
-                          subtitle: Text(report.mainResidence ?? "غير معروف"),
+                          subtitle: Text(
+                              report.originalResidenceAddress ?? "غير معروف"),
                           selected: selected,
                           selectedTileColor:
                               const Color.fromARGB(255, 236, 236, 236),

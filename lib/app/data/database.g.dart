@@ -36,23 +36,17 @@ class $BeneficiarysTable extends Beneficiarys
   late final GeneratedColumn<String> lastName = GeneratedColumn<String>(
       'last_name', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _nationalNumberMeta =
-      const VerificationMeta('nationalNumber');
-  @override
-  late final GeneratedColumn<String> nationalNumber = GeneratedColumn<String>(
-      'national_number', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _motherNameMeta =
       const VerificationMeta('motherName');
   @override
   late final GeneratedColumn<String> motherName = GeneratedColumn<String>(
       'mother_name', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _contactNumberMeta =
-      const VerificationMeta('contactNumber');
+  static const VerificationMeta _nationalNumberMeta =
+      const VerificationMeta('nationalNumber');
   @override
-  late final GeneratedColumn<String> contactNumber = GeneratedColumn<String>(
-      'contact_number', aliasedName, true,
+  late final GeneratedColumn<String> nationalNumber = GeneratedColumn<String>(
+      'national_number', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _genderMeta = const VerificationMeta('gender');
   @override
@@ -60,27 +54,6 @@ class $BeneficiarysTable extends Beneficiarys
       GeneratedColumn<String>('gender', aliasedName, true,
               type: DriftSqlType.string, requiredDuringInsert: false)
           .withConverter<Gender?>($BeneficiarysTable.$convertergendern);
-  static const VerificationMeta _birthDateMeta =
-      const VerificationMeta('birthDate');
-  @override
-  late final GeneratedColumn<DateTime> birthDate = GeneratedColumn<DateTime>(
-      'birth_date', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  static const VerificationMeta _medicalStatusMeta =
-      const VerificationMeta('medicalStatus');
-  @override
-  late final GeneratedColumn<String> medicalStatus = GeneratedColumn<String>(
-      'medical_status', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _hasDisabilityMeta =
-      const VerificationMeta('hasDisability');
-  @override
-  late final GeneratedColumn<bool> hasDisability = GeneratedColumn<bool>(
-      'has_disability', aliasedName, true,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("has_disability" IN (0, 1))'));
   static const VerificationMeta _socialStatusMeta =
       const VerificationMeta('socialStatus');
   @override
@@ -90,33 +63,36 @@ class $BeneficiarysTable extends Beneficiarys
               type: DriftSqlType.string, requiredDuringInsert: true)
           .withConverter<SocialStatus>(
               $BeneficiarysTable.$convertersocialStatus);
-  static const VerificationMeta _familybookNumberMeta =
-      const VerificationMeta('familybookNumber');
+  static const VerificationMeta _birthDateMeta =
+      const VerificationMeta('birthDate');
   @override
-  late final GeneratedColumn<String> familybookNumber = GeneratedColumn<String>(
-      'familybook_number', aliasedName, true,
+  late final GeneratedColumn<DateTime> birthDate = GeneratedColumn<DateTime>(
+      'birth_date', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _contactNumberMeta =
+      const VerificationMeta('contactNumber');
+  @override
+  late final GeneratedColumn<String> contactNumber = GeneratedColumn<String>(
+      'contact_number', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _familyMembersNumberMeta =
-      const VerificationMeta('familyMembersNumber');
+  static const VerificationMeta _medicalStatusMeta =
+      const VerificationMeta('medicalStatus');
   @override
-  late final GeneratedColumn<String> familyMembersNumber =
-      GeneratedColumn<String>('family_members_number', aliasedName, true,
-          type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _familyMedicalStatusMeta =
-      const VerificationMeta('familyMedicalStatus');
+  late final GeneratedColumnWithTypeConverter<MedicalStatus?, String>
+      medicalStatus = GeneratedColumn<String>(
+              'medical_status', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<MedicalStatus?>(
+              $BeneficiarysTable.$convertermedicalStatusn);
+  static const VerificationMeta _disabilityStatusMeta =
+      const VerificationMeta('disabilityStatus');
   @override
-  late final GeneratedColumn<String> familyMedicalStatus =
-      GeneratedColumn<String>('family_medical_status', aliasedName, true,
-          type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _familyHasDisabilityMeta =
-      const VerificationMeta('familyHasDisability');
-  @override
-  late final GeneratedColumn<bool> familyHasDisability = GeneratedColumn<bool>(
-      'family_has_disability', aliasedName, true,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("family_has_disability" IN (0, 1))'));
+  late final GeneratedColumnWithTypeConverter<DisabilityStatus?, String>
+      disabilityStatus = GeneratedColumn<String>(
+              'disability_status', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<DisabilityStatus?>(
+              $BeneficiarysTable.$converterdisabilityStatusn);
   static const VerificationMeta _partnerNameMeta =
       const VerificationMeta('partnerName');
   @override
@@ -129,47 +105,144 @@ class $BeneficiarysTable extends Beneficiarys
   late final GeneratedColumn<String> partnerNationalNum =
       GeneratedColumn<String>('partner_national_num', aliasedName, true,
           type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _partnerBirthDateMeta =
-      const VerificationMeta('partnerBirthDate');
-  @override
-  late final GeneratedColumn<DateTime> partnerBirthDate =
-      GeneratedColumn<DateTime>('partner_birth_date', aliasedName, true,
-          type: DriftSqlType.dateTime, requiredDuringInsert: false);
   static const VerificationMeta _partnerPhoneNumMeta =
       const VerificationMeta('partnerPhoneNum');
   @override
   late final GeneratedColumn<String> partnerPhoneNum = GeneratedColumn<String>(
       'partner_phone_num', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _mainResidenceMeta =
-      const VerificationMeta('mainResidence');
+  static const VerificationMeta _partnerBirthDateMeta =
+      const VerificationMeta('partnerBirthDate');
   @override
-  late final GeneratedColumn<String> mainResidence = GeneratedColumn<String>(
-      'main_residence', aliasedName, true,
+  late final GeneratedColumn<DateTime> partnerBirthDate =
+      GeneratedColumn<DateTime>('partner_birth_date', aliasedName, true,
+          type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _familybookNumberMeta =
+      const VerificationMeta('familybookNumber');
+  @override
+  late final GeneratedColumn<String> familybookNumber = GeneratedColumn<String>(
+      'familybook_number', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _currentResidenceMeta =
-      const VerificationMeta('currentResidence');
+  static const VerificationMeta _familyMembersNumberMeta =
+      const VerificationMeta('familyMembersNumber');
   @override
-  late final GeneratedColumn<String> currentResidence = GeneratedColumn<String>(
-      'current_residence', aliasedName, true,
+  late final GeneratedColumn<int> familyMembersNumber = GeneratedColumn<int>(
+      'family_members_number', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _familyChildrenNumberMeta =
+      const VerificationMeta('familyChildrenNumber');
+  @override
+  late final GeneratedColumn<int> familyChildrenNumber = GeneratedColumn<int>(
+      'family_children_number', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _familyHasMedicalStatusMeta =
+      const VerificationMeta('familyHasMedicalStatus');
+  @override
+  late final GeneratedColumn<bool> familyHasMedicalStatus =
+      GeneratedColumn<bool>('family_has_medical_status', aliasedName, true,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintIsAlways(
+              'CHECK ("family_has_medical_status" IN (0, 1))'));
+  static const VerificationMeta _familyHasDisabilityMeta =
+      const VerificationMeta('familyHasDisability');
+  @override
+  late final GeneratedColumn<bool> familyHasDisability = GeneratedColumn<bool>(
+      'family_has_disability', aliasedName, true,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("family_has_disability" IN (0, 1))'));
+  static const VerificationMeta _originalResidenceTypeMeta =
+      const VerificationMeta('originalResidenceType');
+  @override
+  late final GeneratedColumnWithTypeConverter<ResidenceType?, String>
+      originalResidenceType = GeneratedColumn<String>(
+              'original_residence_type', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<ResidenceType?>(
+              $BeneficiarysTable.$converteroriginalResidenceTypen);
+  static const VerificationMeta _originalResidenceAddressMeta =
+      const VerificationMeta('originalResidenceAddress');
+  @override
+  late final GeneratedColumn<String> originalResidenceAddress =
+      GeneratedColumn<String>('original_residence_address', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _originalResidenceRegionMeta =
+      const VerificationMeta('originalResidenceRegion');
+  @override
+  late final GeneratedColumn<String> originalResidenceRegion =
+      GeneratedColumn<String>('original_residence_region', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _originalResidenceStatusMeta =
+      const VerificationMeta('originalResidenceStatus');
+  @override
+  late final GeneratedColumnWithTypeConverter<ResidenceStatus?, String>
+      originalResidenceStatus = GeneratedColumn<String>(
+              'original_residence_status', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<ResidenceStatus?>(
+              $BeneficiarysTable.$converteroriginalResidenceStatusn);
+  static const VerificationMeta _currentResidenceRegionMeta =
+      const VerificationMeta('currentResidenceRegion');
+  @override
+  late final GeneratedColumn<String> currentResidenceRegion =
+      GeneratedColumn<String>('current_residence_region', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _currentResidenceAddressMeta =
+      const VerificationMeta('currentResidenceAddress');
+  @override
+  late final GeneratedColumn<String> currentResidenceAddress =
+      GeneratedColumn<String>('current_residence_address', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _currentResidenceTypeMeta =
+      const VerificationMeta('currentResidenceType');
+  @override
+  late final GeneratedColumnWithTypeConverter<CurrentResidenceType?, String>
+      currentResidenceType = GeneratedColumn<String>(
+              'current_residence_type', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<CurrentResidenceType?>(
+              $BeneficiarysTable.$convertercurrentResidenceTypen);
+  static const VerificationMeta _acadimicLevelMeta =
+      const VerificationMeta('acadimicLevel');
+  @override
+  late final GeneratedColumnWithTypeConverter<AcadimicLevel?, String>
+      acadimicLevel = GeneratedColumn<String>(
+              'acadimic_level', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<AcadimicLevel?>(
+              $BeneficiarysTable.$converteracadimicLeveln);
+  static const VerificationMeta _certificationMeta =
+      const VerificationMeta('certification');
+  @override
+  late final GeneratedColumn<String> certification = GeneratedColumn<String>(
+      'certification', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _residenceTypeMeta =
-      const VerificationMeta('residenceType');
+  static const VerificationMeta _studyAddressMeta =
+      const VerificationMeta('studyAddress');
   @override
-  late final GeneratedColumn<String> residenceType = GeneratedColumn<String>(
-      'residence_type', aliasedName, true,
+  late final GeneratedColumn<String> studyAddress = GeneratedColumn<String>(
+      'study_address', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _residenceStatusMeta =
-      const VerificationMeta('residenceStatus');
+  static const VerificationMeta _jobTypeMeta =
+      const VerificationMeta('jobType');
   @override
-  late final GeneratedColumn<String> residenceStatus = GeneratedColumn<String>(
-      'residence_status', aliasedName, true,
+  late final GeneratedColumnWithTypeConverter<JobType?, String> jobType =
+      GeneratedColumn<String>('job_type', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<JobType?>($BeneficiarysTable.$converterjobTypen);
+  static const VerificationMeta _jobDecriptionMeta =
+      const VerificationMeta('jobDecription');
+  @override
+  late final GeneratedColumn<String> jobDecription = GeneratedColumn<String>(
+      'job_decription', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _shelterNameMeta =
-      const VerificationMeta('shelterName');
+  static const VerificationMeta _monthlySalaryMeta =
+      const VerificationMeta('monthlySalary');
   @override
-  late final GeneratedColumn<String> shelterName = GeneratedColumn<String>(
-      'shelter_name', aliasedName, true,
+  late final GeneratedColumn<String> monthlySalary = GeneratedColumn<String>(
+      'monthly_salary', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _notesMeta = const VerificationMeta('notes');
   @override
@@ -196,27 +269,36 @@ class $BeneficiarysTable extends Beneficiarys
         firstName,
         fatherName,
         lastName,
-        nationalNumber,
         motherName,
-        contactNumber,
+        nationalNumber,
         gender,
-        birthDate,
-        medicalStatus,
-        hasDisability,
         socialStatus,
-        familybookNumber,
-        familyMembersNumber,
-        familyMedicalStatus,
-        familyHasDisability,
+        birthDate,
+        contactNumber,
+        medicalStatus,
+        disabilityStatus,
         partnerName,
         partnerNationalNum,
-        partnerBirthDate,
         partnerPhoneNum,
-        mainResidence,
-        currentResidence,
-        residenceType,
-        residenceStatus,
-        shelterName,
+        partnerBirthDate,
+        familybookNumber,
+        familyMembersNumber,
+        familyChildrenNumber,
+        familyHasMedicalStatus,
+        familyHasDisability,
+        originalResidenceType,
+        originalResidenceAddress,
+        originalResidenceRegion,
+        originalResidenceStatus,
+        currentResidenceRegion,
+        currentResidenceAddress,
+        currentResidenceType,
+        acadimicLevel,
+        certification,
+        studyAddress,
+        jobType,
+        jobDecription,
+        monthlySalary,
         notes,
         creationTime,
         creationLocation
@@ -254,17 +336,23 @@ class $BeneficiarysTable extends Beneficiarys
     } else if (isInserting) {
       context.missing(_lastNameMeta);
     }
+    if (data.containsKey('mother_name')) {
+      context.handle(
+          _motherNameMeta,
+          motherName.isAcceptableOrUnknown(
+              data['mother_name']!, _motherNameMeta));
+    }
     if (data.containsKey('national_number')) {
       context.handle(
           _nationalNumberMeta,
           nationalNumber.isAcceptableOrUnknown(
               data['national_number']!, _nationalNumberMeta));
     }
-    if (data.containsKey('mother_name')) {
-      context.handle(
-          _motherNameMeta,
-          motherName.isAcceptableOrUnknown(
-              data['mother_name']!, _motherNameMeta));
+    context.handle(_genderMeta, const VerificationResult.success());
+    context.handle(_socialStatusMeta, const VerificationResult.success());
+    if (data.containsKey('birth_date')) {
+      context.handle(_birthDateMeta,
+          birthDate.isAcceptableOrUnknown(data['birth_date']!, _birthDateMeta));
     }
     if (data.containsKey('contact_number')) {
       context.handle(
@@ -272,48 +360,8 @@ class $BeneficiarysTable extends Beneficiarys
           contactNumber.isAcceptableOrUnknown(
               data['contact_number']!, _contactNumberMeta));
     }
-    context.handle(_genderMeta, const VerificationResult.success());
-    if (data.containsKey('birth_date')) {
-      context.handle(_birthDateMeta,
-          birthDate.isAcceptableOrUnknown(data['birth_date']!, _birthDateMeta));
-    }
-    if (data.containsKey('medical_status')) {
-      context.handle(
-          _medicalStatusMeta,
-          medicalStatus.isAcceptableOrUnknown(
-              data['medical_status']!, _medicalStatusMeta));
-    }
-    if (data.containsKey('has_disability')) {
-      context.handle(
-          _hasDisabilityMeta,
-          hasDisability.isAcceptableOrUnknown(
-              data['has_disability']!, _hasDisabilityMeta));
-    }
-    context.handle(_socialStatusMeta, const VerificationResult.success());
-    if (data.containsKey('familybook_number')) {
-      context.handle(
-          _familybookNumberMeta,
-          familybookNumber.isAcceptableOrUnknown(
-              data['familybook_number']!, _familybookNumberMeta));
-    }
-    if (data.containsKey('family_members_number')) {
-      context.handle(
-          _familyMembersNumberMeta,
-          familyMembersNumber.isAcceptableOrUnknown(
-              data['family_members_number']!, _familyMembersNumberMeta));
-    }
-    if (data.containsKey('family_medical_status')) {
-      context.handle(
-          _familyMedicalStatusMeta,
-          familyMedicalStatus.isAcceptableOrUnknown(
-              data['family_medical_status']!, _familyMedicalStatusMeta));
-    }
-    if (data.containsKey('family_has_disability')) {
-      context.handle(
-          _familyHasDisabilityMeta,
-          familyHasDisability.isAcceptableOrUnknown(
-              data['family_has_disability']!, _familyHasDisabilityMeta));
-    }
+    context.handle(_medicalStatusMeta, const VerificationResult.success());
+    context.handle(_disabilityStatusMeta, const VerificationResult.success());
     if (data.containsKey('partner_name')) {
       context.handle(
           _partnerNameMeta,
@@ -326,47 +374,106 @@ class $BeneficiarysTable extends Beneficiarys
           partnerNationalNum.isAcceptableOrUnknown(
               data['partner_national_num']!, _partnerNationalNumMeta));
     }
-    if (data.containsKey('partner_birth_date')) {
-      context.handle(
-          _partnerBirthDateMeta,
-          partnerBirthDate.isAcceptableOrUnknown(
-              data['partner_birth_date']!, _partnerBirthDateMeta));
-    }
     if (data.containsKey('partner_phone_num')) {
       context.handle(
           _partnerPhoneNumMeta,
           partnerPhoneNum.isAcceptableOrUnknown(
               data['partner_phone_num']!, _partnerPhoneNumMeta));
     }
-    if (data.containsKey('main_residence')) {
+    if (data.containsKey('partner_birth_date')) {
       context.handle(
-          _mainResidenceMeta,
-          mainResidence.isAcceptableOrUnknown(
-              data['main_residence']!, _mainResidenceMeta));
+          _partnerBirthDateMeta,
+          partnerBirthDate.isAcceptableOrUnknown(
+              data['partner_birth_date']!, _partnerBirthDateMeta));
     }
-    if (data.containsKey('current_residence')) {
+    if (data.containsKey('familybook_number')) {
       context.handle(
-          _currentResidenceMeta,
-          currentResidence.isAcceptableOrUnknown(
-              data['current_residence']!, _currentResidenceMeta));
+          _familybookNumberMeta,
+          familybookNumber.isAcceptableOrUnknown(
+              data['familybook_number']!, _familybookNumberMeta));
     }
-    if (data.containsKey('residence_type')) {
+    if (data.containsKey('family_members_number')) {
       context.handle(
-          _residenceTypeMeta,
-          residenceType.isAcceptableOrUnknown(
-              data['residence_type']!, _residenceTypeMeta));
+          _familyMembersNumberMeta,
+          familyMembersNumber.isAcceptableOrUnknown(
+              data['family_members_number']!, _familyMembersNumberMeta));
     }
-    if (data.containsKey('residence_status')) {
+    if (data.containsKey('family_children_number')) {
       context.handle(
-          _residenceStatusMeta,
-          residenceStatus.isAcceptableOrUnknown(
-              data['residence_status']!, _residenceStatusMeta));
+          _familyChildrenNumberMeta,
+          familyChildrenNumber.isAcceptableOrUnknown(
+              data['family_children_number']!, _familyChildrenNumberMeta));
     }
-    if (data.containsKey('shelter_name')) {
+    if (data.containsKey('family_has_medical_status')) {
       context.handle(
-          _shelterNameMeta,
-          shelterName.isAcceptableOrUnknown(
-              data['shelter_name']!, _shelterNameMeta));
+          _familyHasMedicalStatusMeta,
+          familyHasMedicalStatus.isAcceptableOrUnknown(
+              data['family_has_medical_status']!, _familyHasMedicalStatusMeta));
+    }
+    if (data.containsKey('family_has_disability')) {
+      context.handle(
+          _familyHasDisabilityMeta,
+          familyHasDisability.isAcceptableOrUnknown(
+              data['family_has_disability']!, _familyHasDisabilityMeta));
+    }
+    context.handle(
+        _originalResidenceTypeMeta, const VerificationResult.success());
+    if (data.containsKey('original_residence_address')) {
+      context.handle(
+          _originalResidenceAddressMeta,
+          originalResidenceAddress.isAcceptableOrUnknown(
+              data['original_residence_address']!,
+              _originalResidenceAddressMeta));
+    }
+    if (data.containsKey('original_residence_region')) {
+      context.handle(
+          _originalResidenceRegionMeta,
+          originalResidenceRegion.isAcceptableOrUnknown(
+              data['original_residence_region']!,
+              _originalResidenceRegionMeta));
+    }
+    context.handle(
+        _originalResidenceStatusMeta, const VerificationResult.success());
+    if (data.containsKey('current_residence_region')) {
+      context.handle(
+          _currentResidenceRegionMeta,
+          currentResidenceRegion.isAcceptableOrUnknown(
+              data['current_residence_region']!, _currentResidenceRegionMeta));
+    }
+    if (data.containsKey('current_residence_address')) {
+      context.handle(
+          _currentResidenceAddressMeta,
+          currentResidenceAddress.isAcceptableOrUnknown(
+              data['current_residence_address']!,
+              _currentResidenceAddressMeta));
+    }
+    context.handle(
+        _currentResidenceTypeMeta, const VerificationResult.success());
+    context.handle(_acadimicLevelMeta, const VerificationResult.success());
+    if (data.containsKey('certification')) {
+      context.handle(
+          _certificationMeta,
+          certification.isAcceptableOrUnknown(
+              data['certification']!, _certificationMeta));
+    }
+    if (data.containsKey('study_address')) {
+      context.handle(
+          _studyAddressMeta,
+          studyAddress.isAcceptableOrUnknown(
+              data['study_address']!, _studyAddressMeta));
+    }
+    context.handle(_jobTypeMeta, const VerificationResult.success());
+    if (data.containsKey('job_decription')) {
+      context.handle(
+          _jobDecriptionMeta,
+          jobDecription.isAcceptableOrUnknown(
+              data['job_decription']!, _jobDecriptionMeta));
+    }
+    if (data.containsKey('monthly_salary')) {
+      context.handle(
+          _monthlySalaryMeta,
+          monthlySalary.isAcceptableOrUnknown(
+              data['monthly_salary']!, _monthlySalaryMeta));
     }
     if (data.containsKey('notes')) {
       context.handle(
@@ -401,50 +508,81 @@ class $BeneficiarysTable extends Beneficiarys
           .read(DriftSqlType.string, data['${effectivePrefix}father_name'])!,
       lastName: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}last_name'])!,
-      nationalNumber: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}national_number']),
       motherName: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}mother_name']),
-      contactNumber: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}contact_number']),
+      nationalNumber: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}national_number']),
       gender: $BeneficiarysTable.$convertergendern.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}gender'])),
-      birthDate: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}birth_date']),
-      medicalStatus: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}medical_status']),
-      hasDisability: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}has_disability']),
       socialStatus: $BeneficiarysTable.$convertersocialStatus.fromSql(
           attachedDatabase.typeMapping.read(
               DriftSqlType.string, data['${effectivePrefix}social_status'])!),
-      familybookNumber: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}familybook_number']),
-      familyMembersNumber: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}family_members_number']),
-      familyMedicalStatus: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}family_medical_status']),
-      familyHasDisability: attachedDatabase.typeMapping.read(
-          DriftSqlType.bool, data['${effectivePrefix}family_has_disability']),
+      birthDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}birth_date']),
+      contactNumber: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}contact_number']),
+      medicalStatus: $BeneficiarysTable.$convertermedicalStatusn.fromSql(
+          attachedDatabase.typeMapping.read(
+              DriftSqlType.string, data['${effectivePrefix}medical_status'])),
+      disabilityStatus: $BeneficiarysTable.$converterdisabilityStatusn.fromSql(
+          attachedDatabase.typeMapping.read(DriftSqlType.string,
+              data['${effectivePrefix}disability_status'])),
       partnerName: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}partner_name']),
       partnerNationalNum: attachedDatabase.typeMapping.read(
           DriftSqlType.string, data['${effectivePrefix}partner_national_num']),
-      partnerBirthDate: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}partner_birth_date']),
       partnerPhoneNum: attachedDatabase.typeMapping.read(
           DriftSqlType.string, data['${effectivePrefix}partner_phone_num']),
-      mainResidence: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}main_residence']),
-      currentResidence: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}current_residence']),
-      residenceType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}residence_type']),
-      residenceStatus: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}residence_status']),
-      shelterName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}shelter_name']),
+      partnerBirthDate: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}partner_birth_date']),
+      familybookNumber: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}familybook_number']),
+      familyMembersNumber: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}family_members_number']),
+      familyChildrenNumber: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}family_children_number']),
+      familyHasMedicalStatus: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool,
+          data['${effectivePrefix}family_has_medical_status']),
+      familyHasDisability: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}family_has_disability']),
+      originalResidenceType: $BeneficiarysTable.$converteroriginalResidenceTypen
+          .fromSql(attachedDatabase.typeMapping.read(DriftSqlType.string,
+              data['${effectivePrefix}original_residence_type'])),
+      originalResidenceAddress: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}original_residence_address']),
+      originalResidenceRegion: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}original_residence_region']),
+      originalResidenceStatus: $BeneficiarysTable
+          .$converteroriginalResidenceStatusn
+          .fromSql(attachedDatabase.typeMapping.read(DriftSqlType.string,
+              data['${effectivePrefix}original_residence_status'])),
+      currentResidenceRegion: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}current_residence_region']),
+      currentResidenceAddress: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}current_residence_address']),
+      currentResidenceType: $BeneficiarysTable.$convertercurrentResidenceTypen
+          .fromSql(attachedDatabase.typeMapping.read(DriftSqlType.string,
+              data['${effectivePrefix}current_residence_type'])),
+      acadimicLevel: $BeneficiarysTable.$converteracadimicLeveln.fromSql(
+          attachedDatabase.typeMapping.read(
+              DriftSqlType.string, data['${effectivePrefix}acadimic_level'])),
+      certification: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}certification']),
+      studyAddress: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}study_address']),
+      jobType: $BeneficiarysTable.$converterjobTypen.fromSql(attachedDatabase
+          .typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}job_type'])),
+      jobDecription: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}job_decription']),
+      monthlySalary: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}monthly_salary']),
       notes: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}notes']),
       creationTime: attachedDatabase.typeMapping
@@ -466,6 +604,47 @@ class $BeneficiarysTable extends Beneficiarys
   static JsonTypeConverter2<SocialStatus, String, String>
       $convertersocialStatus =
       const EnumNameConverter<SocialStatus>(SocialStatus.values);
+  static JsonTypeConverter2<MedicalStatus, String, String>
+      $convertermedicalStatus =
+      const EnumNameConverter<MedicalStatus>(MedicalStatus.values);
+  static JsonTypeConverter2<MedicalStatus?, String?, String?>
+      $convertermedicalStatusn =
+      JsonTypeConverter2.asNullable($convertermedicalStatus);
+  static JsonTypeConverter2<DisabilityStatus, String, String>
+      $converterdisabilityStatus =
+      const EnumNameConverter<DisabilityStatus>(DisabilityStatus.values);
+  static JsonTypeConverter2<DisabilityStatus?, String?, String?>
+      $converterdisabilityStatusn =
+      JsonTypeConverter2.asNullable($converterdisabilityStatus);
+  static JsonTypeConverter2<ResidenceType, String, String>
+      $converteroriginalResidenceType =
+      const EnumNameConverter<ResidenceType>(ResidenceType.values);
+  static JsonTypeConverter2<ResidenceType?, String?, String?>
+      $converteroriginalResidenceTypen =
+      JsonTypeConverter2.asNullable($converteroriginalResidenceType);
+  static JsonTypeConverter2<ResidenceStatus, String, String>
+      $converteroriginalResidenceStatus =
+      const EnumNameConverter<ResidenceStatus>(ResidenceStatus.values);
+  static JsonTypeConverter2<ResidenceStatus?, String?, String?>
+      $converteroriginalResidenceStatusn =
+      JsonTypeConverter2.asNullable($converteroriginalResidenceStatus);
+  static JsonTypeConverter2<CurrentResidenceType, String, String>
+      $convertercurrentResidenceType =
+      const EnumNameConverter<CurrentResidenceType>(
+          CurrentResidenceType.values);
+  static JsonTypeConverter2<CurrentResidenceType?, String?, String?>
+      $convertercurrentResidenceTypen =
+      JsonTypeConverter2.asNullable($convertercurrentResidenceType);
+  static JsonTypeConverter2<AcadimicLevel, String, String>
+      $converteracadimicLevel =
+      const EnumNameConverter<AcadimicLevel>(AcadimicLevel.values);
+  static JsonTypeConverter2<AcadimicLevel?, String?, String?>
+      $converteracadimicLeveln =
+      JsonTypeConverter2.asNullable($converteracadimicLevel);
+  static JsonTypeConverter2<JobType, String, String> $converterjobType =
+      const EnumNameConverter<JobType>(JobType.values);
+  static JsonTypeConverter2<JobType?, String?, String?> $converterjobTypen =
+      JsonTypeConverter2.asNullable($converterjobType);
 }
 
 class Beneficiary extends DataClass implements Insertable<Beneficiary> {
@@ -473,27 +652,36 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
   final String firstName;
   final String fatherName;
   final String lastName;
-  final String? nationalNumber;
   final String? motherName;
-  final String? contactNumber;
+  final String? nationalNumber;
   final Gender? gender;
-  final DateTime? birthDate;
-  final String? medicalStatus;
-  final bool? hasDisability;
   final SocialStatus socialStatus;
-  final String? familybookNumber;
-  final String? familyMembersNumber;
-  final String? familyMedicalStatus;
-  final bool? familyHasDisability;
+  final DateTime? birthDate;
+  final String? contactNumber;
+  final MedicalStatus? medicalStatus;
+  final DisabilityStatus? disabilityStatus;
   final String? partnerName;
   final String? partnerNationalNum;
-  final DateTime? partnerBirthDate;
   final String? partnerPhoneNum;
-  final String? mainResidence;
-  final String? currentResidence;
-  final String? residenceType;
-  final String? residenceStatus;
-  final String? shelterName;
+  final DateTime? partnerBirthDate;
+  final String? familybookNumber;
+  final int? familyMembersNumber;
+  final int? familyChildrenNumber;
+  final bool? familyHasMedicalStatus;
+  final bool? familyHasDisability;
+  final ResidenceType? originalResidenceType;
+  final String? originalResidenceAddress;
+  final String? originalResidenceRegion;
+  final ResidenceStatus? originalResidenceStatus;
+  final String? currentResidenceRegion;
+  final String? currentResidenceAddress;
+  final CurrentResidenceType? currentResidenceType;
+  final AcadimicLevel? acadimicLevel;
+  final String? certification;
+  final String? studyAddress;
+  final JobType? jobType;
+  final String? jobDecription;
+  final String? monthlySalary;
   final String? notes;
   final DateTime? creationTime;
   final String? creationLocation;
@@ -502,27 +690,36 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       required this.firstName,
       required this.fatherName,
       required this.lastName,
-      this.nationalNumber,
       this.motherName,
-      this.contactNumber,
+      this.nationalNumber,
       this.gender,
-      this.birthDate,
-      this.medicalStatus,
-      this.hasDisability,
       required this.socialStatus,
-      this.familybookNumber,
-      this.familyMembersNumber,
-      this.familyMedicalStatus,
-      this.familyHasDisability,
+      this.birthDate,
+      this.contactNumber,
+      this.medicalStatus,
+      this.disabilityStatus,
       this.partnerName,
       this.partnerNationalNum,
-      this.partnerBirthDate,
       this.partnerPhoneNum,
-      this.mainResidence,
-      this.currentResidence,
-      this.residenceType,
-      this.residenceStatus,
-      this.shelterName,
+      this.partnerBirthDate,
+      this.familybookNumber,
+      this.familyMembersNumber,
+      this.familyChildrenNumber,
+      this.familyHasMedicalStatus,
+      this.familyHasDisability,
+      this.originalResidenceType,
+      this.originalResidenceAddress,
+      this.originalResidenceRegion,
+      this.originalResidenceStatus,
+      this.currentResidenceRegion,
+      this.currentResidenceAddress,
+      this.currentResidenceType,
+      this.acadimicLevel,
+      this.certification,
+      this.studyAddress,
+      this.jobType,
+      this.jobDecription,
+      this.monthlySalary,
       this.notes,
       this.creationTime,
       this.creationLocation});
@@ -533,43 +730,34 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
     map['first_name'] = Variable<String>(firstName);
     map['father_name'] = Variable<String>(fatherName);
     map['last_name'] = Variable<String>(lastName);
-    if (!nullToAbsent || nationalNumber != null) {
-      map['national_number'] = Variable<String>(nationalNumber);
-    }
     if (!nullToAbsent || motherName != null) {
       map['mother_name'] = Variable<String>(motherName);
     }
-    if (!nullToAbsent || contactNumber != null) {
-      map['contact_number'] = Variable<String>(contactNumber);
+    if (!nullToAbsent || nationalNumber != null) {
+      map['national_number'] = Variable<String>(nationalNumber);
     }
     if (!nullToAbsent || gender != null) {
       map['gender'] =
           Variable<String>($BeneficiarysTable.$convertergendern.toSql(gender));
     }
-    if (!nullToAbsent || birthDate != null) {
-      map['birth_date'] = Variable<DateTime>(birthDate);
-    }
-    if (!nullToAbsent || medicalStatus != null) {
-      map['medical_status'] = Variable<String>(medicalStatus);
-    }
-    if (!nullToAbsent || hasDisability != null) {
-      map['has_disability'] = Variable<bool>(hasDisability);
-    }
     {
       map['social_status'] = Variable<String>(
           $BeneficiarysTable.$convertersocialStatus.toSql(socialStatus));
     }
-    if (!nullToAbsent || familybookNumber != null) {
-      map['familybook_number'] = Variable<String>(familybookNumber);
+    if (!nullToAbsent || birthDate != null) {
+      map['birth_date'] = Variable<DateTime>(birthDate);
     }
-    if (!nullToAbsent || familyMembersNumber != null) {
-      map['family_members_number'] = Variable<String>(familyMembersNumber);
+    if (!nullToAbsent || contactNumber != null) {
+      map['contact_number'] = Variable<String>(contactNumber);
     }
-    if (!nullToAbsent || familyMedicalStatus != null) {
-      map['family_medical_status'] = Variable<String>(familyMedicalStatus);
+    if (!nullToAbsent || medicalStatus != null) {
+      map['medical_status'] = Variable<String>(
+          $BeneficiarysTable.$convertermedicalStatusn.toSql(medicalStatus));
     }
-    if (!nullToAbsent || familyHasDisability != null) {
-      map['family_has_disability'] = Variable<bool>(familyHasDisability);
+    if (!nullToAbsent || disabilityStatus != null) {
+      map['disability_status'] = Variable<String>($BeneficiarysTable
+          .$converterdisabilityStatusn
+          .toSql(disabilityStatus));
     }
     if (!nullToAbsent || partnerName != null) {
       map['partner_name'] = Variable<String>(partnerName);
@@ -577,26 +765,77 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
     if (!nullToAbsent || partnerNationalNum != null) {
       map['partner_national_num'] = Variable<String>(partnerNationalNum);
     }
-    if (!nullToAbsent || partnerBirthDate != null) {
-      map['partner_birth_date'] = Variable<DateTime>(partnerBirthDate);
-    }
     if (!nullToAbsent || partnerPhoneNum != null) {
       map['partner_phone_num'] = Variable<String>(partnerPhoneNum);
     }
-    if (!nullToAbsent || mainResidence != null) {
-      map['main_residence'] = Variable<String>(mainResidence);
+    if (!nullToAbsent || partnerBirthDate != null) {
+      map['partner_birth_date'] = Variable<DateTime>(partnerBirthDate);
     }
-    if (!nullToAbsent || currentResidence != null) {
-      map['current_residence'] = Variable<String>(currentResidence);
+    if (!nullToAbsent || familybookNumber != null) {
+      map['familybook_number'] = Variable<String>(familybookNumber);
     }
-    if (!nullToAbsent || residenceType != null) {
-      map['residence_type'] = Variable<String>(residenceType);
+    if (!nullToAbsent || familyMembersNumber != null) {
+      map['family_members_number'] = Variable<int>(familyMembersNumber);
     }
-    if (!nullToAbsent || residenceStatus != null) {
-      map['residence_status'] = Variable<String>(residenceStatus);
+    if (!nullToAbsent || familyChildrenNumber != null) {
+      map['family_children_number'] = Variable<int>(familyChildrenNumber);
     }
-    if (!nullToAbsent || shelterName != null) {
-      map['shelter_name'] = Variable<String>(shelterName);
+    if (!nullToAbsent || familyHasMedicalStatus != null) {
+      map['family_has_medical_status'] = Variable<bool>(familyHasMedicalStatus);
+    }
+    if (!nullToAbsent || familyHasDisability != null) {
+      map['family_has_disability'] = Variable<bool>(familyHasDisability);
+    }
+    if (!nullToAbsent || originalResidenceType != null) {
+      map['original_residence_type'] = Variable<String>($BeneficiarysTable
+          .$converteroriginalResidenceTypen
+          .toSql(originalResidenceType));
+    }
+    if (!nullToAbsent || originalResidenceAddress != null) {
+      map['original_residence_address'] =
+          Variable<String>(originalResidenceAddress);
+    }
+    if (!nullToAbsent || originalResidenceRegion != null) {
+      map['original_residence_region'] =
+          Variable<String>(originalResidenceRegion);
+    }
+    if (!nullToAbsent || originalResidenceStatus != null) {
+      map['original_residence_status'] = Variable<String>($BeneficiarysTable
+          .$converteroriginalResidenceStatusn
+          .toSql(originalResidenceStatus));
+    }
+    if (!nullToAbsent || currentResidenceRegion != null) {
+      map['current_residence_region'] =
+          Variable<String>(currentResidenceRegion);
+    }
+    if (!nullToAbsent || currentResidenceAddress != null) {
+      map['current_residence_address'] =
+          Variable<String>(currentResidenceAddress);
+    }
+    if (!nullToAbsent || currentResidenceType != null) {
+      map['current_residence_type'] = Variable<String>($BeneficiarysTable
+          .$convertercurrentResidenceTypen
+          .toSql(currentResidenceType));
+    }
+    if (!nullToAbsent || acadimicLevel != null) {
+      map['acadimic_level'] = Variable<String>(
+          $BeneficiarysTable.$converteracadimicLeveln.toSql(acadimicLevel));
+    }
+    if (!nullToAbsent || certification != null) {
+      map['certification'] = Variable<String>(certification);
+    }
+    if (!nullToAbsent || studyAddress != null) {
+      map['study_address'] = Variable<String>(studyAddress);
+    }
+    if (!nullToAbsent || jobType != null) {
+      map['job_type'] = Variable<String>(
+          $BeneficiarysTable.$converterjobTypen.toSql(jobType));
+    }
+    if (!nullToAbsent || jobDecription != null) {
+      map['job_decription'] = Variable<String>(jobDecription);
+    }
+    if (!nullToAbsent || monthlySalary != null) {
+      map['monthly_salary'] = Variable<String>(monthlySalary);
     }
     if (!nullToAbsent || notes != null) {
       map['notes'] = Variable<String>(notes);
@@ -616,66 +855,93 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       firstName: Value(firstName),
       fatherName: Value(fatherName),
       lastName: Value(lastName),
-      nationalNumber: nationalNumber == null && nullToAbsent
-          ? const Value.absent()
-          : Value(nationalNumber),
       motherName: motherName == null && nullToAbsent
           ? const Value.absent()
           : Value(motherName),
-      contactNumber: contactNumber == null && nullToAbsent
+      nationalNumber: nationalNumber == null && nullToAbsent
           ? const Value.absent()
-          : Value(contactNumber),
+          : Value(nationalNumber),
       gender:
           gender == null && nullToAbsent ? const Value.absent() : Value(gender),
+      socialStatus: Value(socialStatus),
       birthDate: birthDate == null && nullToAbsent
           ? const Value.absent()
           : Value(birthDate),
+      contactNumber: contactNumber == null && nullToAbsent
+          ? const Value.absent()
+          : Value(contactNumber),
       medicalStatus: medicalStatus == null && nullToAbsent
           ? const Value.absent()
           : Value(medicalStatus),
-      hasDisability: hasDisability == null && nullToAbsent
+      disabilityStatus: disabilityStatus == null && nullToAbsent
           ? const Value.absent()
-          : Value(hasDisability),
-      socialStatus: Value(socialStatus),
-      familybookNumber: familybookNumber == null && nullToAbsent
-          ? const Value.absent()
-          : Value(familybookNumber),
-      familyMembersNumber: familyMembersNumber == null && nullToAbsent
-          ? const Value.absent()
-          : Value(familyMembersNumber),
-      familyMedicalStatus: familyMedicalStatus == null && nullToAbsent
-          ? const Value.absent()
-          : Value(familyMedicalStatus),
-      familyHasDisability: familyHasDisability == null && nullToAbsent
-          ? const Value.absent()
-          : Value(familyHasDisability),
+          : Value(disabilityStatus),
       partnerName: partnerName == null && nullToAbsent
           ? const Value.absent()
           : Value(partnerName),
       partnerNationalNum: partnerNationalNum == null && nullToAbsent
           ? const Value.absent()
           : Value(partnerNationalNum),
-      partnerBirthDate: partnerBirthDate == null && nullToAbsent
-          ? const Value.absent()
-          : Value(partnerBirthDate),
       partnerPhoneNum: partnerPhoneNum == null && nullToAbsent
           ? const Value.absent()
           : Value(partnerPhoneNum),
-      mainResidence: mainResidence == null && nullToAbsent
+      partnerBirthDate: partnerBirthDate == null && nullToAbsent
           ? const Value.absent()
-          : Value(mainResidence),
-      currentResidence: currentResidence == null && nullToAbsent
+          : Value(partnerBirthDate),
+      familybookNumber: familybookNumber == null && nullToAbsent
           ? const Value.absent()
-          : Value(currentResidence),
-      residenceType: residenceType == null && nullToAbsent
+          : Value(familybookNumber),
+      familyMembersNumber: familyMembersNumber == null && nullToAbsent
           ? const Value.absent()
-          : Value(residenceType),
-      residenceStatus: residenceStatus == null && nullToAbsent
+          : Value(familyMembersNumber),
+      familyChildrenNumber: familyChildrenNumber == null && nullToAbsent
           ? const Value.absent()
-          : Value(residenceStatus),
-      shelterName: shelterName == null && nullToAbsent
+          : Value(familyChildrenNumber),
+      familyHasMedicalStatus: familyHasMedicalStatus == null && nullToAbsent
           ? const Value.absent()
-          : Value(shelterName),
+          : Value(familyHasMedicalStatus),
+      familyHasDisability: familyHasDisability == null && nullToAbsent
+          ? const Value.absent()
+          : Value(familyHasDisability),
+      originalResidenceType: originalResidenceType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(originalResidenceType),
+      originalResidenceAddress: originalResidenceAddress == null && nullToAbsent
+          ? const Value.absent()
+          : Value(originalResidenceAddress),
+      originalResidenceRegion: originalResidenceRegion == null && nullToAbsent
+          ? const Value.absent()
+          : Value(originalResidenceRegion),
+      originalResidenceStatus: originalResidenceStatus == null && nullToAbsent
+          ? const Value.absent()
+          : Value(originalResidenceStatus),
+      currentResidenceRegion: currentResidenceRegion == null && nullToAbsent
+          ? const Value.absent()
+          : Value(currentResidenceRegion),
+      currentResidenceAddress: currentResidenceAddress == null && nullToAbsent
+          ? const Value.absent()
+          : Value(currentResidenceAddress),
+      currentResidenceType: currentResidenceType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(currentResidenceType),
+      acadimicLevel: acadimicLevel == null && nullToAbsent
+          ? const Value.absent()
+          : Value(acadimicLevel),
+      certification: certification == null && nullToAbsent
+          ? const Value.absent()
+          : Value(certification),
+      studyAddress: studyAddress == null && nullToAbsent
+          ? const Value.absent()
+          : Value(studyAddress),
+      jobType: jobType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(jobType),
+      jobDecription: jobDecription == null && nullToAbsent
+          ? const Value.absent()
+          : Value(jobDecription),
+      monthlySalary: monthlySalary == null && nullToAbsent
+          ? const Value.absent()
+          : Value(monthlySalary),
       notes:
           notes == null && nullToAbsent ? const Value.absent() : Value(notes),
       creationTime: creationTime == null && nullToAbsent
@@ -695,34 +961,57 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       firstName: serializer.fromJson<String>(json['firstName']),
       fatherName: serializer.fromJson<String>(json['fatherName']),
       lastName: serializer.fromJson<String>(json['lastName']),
-      nationalNumber: serializer.fromJson<String?>(json['nationalNumber']),
       motherName: serializer.fromJson<String?>(json['motherName']),
-      contactNumber: serializer.fromJson<String?>(json['contactNumber']),
+      nationalNumber: serializer.fromJson<String?>(json['nationalNumber']),
       gender: $BeneficiarysTable.$convertergendern
           .fromJson(serializer.fromJson<String?>(json['gender'])),
-      birthDate: serializer.fromJson<DateTime?>(json['birthDate']),
-      medicalStatus: serializer.fromJson<String?>(json['medicalStatus']),
-      hasDisability: serializer.fromJson<bool?>(json['hasDisability']),
       socialStatus: $BeneficiarysTable.$convertersocialStatus
           .fromJson(serializer.fromJson<String>(json['socialStatus'])),
-      familybookNumber: serializer.fromJson<String?>(json['familybookNumber']),
-      familyMembersNumber:
-          serializer.fromJson<String?>(json['familyMembersNumber']),
-      familyMedicalStatus:
-          serializer.fromJson<String?>(json['familyMedicalStatus']),
-      familyHasDisability:
-          serializer.fromJson<bool?>(json['familyHasDisability']),
+      birthDate: serializer.fromJson<DateTime?>(json['birthDate']),
+      contactNumber: serializer.fromJson<String?>(json['contactNumber']),
+      medicalStatus: $BeneficiarysTable.$convertermedicalStatusn
+          .fromJson(serializer.fromJson<String?>(json['medicalStatus'])),
+      disabilityStatus: $BeneficiarysTable.$converterdisabilityStatusn
+          .fromJson(serializer.fromJson<String?>(json['disabilityStatus'])),
       partnerName: serializer.fromJson<String?>(json['partnerName']),
       partnerNationalNum:
           serializer.fromJson<String?>(json['partnerNationalNum']),
+      partnerPhoneNum: serializer.fromJson<String?>(json['partnerPhoneNum']),
       partnerBirthDate:
           serializer.fromJson<DateTime?>(json['partnerBirthDate']),
-      partnerPhoneNum: serializer.fromJson<String?>(json['partnerPhoneNum']),
-      mainResidence: serializer.fromJson<String?>(json['mainResidence']),
-      currentResidence: serializer.fromJson<String?>(json['currentResidence']),
-      residenceType: serializer.fromJson<String?>(json['residenceType']),
-      residenceStatus: serializer.fromJson<String?>(json['residenceStatus']),
-      shelterName: serializer.fromJson<String?>(json['shelterName']),
+      familybookNumber: serializer.fromJson<String?>(json['familybookNumber']),
+      familyMembersNumber:
+          serializer.fromJson<int?>(json['familyMembersNumber']),
+      familyChildrenNumber:
+          serializer.fromJson<int?>(json['familyChildrenNumber']),
+      familyHasMedicalStatus:
+          serializer.fromJson<bool?>(json['familyHasMedicalStatus']),
+      familyHasDisability:
+          serializer.fromJson<bool?>(json['familyHasDisability']),
+      originalResidenceType: $BeneficiarysTable.$converteroriginalResidenceTypen
+          .fromJson(
+              serializer.fromJson<String?>(json['originalResidenceType'])),
+      originalResidenceAddress:
+          serializer.fromJson<String?>(json['originalResidenceAddress']),
+      originalResidenceRegion:
+          serializer.fromJson<String?>(json['originalResidenceRegion']),
+      originalResidenceStatus:
+          $BeneficiarysTable.$converteroriginalResidenceStatusn.fromJson(
+              serializer.fromJson<String?>(json['originalResidenceStatus'])),
+      currentResidenceRegion:
+          serializer.fromJson<String?>(json['currentResidenceRegion']),
+      currentResidenceAddress:
+          serializer.fromJson<String?>(json['currentResidenceAddress']),
+      currentResidenceType: $BeneficiarysTable.$convertercurrentResidenceTypen
+          .fromJson(serializer.fromJson<String?>(json['currentResidenceType'])),
+      acadimicLevel: $BeneficiarysTable.$converteracadimicLeveln
+          .fromJson(serializer.fromJson<String?>(json['acadimicLevel'])),
+      certification: serializer.fromJson<String?>(json['certification']),
+      studyAddress: serializer.fromJson<String?>(json['studyAddress']),
+      jobType: $BeneficiarysTable.$converterjobTypen
+          .fromJson(serializer.fromJson<String?>(json['jobType'])),
+      jobDecription: serializer.fromJson<String?>(json['jobDecription']),
+      monthlySalary: serializer.fromJson<String?>(json['monthlySalary']),
       notes: serializer.fromJson<String?>(json['notes']),
       creationTime: serializer.fromJson<DateTime?>(json['creationTime']),
       creationLocation: serializer.fromJson<String?>(json['creationLocation']),
@@ -736,29 +1025,54 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       'firstName': serializer.toJson<String>(firstName),
       'fatherName': serializer.toJson<String>(fatherName),
       'lastName': serializer.toJson<String>(lastName),
-      'nationalNumber': serializer.toJson<String?>(nationalNumber),
       'motherName': serializer.toJson<String?>(motherName),
-      'contactNumber': serializer.toJson<String?>(contactNumber),
+      'nationalNumber': serializer.toJson<String?>(nationalNumber),
       'gender': serializer
           .toJson<String?>($BeneficiarysTable.$convertergendern.toJson(gender)),
-      'birthDate': serializer.toJson<DateTime?>(birthDate),
-      'medicalStatus': serializer.toJson<String?>(medicalStatus),
-      'hasDisability': serializer.toJson<bool?>(hasDisability),
       'socialStatus': serializer.toJson<String>(
           $BeneficiarysTable.$convertersocialStatus.toJson(socialStatus)),
-      'familybookNumber': serializer.toJson<String?>(familybookNumber),
-      'familyMembersNumber': serializer.toJson<String?>(familyMembersNumber),
-      'familyMedicalStatus': serializer.toJson<String?>(familyMedicalStatus),
-      'familyHasDisability': serializer.toJson<bool?>(familyHasDisability),
+      'birthDate': serializer.toJson<DateTime?>(birthDate),
+      'contactNumber': serializer.toJson<String?>(contactNumber),
+      'medicalStatus': serializer.toJson<String?>(
+          $BeneficiarysTable.$convertermedicalStatusn.toJson(medicalStatus)),
+      'disabilityStatus': serializer.toJson<String?>($BeneficiarysTable
+          .$converterdisabilityStatusn
+          .toJson(disabilityStatus)),
       'partnerName': serializer.toJson<String?>(partnerName),
       'partnerNationalNum': serializer.toJson<String?>(partnerNationalNum),
-      'partnerBirthDate': serializer.toJson<DateTime?>(partnerBirthDate),
       'partnerPhoneNum': serializer.toJson<String?>(partnerPhoneNum),
-      'mainResidence': serializer.toJson<String?>(mainResidence),
-      'currentResidence': serializer.toJson<String?>(currentResidence),
-      'residenceType': serializer.toJson<String?>(residenceType),
-      'residenceStatus': serializer.toJson<String?>(residenceStatus),
-      'shelterName': serializer.toJson<String?>(shelterName),
+      'partnerBirthDate': serializer.toJson<DateTime?>(partnerBirthDate),
+      'familybookNumber': serializer.toJson<String?>(familybookNumber),
+      'familyMembersNumber': serializer.toJson<int?>(familyMembersNumber),
+      'familyChildrenNumber': serializer.toJson<int?>(familyChildrenNumber),
+      'familyHasMedicalStatus':
+          serializer.toJson<bool?>(familyHasMedicalStatus),
+      'familyHasDisability': serializer.toJson<bool?>(familyHasDisability),
+      'originalResidenceType': serializer.toJson<String?>($BeneficiarysTable
+          .$converteroriginalResidenceTypen
+          .toJson(originalResidenceType)),
+      'originalResidenceAddress':
+          serializer.toJson<String?>(originalResidenceAddress),
+      'originalResidenceRegion':
+          serializer.toJson<String?>(originalResidenceRegion),
+      'originalResidenceStatus': serializer.toJson<String?>($BeneficiarysTable
+          .$converteroriginalResidenceStatusn
+          .toJson(originalResidenceStatus)),
+      'currentResidenceRegion':
+          serializer.toJson<String?>(currentResidenceRegion),
+      'currentResidenceAddress':
+          serializer.toJson<String?>(currentResidenceAddress),
+      'currentResidenceType': serializer.toJson<String?>($BeneficiarysTable
+          .$convertercurrentResidenceTypen
+          .toJson(currentResidenceType)),
+      'acadimicLevel': serializer.toJson<String?>(
+          $BeneficiarysTable.$converteracadimicLeveln.toJson(acadimicLevel)),
+      'certification': serializer.toJson<String?>(certification),
+      'studyAddress': serializer.toJson<String?>(studyAddress),
+      'jobType': serializer.toJson<String?>(
+          $BeneficiarysTable.$converterjobTypen.toJson(jobType)),
+      'jobDecription': serializer.toJson<String?>(jobDecription),
+      'monthlySalary': serializer.toJson<String?>(monthlySalary),
       'notes': serializer.toJson<String?>(notes),
       'creationTime': serializer.toJson<DateTime?>(creationTime),
       'creationLocation': serializer.toJson<String?>(creationLocation),
@@ -770,27 +1084,38 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
           String? firstName,
           String? fatherName,
           String? lastName,
-          Value<String?> nationalNumber = const Value.absent(),
           Value<String?> motherName = const Value.absent(),
-          Value<String?> contactNumber = const Value.absent(),
+          Value<String?> nationalNumber = const Value.absent(),
           Value<Gender?> gender = const Value.absent(),
-          Value<DateTime?> birthDate = const Value.absent(),
-          Value<String?> medicalStatus = const Value.absent(),
-          Value<bool?> hasDisability = const Value.absent(),
           SocialStatus? socialStatus,
-          Value<String?> familybookNumber = const Value.absent(),
-          Value<String?> familyMembersNumber = const Value.absent(),
-          Value<String?> familyMedicalStatus = const Value.absent(),
-          Value<bool?> familyHasDisability = const Value.absent(),
+          Value<DateTime?> birthDate = const Value.absent(),
+          Value<String?> contactNumber = const Value.absent(),
+          Value<MedicalStatus?> medicalStatus = const Value.absent(),
+          Value<DisabilityStatus?> disabilityStatus = const Value.absent(),
           Value<String?> partnerName = const Value.absent(),
           Value<String?> partnerNationalNum = const Value.absent(),
-          Value<DateTime?> partnerBirthDate = const Value.absent(),
           Value<String?> partnerPhoneNum = const Value.absent(),
-          Value<String?> mainResidence = const Value.absent(),
-          Value<String?> currentResidence = const Value.absent(),
-          Value<String?> residenceType = const Value.absent(),
-          Value<String?> residenceStatus = const Value.absent(),
-          Value<String?> shelterName = const Value.absent(),
+          Value<DateTime?> partnerBirthDate = const Value.absent(),
+          Value<String?> familybookNumber = const Value.absent(),
+          Value<int?> familyMembersNumber = const Value.absent(),
+          Value<int?> familyChildrenNumber = const Value.absent(),
+          Value<bool?> familyHasMedicalStatus = const Value.absent(),
+          Value<bool?> familyHasDisability = const Value.absent(),
+          Value<ResidenceType?> originalResidenceType = const Value.absent(),
+          Value<String?> originalResidenceAddress = const Value.absent(),
+          Value<String?> originalResidenceRegion = const Value.absent(),
+          Value<ResidenceStatus?> originalResidenceStatus =
+              const Value.absent(),
+          Value<String?> currentResidenceRegion = const Value.absent(),
+          Value<String?> currentResidenceAddress = const Value.absent(),
+          Value<CurrentResidenceType?> currentResidenceType =
+              const Value.absent(),
+          Value<AcadimicLevel?> acadimicLevel = const Value.absent(),
+          Value<String?> certification = const Value.absent(),
+          Value<String?> studyAddress = const Value.absent(),
+          Value<JobType?> jobType = const Value.absent(),
+          Value<String?> jobDecription = const Value.absent(),
+          Value<String?> monthlySalary = const Value.absent(),
           Value<String?> notes = const Value.absent(),
           Value<DateTime?> creationTime = const Value.absent(),
           Value<String?> creationLocation = const Value.absent()}) =>
@@ -799,51 +1124,76 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
         firstName: firstName ?? this.firstName,
         fatherName: fatherName ?? this.fatherName,
         lastName: lastName ?? this.lastName,
+        motherName: motherName.present ? motherName.value : this.motherName,
         nationalNumber:
             nationalNumber.present ? nationalNumber.value : this.nationalNumber,
-        motherName: motherName.present ? motherName.value : this.motherName,
+        gender: gender.present ? gender.value : this.gender,
+        socialStatus: socialStatus ?? this.socialStatus,
+        birthDate: birthDate.present ? birthDate.value : this.birthDate,
         contactNumber:
             contactNumber.present ? contactNumber.value : this.contactNumber,
-        gender: gender.present ? gender.value : this.gender,
-        birthDate: birthDate.present ? birthDate.value : this.birthDate,
         medicalStatus:
             medicalStatus.present ? medicalStatus.value : this.medicalStatus,
-        hasDisability:
-            hasDisability.present ? hasDisability.value : this.hasDisability,
-        socialStatus: socialStatus ?? this.socialStatus,
+        disabilityStatus: disabilityStatus.present
+            ? disabilityStatus.value
+            : this.disabilityStatus,
+        partnerName: partnerName.present ? partnerName.value : this.partnerName,
+        partnerNationalNum: partnerNationalNum.present
+            ? partnerNationalNum.value
+            : this.partnerNationalNum,
+        partnerPhoneNum: partnerPhoneNum.present
+            ? partnerPhoneNum.value
+            : this.partnerPhoneNum,
+        partnerBirthDate: partnerBirthDate.present
+            ? partnerBirthDate.value
+            : this.partnerBirthDate,
         familybookNumber: familybookNumber.present
             ? familybookNumber.value
             : this.familybookNumber,
         familyMembersNumber: familyMembersNumber.present
             ? familyMembersNumber.value
             : this.familyMembersNumber,
-        familyMedicalStatus: familyMedicalStatus.present
-            ? familyMedicalStatus.value
-            : this.familyMedicalStatus,
+        familyChildrenNumber: familyChildrenNumber.present
+            ? familyChildrenNumber.value
+            : this.familyChildrenNumber,
+        familyHasMedicalStatus: familyHasMedicalStatus.present
+            ? familyHasMedicalStatus.value
+            : this.familyHasMedicalStatus,
         familyHasDisability: familyHasDisability.present
             ? familyHasDisability.value
             : this.familyHasDisability,
-        partnerName: partnerName.present ? partnerName.value : this.partnerName,
-        partnerNationalNum: partnerNationalNum.present
-            ? partnerNationalNum.value
-            : this.partnerNationalNum,
-        partnerBirthDate: partnerBirthDate.present
-            ? partnerBirthDate.value
-            : this.partnerBirthDate,
-        partnerPhoneNum: partnerPhoneNum.present
-            ? partnerPhoneNum.value
-            : this.partnerPhoneNum,
-        mainResidence:
-            mainResidence.present ? mainResidence.value : this.mainResidence,
-        currentResidence: currentResidence.present
-            ? currentResidence.value
-            : this.currentResidence,
-        residenceType:
-            residenceType.present ? residenceType.value : this.residenceType,
-        residenceStatus: residenceStatus.present
-            ? residenceStatus.value
-            : this.residenceStatus,
-        shelterName: shelterName.present ? shelterName.value : this.shelterName,
+        originalResidenceType: originalResidenceType.present
+            ? originalResidenceType.value
+            : this.originalResidenceType,
+        originalResidenceAddress: originalResidenceAddress.present
+            ? originalResidenceAddress.value
+            : this.originalResidenceAddress,
+        originalResidenceRegion: originalResidenceRegion.present
+            ? originalResidenceRegion.value
+            : this.originalResidenceRegion,
+        originalResidenceStatus: originalResidenceStatus.present
+            ? originalResidenceStatus.value
+            : this.originalResidenceStatus,
+        currentResidenceRegion: currentResidenceRegion.present
+            ? currentResidenceRegion.value
+            : this.currentResidenceRegion,
+        currentResidenceAddress: currentResidenceAddress.present
+            ? currentResidenceAddress.value
+            : this.currentResidenceAddress,
+        currentResidenceType: currentResidenceType.present
+            ? currentResidenceType.value
+            : this.currentResidenceType,
+        acadimicLevel:
+            acadimicLevel.present ? acadimicLevel.value : this.acadimicLevel,
+        certification:
+            certification.present ? certification.value : this.certification,
+        studyAddress:
+            studyAddress.present ? studyAddress.value : this.studyAddress,
+        jobType: jobType.present ? jobType.value : this.jobType,
+        jobDecription:
+            jobDecription.present ? jobDecription.value : this.jobDecription,
+        monthlySalary:
+            monthlySalary.present ? monthlySalary.value : this.monthlySalary,
         notes: notes.present ? notes.value : this.notes,
         creationTime:
             creationTime.present ? creationTime.value : this.creationTime,
@@ -858,62 +1208,88 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       fatherName:
           data.fatherName.present ? data.fatherName.value : this.fatherName,
       lastName: data.lastName.present ? data.lastName.value : this.lastName,
+      motherName:
+          data.motherName.present ? data.motherName.value : this.motherName,
       nationalNumber: data.nationalNumber.present
           ? data.nationalNumber.value
           : this.nationalNumber,
-      motherName:
-          data.motherName.present ? data.motherName.value : this.motherName,
-      contactNumber: data.contactNumber.present
-          ? data.contactNumber.value
-          : this.contactNumber,
       gender: data.gender.present ? data.gender.value : this.gender,
-      birthDate: data.birthDate.present ? data.birthDate.value : this.birthDate,
-      medicalStatus: data.medicalStatus.present
-          ? data.medicalStatus.value
-          : this.medicalStatus,
-      hasDisability: data.hasDisability.present
-          ? data.hasDisability.value
-          : this.hasDisability,
       socialStatus: data.socialStatus.present
           ? data.socialStatus.value
           : this.socialStatus,
+      birthDate: data.birthDate.present ? data.birthDate.value : this.birthDate,
+      contactNumber: data.contactNumber.present
+          ? data.contactNumber.value
+          : this.contactNumber,
+      medicalStatus: data.medicalStatus.present
+          ? data.medicalStatus.value
+          : this.medicalStatus,
+      disabilityStatus: data.disabilityStatus.present
+          ? data.disabilityStatus.value
+          : this.disabilityStatus,
+      partnerName:
+          data.partnerName.present ? data.partnerName.value : this.partnerName,
+      partnerNationalNum: data.partnerNationalNum.present
+          ? data.partnerNationalNum.value
+          : this.partnerNationalNum,
+      partnerPhoneNum: data.partnerPhoneNum.present
+          ? data.partnerPhoneNum.value
+          : this.partnerPhoneNum,
+      partnerBirthDate: data.partnerBirthDate.present
+          ? data.partnerBirthDate.value
+          : this.partnerBirthDate,
       familybookNumber: data.familybookNumber.present
           ? data.familybookNumber.value
           : this.familybookNumber,
       familyMembersNumber: data.familyMembersNumber.present
           ? data.familyMembersNumber.value
           : this.familyMembersNumber,
-      familyMedicalStatus: data.familyMedicalStatus.present
-          ? data.familyMedicalStatus.value
-          : this.familyMedicalStatus,
+      familyChildrenNumber: data.familyChildrenNumber.present
+          ? data.familyChildrenNumber.value
+          : this.familyChildrenNumber,
+      familyHasMedicalStatus: data.familyHasMedicalStatus.present
+          ? data.familyHasMedicalStatus.value
+          : this.familyHasMedicalStatus,
       familyHasDisability: data.familyHasDisability.present
           ? data.familyHasDisability.value
           : this.familyHasDisability,
-      partnerName:
-          data.partnerName.present ? data.partnerName.value : this.partnerName,
-      partnerNationalNum: data.partnerNationalNum.present
-          ? data.partnerNationalNum.value
-          : this.partnerNationalNum,
-      partnerBirthDate: data.partnerBirthDate.present
-          ? data.partnerBirthDate.value
-          : this.partnerBirthDate,
-      partnerPhoneNum: data.partnerPhoneNum.present
-          ? data.partnerPhoneNum.value
-          : this.partnerPhoneNum,
-      mainResidence: data.mainResidence.present
-          ? data.mainResidence.value
-          : this.mainResidence,
-      currentResidence: data.currentResidence.present
-          ? data.currentResidence.value
-          : this.currentResidence,
-      residenceType: data.residenceType.present
-          ? data.residenceType.value
-          : this.residenceType,
-      residenceStatus: data.residenceStatus.present
-          ? data.residenceStatus.value
-          : this.residenceStatus,
-      shelterName:
-          data.shelterName.present ? data.shelterName.value : this.shelterName,
+      originalResidenceType: data.originalResidenceType.present
+          ? data.originalResidenceType.value
+          : this.originalResidenceType,
+      originalResidenceAddress: data.originalResidenceAddress.present
+          ? data.originalResidenceAddress.value
+          : this.originalResidenceAddress,
+      originalResidenceRegion: data.originalResidenceRegion.present
+          ? data.originalResidenceRegion.value
+          : this.originalResidenceRegion,
+      originalResidenceStatus: data.originalResidenceStatus.present
+          ? data.originalResidenceStatus.value
+          : this.originalResidenceStatus,
+      currentResidenceRegion: data.currentResidenceRegion.present
+          ? data.currentResidenceRegion.value
+          : this.currentResidenceRegion,
+      currentResidenceAddress: data.currentResidenceAddress.present
+          ? data.currentResidenceAddress.value
+          : this.currentResidenceAddress,
+      currentResidenceType: data.currentResidenceType.present
+          ? data.currentResidenceType.value
+          : this.currentResidenceType,
+      acadimicLevel: data.acadimicLevel.present
+          ? data.acadimicLevel.value
+          : this.acadimicLevel,
+      certification: data.certification.present
+          ? data.certification.value
+          : this.certification,
+      studyAddress: data.studyAddress.present
+          ? data.studyAddress.value
+          : this.studyAddress,
+      jobType: data.jobType.present ? data.jobType.value : this.jobType,
+      jobDecription: data.jobDecription.present
+          ? data.jobDecription.value
+          : this.jobDecription,
+      monthlySalary: data.monthlySalary.present
+          ? data.monthlySalary.value
+          : this.monthlySalary,
       notes: data.notes.present ? data.notes.value : this.notes,
       creationTime: data.creationTime.present
           ? data.creationTime.value
@@ -931,27 +1307,36 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
           ..write('firstName: $firstName, ')
           ..write('fatherName: $fatherName, ')
           ..write('lastName: $lastName, ')
-          ..write('nationalNumber: $nationalNumber, ')
           ..write('motherName: $motherName, ')
-          ..write('contactNumber: $contactNumber, ')
+          ..write('nationalNumber: $nationalNumber, ')
           ..write('gender: $gender, ')
-          ..write('birthDate: $birthDate, ')
-          ..write('medicalStatus: $medicalStatus, ')
-          ..write('hasDisability: $hasDisability, ')
           ..write('socialStatus: $socialStatus, ')
-          ..write('familybookNumber: $familybookNumber, ')
-          ..write('familyMembersNumber: $familyMembersNumber, ')
-          ..write('familyMedicalStatus: $familyMedicalStatus, ')
-          ..write('familyHasDisability: $familyHasDisability, ')
+          ..write('birthDate: $birthDate, ')
+          ..write('contactNumber: $contactNumber, ')
+          ..write('medicalStatus: $medicalStatus, ')
+          ..write('disabilityStatus: $disabilityStatus, ')
           ..write('partnerName: $partnerName, ')
           ..write('partnerNationalNum: $partnerNationalNum, ')
-          ..write('partnerBirthDate: $partnerBirthDate, ')
           ..write('partnerPhoneNum: $partnerPhoneNum, ')
-          ..write('mainResidence: $mainResidence, ')
-          ..write('currentResidence: $currentResidence, ')
-          ..write('residenceType: $residenceType, ')
-          ..write('residenceStatus: $residenceStatus, ')
-          ..write('shelterName: $shelterName, ')
+          ..write('partnerBirthDate: $partnerBirthDate, ')
+          ..write('familybookNumber: $familybookNumber, ')
+          ..write('familyMembersNumber: $familyMembersNumber, ')
+          ..write('familyChildrenNumber: $familyChildrenNumber, ')
+          ..write('familyHasMedicalStatus: $familyHasMedicalStatus, ')
+          ..write('familyHasDisability: $familyHasDisability, ')
+          ..write('originalResidenceType: $originalResidenceType, ')
+          ..write('originalResidenceAddress: $originalResidenceAddress, ')
+          ..write('originalResidenceRegion: $originalResidenceRegion, ')
+          ..write('originalResidenceStatus: $originalResidenceStatus, ')
+          ..write('currentResidenceRegion: $currentResidenceRegion, ')
+          ..write('currentResidenceAddress: $currentResidenceAddress, ')
+          ..write('currentResidenceType: $currentResidenceType, ')
+          ..write('acadimicLevel: $acadimicLevel, ')
+          ..write('certification: $certification, ')
+          ..write('studyAddress: $studyAddress, ')
+          ..write('jobType: $jobType, ')
+          ..write('jobDecription: $jobDecription, ')
+          ..write('monthlySalary: $monthlySalary, ')
           ..write('notes: $notes, ')
           ..write('creationTime: $creationTime, ')
           ..write('creationLocation: $creationLocation')
@@ -965,27 +1350,36 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
         firstName,
         fatherName,
         lastName,
-        nationalNumber,
         motherName,
-        contactNumber,
+        nationalNumber,
         gender,
-        birthDate,
-        medicalStatus,
-        hasDisability,
         socialStatus,
-        familybookNumber,
-        familyMembersNumber,
-        familyMedicalStatus,
-        familyHasDisability,
+        birthDate,
+        contactNumber,
+        medicalStatus,
+        disabilityStatus,
         partnerName,
         partnerNationalNum,
-        partnerBirthDate,
         partnerPhoneNum,
-        mainResidence,
-        currentResidence,
-        residenceType,
-        residenceStatus,
-        shelterName,
+        partnerBirthDate,
+        familybookNumber,
+        familyMembersNumber,
+        familyChildrenNumber,
+        familyHasMedicalStatus,
+        familyHasDisability,
+        originalResidenceType,
+        originalResidenceAddress,
+        originalResidenceRegion,
+        originalResidenceStatus,
+        currentResidenceRegion,
+        currentResidenceAddress,
+        currentResidenceType,
+        acadimicLevel,
+        certification,
+        studyAddress,
+        jobType,
+        jobDecription,
+        monthlySalary,
         notes,
         creationTime,
         creationLocation
@@ -998,27 +1392,36 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
           other.firstName == this.firstName &&
           other.fatherName == this.fatherName &&
           other.lastName == this.lastName &&
-          other.nationalNumber == this.nationalNumber &&
           other.motherName == this.motherName &&
-          other.contactNumber == this.contactNumber &&
+          other.nationalNumber == this.nationalNumber &&
           other.gender == this.gender &&
-          other.birthDate == this.birthDate &&
-          other.medicalStatus == this.medicalStatus &&
-          other.hasDisability == this.hasDisability &&
           other.socialStatus == this.socialStatus &&
-          other.familybookNumber == this.familybookNumber &&
-          other.familyMembersNumber == this.familyMembersNumber &&
-          other.familyMedicalStatus == this.familyMedicalStatus &&
-          other.familyHasDisability == this.familyHasDisability &&
+          other.birthDate == this.birthDate &&
+          other.contactNumber == this.contactNumber &&
+          other.medicalStatus == this.medicalStatus &&
+          other.disabilityStatus == this.disabilityStatus &&
           other.partnerName == this.partnerName &&
           other.partnerNationalNum == this.partnerNationalNum &&
-          other.partnerBirthDate == this.partnerBirthDate &&
           other.partnerPhoneNum == this.partnerPhoneNum &&
-          other.mainResidence == this.mainResidence &&
-          other.currentResidence == this.currentResidence &&
-          other.residenceType == this.residenceType &&
-          other.residenceStatus == this.residenceStatus &&
-          other.shelterName == this.shelterName &&
+          other.partnerBirthDate == this.partnerBirthDate &&
+          other.familybookNumber == this.familybookNumber &&
+          other.familyMembersNumber == this.familyMembersNumber &&
+          other.familyChildrenNumber == this.familyChildrenNumber &&
+          other.familyHasMedicalStatus == this.familyHasMedicalStatus &&
+          other.familyHasDisability == this.familyHasDisability &&
+          other.originalResidenceType == this.originalResidenceType &&
+          other.originalResidenceAddress == this.originalResidenceAddress &&
+          other.originalResidenceRegion == this.originalResidenceRegion &&
+          other.originalResidenceStatus == this.originalResidenceStatus &&
+          other.currentResidenceRegion == this.currentResidenceRegion &&
+          other.currentResidenceAddress == this.currentResidenceAddress &&
+          other.currentResidenceType == this.currentResidenceType &&
+          other.acadimicLevel == this.acadimicLevel &&
+          other.certification == this.certification &&
+          other.studyAddress == this.studyAddress &&
+          other.jobType == this.jobType &&
+          other.jobDecription == this.jobDecription &&
+          other.monthlySalary == this.monthlySalary &&
           other.notes == this.notes &&
           other.creationTime == this.creationTime &&
           other.creationLocation == this.creationLocation);
@@ -1029,27 +1432,36 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
   final Value<String> firstName;
   final Value<String> fatherName;
   final Value<String> lastName;
-  final Value<String?> nationalNumber;
   final Value<String?> motherName;
-  final Value<String?> contactNumber;
+  final Value<String?> nationalNumber;
   final Value<Gender?> gender;
-  final Value<DateTime?> birthDate;
-  final Value<String?> medicalStatus;
-  final Value<bool?> hasDisability;
   final Value<SocialStatus> socialStatus;
-  final Value<String?> familybookNumber;
-  final Value<String?> familyMembersNumber;
-  final Value<String?> familyMedicalStatus;
-  final Value<bool?> familyHasDisability;
+  final Value<DateTime?> birthDate;
+  final Value<String?> contactNumber;
+  final Value<MedicalStatus?> medicalStatus;
+  final Value<DisabilityStatus?> disabilityStatus;
   final Value<String?> partnerName;
   final Value<String?> partnerNationalNum;
-  final Value<DateTime?> partnerBirthDate;
   final Value<String?> partnerPhoneNum;
-  final Value<String?> mainResidence;
-  final Value<String?> currentResidence;
-  final Value<String?> residenceType;
-  final Value<String?> residenceStatus;
-  final Value<String?> shelterName;
+  final Value<DateTime?> partnerBirthDate;
+  final Value<String?> familybookNumber;
+  final Value<int?> familyMembersNumber;
+  final Value<int?> familyChildrenNumber;
+  final Value<bool?> familyHasMedicalStatus;
+  final Value<bool?> familyHasDisability;
+  final Value<ResidenceType?> originalResidenceType;
+  final Value<String?> originalResidenceAddress;
+  final Value<String?> originalResidenceRegion;
+  final Value<ResidenceStatus?> originalResidenceStatus;
+  final Value<String?> currentResidenceRegion;
+  final Value<String?> currentResidenceAddress;
+  final Value<CurrentResidenceType?> currentResidenceType;
+  final Value<AcadimicLevel?> acadimicLevel;
+  final Value<String?> certification;
+  final Value<String?> studyAddress;
+  final Value<JobType?> jobType;
+  final Value<String?> jobDecription;
+  final Value<String?> monthlySalary;
   final Value<String?> notes;
   final Value<DateTime?> creationTime;
   final Value<String?> creationLocation;
@@ -1058,27 +1470,36 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     this.firstName = const Value.absent(),
     this.fatherName = const Value.absent(),
     this.lastName = const Value.absent(),
-    this.nationalNumber = const Value.absent(),
     this.motherName = const Value.absent(),
-    this.contactNumber = const Value.absent(),
+    this.nationalNumber = const Value.absent(),
     this.gender = const Value.absent(),
-    this.birthDate = const Value.absent(),
-    this.medicalStatus = const Value.absent(),
-    this.hasDisability = const Value.absent(),
     this.socialStatus = const Value.absent(),
-    this.familybookNumber = const Value.absent(),
-    this.familyMembersNumber = const Value.absent(),
-    this.familyMedicalStatus = const Value.absent(),
-    this.familyHasDisability = const Value.absent(),
+    this.birthDate = const Value.absent(),
+    this.contactNumber = const Value.absent(),
+    this.medicalStatus = const Value.absent(),
+    this.disabilityStatus = const Value.absent(),
     this.partnerName = const Value.absent(),
     this.partnerNationalNum = const Value.absent(),
-    this.partnerBirthDate = const Value.absent(),
     this.partnerPhoneNum = const Value.absent(),
-    this.mainResidence = const Value.absent(),
-    this.currentResidence = const Value.absent(),
-    this.residenceType = const Value.absent(),
-    this.residenceStatus = const Value.absent(),
-    this.shelterName = const Value.absent(),
+    this.partnerBirthDate = const Value.absent(),
+    this.familybookNumber = const Value.absent(),
+    this.familyMembersNumber = const Value.absent(),
+    this.familyChildrenNumber = const Value.absent(),
+    this.familyHasMedicalStatus = const Value.absent(),
+    this.familyHasDisability = const Value.absent(),
+    this.originalResidenceType = const Value.absent(),
+    this.originalResidenceAddress = const Value.absent(),
+    this.originalResidenceRegion = const Value.absent(),
+    this.originalResidenceStatus = const Value.absent(),
+    this.currentResidenceRegion = const Value.absent(),
+    this.currentResidenceAddress = const Value.absent(),
+    this.currentResidenceType = const Value.absent(),
+    this.acadimicLevel = const Value.absent(),
+    this.certification = const Value.absent(),
+    this.studyAddress = const Value.absent(),
+    this.jobType = const Value.absent(),
+    this.jobDecription = const Value.absent(),
+    this.monthlySalary = const Value.absent(),
     this.notes = const Value.absent(),
     this.creationTime = const Value.absent(),
     this.creationLocation = const Value.absent(),
@@ -1088,27 +1509,36 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     required String firstName,
     required String fatherName,
     required String lastName,
-    this.nationalNumber = const Value.absent(),
     this.motherName = const Value.absent(),
-    this.contactNumber = const Value.absent(),
+    this.nationalNumber = const Value.absent(),
     this.gender = const Value.absent(),
-    this.birthDate = const Value.absent(),
-    this.medicalStatus = const Value.absent(),
-    this.hasDisability = const Value.absent(),
     required SocialStatus socialStatus,
-    this.familybookNumber = const Value.absent(),
-    this.familyMembersNumber = const Value.absent(),
-    this.familyMedicalStatus = const Value.absent(),
-    this.familyHasDisability = const Value.absent(),
+    this.birthDate = const Value.absent(),
+    this.contactNumber = const Value.absent(),
+    this.medicalStatus = const Value.absent(),
+    this.disabilityStatus = const Value.absent(),
     this.partnerName = const Value.absent(),
     this.partnerNationalNum = const Value.absent(),
-    this.partnerBirthDate = const Value.absent(),
     this.partnerPhoneNum = const Value.absent(),
-    this.mainResidence = const Value.absent(),
-    this.currentResidence = const Value.absent(),
-    this.residenceType = const Value.absent(),
-    this.residenceStatus = const Value.absent(),
-    this.shelterName = const Value.absent(),
+    this.partnerBirthDate = const Value.absent(),
+    this.familybookNumber = const Value.absent(),
+    this.familyMembersNumber = const Value.absent(),
+    this.familyChildrenNumber = const Value.absent(),
+    this.familyHasMedicalStatus = const Value.absent(),
+    this.familyHasDisability = const Value.absent(),
+    this.originalResidenceType = const Value.absent(),
+    this.originalResidenceAddress = const Value.absent(),
+    this.originalResidenceRegion = const Value.absent(),
+    this.originalResidenceStatus = const Value.absent(),
+    this.currentResidenceRegion = const Value.absent(),
+    this.currentResidenceAddress = const Value.absent(),
+    this.currentResidenceType = const Value.absent(),
+    this.acadimicLevel = const Value.absent(),
+    this.certification = const Value.absent(),
+    this.studyAddress = const Value.absent(),
+    this.jobType = const Value.absent(),
+    this.jobDecription = const Value.absent(),
+    this.monthlySalary = const Value.absent(),
     this.notes = const Value.absent(),
     this.creationTime = const Value.absent(),
     this.creationLocation = const Value.absent(),
@@ -1121,27 +1551,36 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     Expression<String>? firstName,
     Expression<String>? fatherName,
     Expression<String>? lastName,
-    Expression<String>? nationalNumber,
     Expression<String>? motherName,
-    Expression<String>? contactNumber,
+    Expression<String>? nationalNumber,
     Expression<String>? gender,
-    Expression<DateTime>? birthDate,
-    Expression<String>? medicalStatus,
-    Expression<bool>? hasDisability,
     Expression<String>? socialStatus,
-    Expression<String>? familybookNumber,
-    Expression<String>? familyMembersNumber,
-    Expression<String>? familyMedicalStatus,
-    Expression<bool>? familyHasDisability,
+    Expression<DateTime>? birthDate,
+    Expression<String>? contactNumber,
+    Expression<String>? medicalStatus,
+    Expression<String>? disabilityStatus,
     Expression<String>? partnerName,
     Expression<String>? partnerNationalNum,
-    Expression<DateTime>? partnerBirthDate,
     Expression<String>? partnerPhoneNum,
-    Expression<String>? mainResidence,
-    Expression<String>? currentResidence,
-    Expression<String>? residenceType,
-    Expression<String>? residenceStatus,
-    Expression<String>? shelterName,
+    Expression<DateTime>? partnerBirthDate,
+    Expression<String>? familybookNumber,
+    Expression<int>? familyMembersNumber,
+    Expression<int>? familyChildrenNumber,
+    Expression<bool>? familyHasMedicalStatus,
+    Expression<bool>? familyHasDisability,
+    Expression<String>? originalResidenceType,
+    Expression<String>? originalResidenceAddress,
+    Expression<String>? originalResidenceRegion,
+    Expression<String>? originalResidenceStatus,
+    Expression<String>? currentResidenceRegion,
+    Expression<String>? currentResidenceAddress,
+    Expression<String>? currentResidenceType,
+    Expression<String>? acadimicLevel,
+    Expression<String>? certification,
+    Expression<String>? studyAddress,
+    Expression<String>? jobType,
+    Expression<String>? jobDecription,
+    Expression<String>? monthlySalary,
     Expression<String>? notes,
     Expression<DateTime>? creationTime,
     Expression<String>? creationLocation,
@@ -1151,31 +1590,48 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
       if (firstName != null) 'first_name': firstName,
       if (fatherName != null) 'father_name': fatherName,
       if (lastName != null) 'last_name': lastName,
-      if (nationalNumber != null) 'national_number': nationalNumber,
       if (motherName != null) 'mother_name': motherName,
-      if (contactNumber != null) 'contact_number': contactNumber,
+      if (nationalNumber != null) 'national_number': nationalNumber,
       if (gender != null) 'gender': gender,
-      if (birthDate != null) 'birth_date': birthDate,
-      if (medicalStatus != null) 'medical_status': medicalStatus,
-      if (hasDisability != null) 'has_disability': hasDisability,
       if (socialStatus != null) 'social_status': socialStatus,
-      if (familybookNumber != null) 'familybook_number': familybookNumber,
-      if (familyMembersNumber != null)
-        'family_members_number': familyMembersNumber,
-      if (familyMedicalStatus != null)
-        'family_medical_status': familyMedicalStatus,
-      if (familyHasDisability != null)
-        'family_has_disability': familyHasDisability,
+      if (birthDate != null) 'birth_date': birthDate,
+      if (contactNumber != null) 'contact_number': contactNumber,
+      if (medicalStatus != null) 'medical_status': medicalStatus,
+      if (disabilityStatus != null) 'disability_status': disabilityStatus,
       if (partnerName != null) 'partner_name': partnerName,
       if (partnerNationalNum != null)
         'partner_national_num': partnerNationalNum,
-      if (partnerBirthDate != null) 'partner_birth_date': partnerBirthDate,
       if (partnerPhoneNum != null) 'partner_phone_num': partnerPhoneNum,
-      if (mainResidence != null) 'main_residence': mainResidence,
-      if (currentResidence != null) 'current_residence': currentResidence,
-      if (residenceType != null) 'residence_type': residenceType,
-      if (residenceStatus != null) 'residence_status': residenceStatus,
-      if (shelterName != null) 'shelter_name': shelterName,
+      if (partnerBirthDate != null) 'partner_birth_date': partnerBirthDate,
+      if (familybookNumber != null) 'familybook_number': familybookNumber,
+      if (familyMembersNumber != null)
+        'family_members_number': familyMembersNumber,
+      if (familyChildrenNumber != null)
+        'family_children_number': familyChildrenNumber,
+      if (familyHasMedicalStatus != null)
+        'family_has_medical_status': familyHasMedicalStatus,
+      if (familyHasDisability != null)
+        'family_has_disability': familyHasDisability,
+      if (originalResidenceType != null)
+        'original_residence_type': originalResidenceType,
+      if (originalResidenceAddress != null)
+        'original_residence_address': originalResidenceAddress,
+      if (originalResidenceRegion != null)
+        'original_residence_region': originalResidenceRegion,
+      if (originalResidenceStatus != null)
+        'original_residence_status': originalResidenceStatus,
+      if (currentResidenceRegion != null)
+        'current_residence_region': currentResidenceRegion,
+      if (currentResidenceAddress != null)
+        'current_residence_address': currentResidenceAddress,
+      if (currentResidenceType != null)
+        'current_residence_type': currentResidenceType,
+      if (acadimicLevel != null) 'acadimic_level': acadimicLevel,
+      if (certification != null) 'certification': certification,
+      if (studyAddress != null) 'study_address': studyAddress,
+      if (jobType != null) 'job_type': jobType,
+      if (jobDecription != null) 'job_decription': jobDecription,
+      if (monthlySalary != null) 'monthly_salary': monthlySalary,
       if (notes != null) 'notes': notes,
       if (creationTime != null) 'creation_time': creationTime,
       if (creationLocation != null) 'creation_location': creationLocation,
@@ -1187,27 +1643,36 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
       Value<String>? firstName,
       Value<String>? fatherName,
       Value<String>? lastName,
-      Value<String?>? nationalNumber,
       Value<String?>? motherName,
-      Value<String?>? contactNumber,
+      Value<String?>? nationalNumber,
       Value<Gender?>? gender,
-      Value<DateTime?>? birthDate,
-      Value<String?>? medicalStatus,
-      Value<bool?>? hasDisability,
       Value<SocialStatus>? socialStatus,
-      Value<String?>? familybookNumber,
-      Value<String?>? familyMembersNumber,
-      Value<String?>? familyMedicalStatus,
-      Value<bool?>? familyHasDisability,
+      Value<DateTime?>? birthDate,
+      Value<String?>? contactNumber,
+      Value<MedicalStatus?>? medicalStatus,
+      Value<DisabilityStatus?>? disabilityStatus,
       Value<String?>? partnerName,
       Value<String?>? partnerNationalNum,
-      Value<DateTime?>? partnerBirthDate,
       Value<String?>? partnerPhoneNum,
-      Value<String?>? mainResidence,
-      Value<String?>? currentResidence,
-      Value<String?>? residenceType,
-      Value<String?>? residenceStatus,
-      Value<String?>? shelterName,
+      Value<DateTime?>? partnerBirthDate,
+      Value<String?>? familybookNumber,
+      Value<int?>? familyMembersNumber,
+      Value<int?>? familyChildrenNumber,
+      Value<bool?>? familyHasMedicalStatus,
+      Value<bool?>? familyHasDisability,
+      Value<ResidenceType?>? originalResidenceType,
+      Value<String?>? originalResidenceAddress,
+      Value<String?>? originalResidenceRegion,
+      Value<ResidenceStatus?>? originalResidenceStatus,
+      Value<String?>? currentResidenceRegion,
+      Value<String?>? currentResidenceAddress,
+      Value<CurrentResidenceType?>? currentResidenceType,
+      Value<AcadimicLevel?>? acadimicLevel,
+      Value<String?>? certification,
+      Value<String?>? studyAddress,
+      Value<JobType?>? jobType,
+      Value<String?>? jobDecription,
+      Value<String?>? monthlySalary,
       Value<String?>? notes,
       Value<DateTime?>? creationTime,
       Value<String?>? creationLocation}) {
@@ -1216,27 +1681,43 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
       firstName: firstName ?? this.firstName,
       fatherName: fatherName ?? this.fatherName,
       lastName: lastName ?? this.lastName,
-      nationalNumber: nationalNumber ?? this.nationalNumber,
       motherName: motherName ?? this.motherName,
-      contactNumber: contactNumber ?? this.contactNumber,
+      nationalNumber: nationalNumber ?? this.nationalNumber,
       gender: gender ?? this.gender,
-      birthDate: birthDate ?? this.birthDate,
-      medicalStatus: medicalStatus ?? this.medicalStatus,
-      hasDisability: hasDisability ?? this.hasDisability,
       socialStatus: socialStatus ?? this.socialStatus,
-      familybookNumber: familybookNumber ?? this.familybookNumber,
-      familyMembersNumber: familyMembersNumber ?? this.familyMembersNumber,
-      familyMedicalStatus: familyMedicalStatus ?? this.familyMedicalStatus,
-      familyHasDisability: familyHasDisability ?? this.familyHasDisability,
+      birthDate: birthDate ?? this.birthDate,
+      contactNumber: contactNumber ?? this.contactNumber,
+      medicalStatus: medicalStatus ?? this.medicalStatus,
+      disabilityStatus: disabilityStatus ?? this.disabilityStatus,
       partnerName: partnerName ?? this.partnerName,
       partnerNationalNum: partnerNationalNum ?? this.partnerNationalNum,
-      partnerBirthDate: partnerBirthDate ?? this.partnerBirthDate,
       partnerPhoneNum: partnerPhoneNum ?? this.partnerPhoneNum,
-      mainResidence: mainResidence ?? this.mainResidence,
-      currentResidence: currentResidence ?? this.currentResidence,
-      residenceType: residenceType ?? this.residenceType,
-      residenceStatus: residenceStatus ?? this.residenceStatus,
-      shelterName: shelterName ?? this.shelterName,
+      partnerBirthDate: partnerBirthDate ?? this.partnerBirthDate,
+      familybookNumber: familybookNumber ?? this.familybookNumber,
+      familyMembersNumber: familyMembersNumber ?? this.familyMembersNumber,
+      familyChildrenNumber: familyChildrenNumber ?? this.familyChildrenNumber,
+      familyHasMedicalStatus:
+          familyHasMedicalStatus ?? this.familyHasMedicalStatus,
+      familyHasDisability: familyHasDisability ?? this.familyHasDisability,
+      originalResidenceType:
+          originalResidenceType ?? this.originalResidenceType,
+      originalResidenceAddress:
+          originalResidenceAddress ?? this.originalResidenceAddress,
+      originalResidenceRegion:
+          originalResidenceRegion ?? this.originalResidenceRegion,
+      originalResidenceStatus:
+          originalResidenceStatus ?? this.originalResidenceStatus,
+      currentResidenceRegion:
+          currentResidenceRegion ?? this.currentResidenceRegion,
+      currentResidenceAddress:
+          currentResidenceAddress ?? this.currentResidenceAddress,
+      currentResidenceType: currentResidenceType ?? this.currentResidenceType,
+      acadimicLevel: acadimicLevel ?? this.acadimicLevel,
+      certification: certification ?? this.certification,
+      studyAddress: studyAddress ?? this.studyAddress,
+      jobType: jobType ?? this.jobType,
+      jobDecription: jobDecription ?? this.jobDecription,
+      monthlySalary: monthlySalary ?? this.monthlySalary,
       notes: notes ?? this.notes,
       creationTime: creationTime ?? this.creationTime,
       creationLocation: creationLocation ?? this.creationLocation,
@@ -1258,45 +1739,35 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     if (lastName.present) {
       map['last_name'] = Variable<String>(lastName.value);
     }
-    if (nationalNumber.present) {
-      map['national_number'] = Variable<String>(nationalNumber.value);
-    }
     if (motherName.present) {
       map['mother_name'] = Variable<String>(motherName.value);
     }
-    if (contactNumber.present) {
-      map['contact_number'] = Variable<String>(contactNumber.value);
+    if (nationalNumber.present) {
+      map['national_number'] = Variable<String>(nationalNumber.value);
     }
     if (gender.present) {
       map['gender'] = Variable<String>(
           $BeneficiarysTable.$convertergendern.toSql(gender.value));
     }
-    if (birthDate.present) {
-      map['birth_date'] = Variable<DateTime>(birthDate.value);
-    }
-    if (medicalStatus.present) {
-      map['medical_status'] = Variable<String>(medicalStatus.value);
-    }
-    if (hasDisability.present) {
-      map['has_disability'] = Variable<bool>(hasDisability.value);
-    }
     if (socialStatus.present) {
       map['social_status'] = Variable<String>(
           $BeneficiarysTable.$convertersocialStatus.toSql(socialStatus.value));
     }
-    if (familybookNumber.present) {
-      map['familybook_number'] = Variable<String>(familybookNumber.value);
+    if (birthDate.present) {
+      map['birth_date'] = Variable<DateTime>(birthDate.value);
     }
-    if (familyMembersNumber.present) {
-      map['family_members_number'] =
-          Variable<String>(familyMembersNumber.value);
+    if (contactNumber.present) {
+      map['contact_number'] = Variable<String>(contactNumber.value);
     }
-    if (familyMedicalStatus.present) {
-      map['family_medical_status'] =
-          Variable<String>(familyMedicalStatus.value);
+    if (medicalStatus.present) {
+      map['medical_status'] = Variable<String>($BeneficiarysTable
+          .$convertermedicalStatusn
+          .toSql(medicalStatus.value));
     }
-    if (familyHasDisability.present) {
-      map['family_has_disability'] = Variable<bool>(familyHasDisability.value);
+    if (disabilityStatus.present) {
+      map['disability_status'] = Variable<String>($BeneficiarysTable
+          .$converterdisabilityStatusn
+          .toSql(disabilityStatus.value));
     }
     if (partnerName.present) {
       map['partner_name'] = Variable<String>(partnerName.value);
@@ -1304,26 +1775,79 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     if (partnerNationalNum.present) {
       map['partner_national_num'] = Variable<String>(partnerNationalNum.value);
     }
-    if (partnerBirthDate.present) {
-      map['partner_birth_date'] = Variable<DateTime>(partnerBirthDate.value);
-    }
     if (partnerPhoneNum.present) {
       map['partner_phone_num'] = Variable<String>(partnerPhoneNum.value);
     }
-    if (mainResidence.present) {
-      map['main_residence'] = Variable<String>(mainResidence.value);
+    if (partnerBirthDate.present) {
+      map['partner_birth_date'] = Variable<DateTime>(partnerBirthDate.value);
     }
-    if (currentResidence.present) {
-      map['current_residence'] = Variable<String>(currentResidence.value);
+    if (familybookNumber.present) {
+      map['familybook_number'] = Variable<String>(familybookNumber.value);
     }
-    if (residenceType.present) {
-      map['residence_type'] = Variable<String>(residenceType.value);
+    if (familyMembersNumber.present) {
+      map['family_members_number'] = Variable<int>(familyMembersNumber.value);
     }
-    if (residenceStatus.present) {
-      map['residence_status'] = Variable<String>(residenceStatus.value);
+    if (familyChildrenNumber.present) {
+      map['family_children_number'] = Variable<int>(familyChildrenNumber.value);
     }
-    if (shelterName.present) {
-      map['shelter_name'] = Variable<String>(shelterName.value);
+    if (familyHasMedicalStatus.present) {
+      map['family_has_medical_status'] =
+          Variable<bool>(familyHasMedicalStatus.value);
+    }
+    if (familyHasDisability.present) {
+      map['family_has_disability'] = Variable<bool>(familyHasDisability.value);
+    }
+    if (originalResidenceType.present) {
+      map['original_residence_type'] = Variable<String>($BeneficiarysTable
+          .$converteroriginalResidenceTypen
+          .toSql(originalResidenceType.value));
+    }
+    if (originalResidenceAddress.present) {
+      map['original_residence_address'] =
+          Variable<String>(originalResidenceAddress.value);
+    }
+    if (originalResidenceRegion.present) {
+      map['original_residence_region'] =
+          Variable<String>(originalResidenceRegion.value);
+    }
+    if (originalResidenceStatus.present) {
+      map['original_residence_status'] = Variable<String>($BeneficiarysTable
+          .$converteroriginalResidenceStatusn
+          .toSql(originalResidenceStatus.value));
+    }
+    if (currentResidenceRegion.present) {
+      map['current_residence_region'] =
+          Variable<String>(currentResidenceRegion.value);
+    }
+    if (currentResidenceAddress.present) {
+      map['current_residence_address'] =
+          Variable<String>(currentResidenceAddress.value);
+    }
+    if (currentResidenceType.present) {
+      map['current_residence_type'] = Variable<String>($BeneficiarysTable
+          .$convertercurrentResidenceTypen
+          .toSql(currentResidenceType.value));
+    }
+    if (acadimicLevel.present) {
+      map['acadimic_level'] = Variable<String>($BeneficiarysTable
+          .$converteracadimicLeveln
+          .toSql(acadimicLevel.value));
+    }
+    if (certification.present) {
+      map['certification'] = Variable<String>(certification.value);
+    }
+    if (studyAddress.present) {
+      map['study_address'] = Variable<String>(studyAddress.value);
+    }
+    if (jobType.present) {
+      map['job_type'] = Variable<String>(
+          $BeneficiarysTable.$converterjobTypen.toSql(jobType.value));
+    }
+    if (jobDecription.present) {
+      map['job_decription'] = Variable<String>(jobDecription.value);
+    }
+    if (monthlySalary.present) {
+      map['monthly_salary'] = Variable<String>(monthlySalary.value);
     }
     if (notes.present) {
       map['notes'] = Variable<String>(notes.value);
@@ -1344,27 +1868,36 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
           ..write('firstName: $firstName, ')
           ..write('fatherName: $fatherName, ')
           ..write('lastName: $lastName, ')
-          ..write('nationalNumber: $nationalNumber, ')
           ..write('motherName: $motherName, ')
-          ..write('contactNumber: $contactNumber, ')
+          ..write('nationalNumber: $nationalNumber, ')
           ..write('gender: $gender, ')
-          ..write('birthDate: $birthDate, ')
-          ..write('medicalStatus: $medicalStatus, ')
-          ..write('hasDisability: $hasDisability, ')
           ..write('socialStatus: $socialStatus, ')
-          ..write('familybookNumber: $familybookNumber, ')
-          ..write('familyMembersNumber: $familyMembersNumber, ')
-          ..write('familyMedicalStatus: $familyMedicalStatus, ')
-          ..write('familyHasDisability: $familyHasDisability, ')
+          ..write('birthDate: $birthDate, ')
+          ..write('contactNumber: $contactNumber, ')
+          ..write('medicalStatus: $medicalStatus, ')
+          ..write('disabilityStatus: $disabilityStatus, ')
           ..write('partnerName: $partnerName, ')
           ..write('partnerNationalNum: $partnerNationalNum, ')
-          ..write('partnerBirthDate: $partnerBirthDate, ')
           ..write('partnerPhoneNum: $partnerPhoneNum, ')
-          ..write('mainResidence: $mainResidence, ')
-          ..write('currentResidence: $currentResidence, ')
-          ..write('residenceType: $residenceType, ')
-          ..write('residenceStatus: $residenceStatus, ')
-          ..write('shelterName: $shelterName, ')
+          ..write('partnerBirthDate: $partnerBirthDate, ')
+          ..write('familybookNumber: $familybookNumber, ')
+          ..write('familyMembersNumber: $familyMembersNumber, ')
+          ..write('familyChildrenNumber: $familyChildrenNumber, ')
+          ..write('familyHasMedicalStatus: $familyHasMedicalStatus, ')
+          ..write('familyHasDisability: $familyHasDisability, ')
+          ..write('originalResidenceType: $originalResidenceType, ')
+          ..write('originalResidenceAddress: $originalResidenceAddress, ')
+          ..write('originalResidenceRegion: $originalResidenceRegion, ')
+          ..write('originalResidenceStatus: $originalResidenceStatus, ')
+          ..write('currentResidenceRegion: $currentResidenceRegion, ')
+          ..write('currentResidenceAddress: $currentResidenceAddress, ')
+          ..write('currentResidenceType: $currentResidenceType, ')
+          ..write('acadimicLevel: $acadimicLevel, ')
+          ..write('certification: $certification, ')
+          ..write('studyAddress: $studyAddress, ')
+          ..write('jobType: $jobType, ')
+          ..write('jobDecription: $jobDecription, ')
+          ..write('monthlySalary: $monthlySalary, ')
           ..write('notes: $notes, ')
           ..write('creationTime: $creationTime, ')
           ..write('creationLocation: $creationLocation')
@@ -1390,27 +1923,36 @@ typedef $$BeneficiarysTableCreateCompanionBuilder = BeneficiarysCompanion
   required String firstName,
   required String fatherName,
   required String lastName,
-  Value<String?> nationalNumber,
   Value<String?> motherName,
-  Value<String?> contactNumber,
+  Value<String?> nationalNumber,
   Value<Gender?> gender,
-  Value<DateTime?> birthDate,
-  Value<String?> medicalStatus,
-  Value<bool?> hasDisability,
   required SocialStatus socialStatus,
-  Value<String?> familybookNumber,
-  Value<String?> familyMembersNumber,
-  Value<String?> familyMedicalStatus,
-  Value<bool?> familyHasDisability,
+  Value<DateTime?> birthDate,
+  Value<String?> contactNumber,
+  Value<MedicalStatus?> medicalStatus,
+  Value<DisabilityStatus?> disabilityStatus,
   Value<String?> partnerName,
   Value<String?> partnerNationalNum,
-  Value<DateTime?> partnerBirthDate,
   Value<String?> partnerPhoneNum,
-  Value<String?> mainResidence,
-  Value<String?> currentResidence,
-  Value<String?> residenceType,
-  Value<String?> residenceStatus,
-  Value<String?> shelterName,
+  Value<DateTime?> partnerBirthDate,
+  Value<String?> familybookNumber,
+  Value<int?> familyMembersNumber,
+  Value<int?> familyChildrenNumber,
+  Value<bool?> familyHasMedicalStatus,
+  Value<bool?> familyHasDisability,
+  Value<ResidenceType?> originalResidenceType,
+  Value<String?> originalResidenceAddress,
+  Value<String?> originalResidenceRegion,
+  Value<ResidenceStatus?> originalResidenceStatus,
+  Value<String?> currentResidenceRegion,
+  Value<String?> currentResidenceAddress,
+  Value<CurrentResidenceType?> currentResidenceType,
+  Value<AcadimicLevel?> acadimicLevel,
+  Value<String?> certification,
+  Value<String?> studyAddress,
+  Value<JobType?> jobType,
+  Value<String?> jobDecription,
+  Value<String?> monthlySalary,
   Value<String?> notes,
   Value<DateTime?> creationTime,
   Value<String?> creationLocation,
@@ -1421,27 +1963,36 @@ typedef $$BeneficiarysTableUpdateCompanionBuilder = BeneficiarysCompanion
   Value<String> firstName,
   Value<String> fatherName,
   Value<String> lastName,
-  Value<String?> nationalNumber,
   Value<String?> motherName,
-  Value<String?> contactNumber,
+  Value<String?> nationalNumber,
   Value<Gender?> gender,
-  Value<DateTime?> birthDate,
-  Value<String?> medicalStatus,
-  Value<bool?> hasDisability,
   Value<SocialStatus> socialStatus,
-  Value<String?> familybookNumber,
-  Value<String?> familyMembersNumber,
-  Value<String?> familyMedicalStatus,
-  Value<bool?> familyHasDisability,
+  Value<DateTime?> birthDate,
+  Value<String?> contactNumber,
+  Value<MedicalStatus?> medicalStatus,
+  Value<DisabilityStatus?> disabilityStatus,
   Value<String?> partnerName,
   Value<String?> partnerNationalNum,
-  Value<DateTime?> partnerBirthDate,
   Value<String?> partnerPhoneNum,
-  Value<String?> mainResidence,
-  Value<String?> currentResidence,
-  Value<String?> residenceType,
-  Value<String?> residenceStatus,
-  Value<String?> shelterName,
+  Value<DateTime?> partnerBirthDate,
+  Value<String?> familybookNumber,
+  Value<int?> familyMembersNumber,
+  Value<int?> familyChildrenNumber,
+  Value<bool?> familyHasMedicalStatus,
+  Value<bool?> familyHasDisability,
+  Value<ResidenceType?> originalResidenceType,
+  Value<String?> originalResidenceAddress,
+  Value<String?> originalResidenceRegion,
+  Value<ResidenceStatus?> originalResidenceStatus,
+  Value<String?> currentResidenceRegion,
+  Value<String?> currentResidenceAddress,
+  Value<CurrentResidenceType?> currentResidenceType,
+  Value<AcadimicLevel?> acadimicLevel,
+  Value<String?> certification,
+  Value<String?> studyAddress,
+  Value<JobType?> jobType,
+  Value<String?> jobDecription,
+  Value<String?> monthlySalary,
   Value<String?> notes,
   Value<DateTime?> creationTime,
   Value<String?> creationLocation,
@@ -1468,50 +2019,38 @@ class $$BeneficiarysTableFilterComposer
   ColumnFilters<String> get lastName => $composableBuilder(
       column: $table.lastName, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get nationalNumber => $composableBuilder(
-      column: $table.nationalNumber,
-      builder: (column) => ColumnFilters(column));
-
   ColumnFilters<String> get motherName => $composableBuilder(
       column: $table.motherName, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get contactNumber => $composableBuilder(
-      column: $table.contactNumber, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get nationalNumber => $composableBuilder(
+      column: $table.nationalNumber,
+      builder: (column) => ColumnFilters(column));
 
   ColumnWithTypeConverterFilters<Gender?, Gender, String> get gender =>
       $composableBuilder(
           column: $table.gender,
           builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<DateTime> get birthDate => $composableBuilder(
-      column: $table.birthDate, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get medicalStatus => $composableBuilder(
-      column: $table.medicalStatus, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<bool> get hasDisability => $composableBuilder(
-      column: $table.hasDisability, builder: (column) => ColumnFilters(column));
-
   ColumnWithTypeConverterFilters<SocialStatus, SocialStatus, String>
       get socialStatus => $composableBuilder(
           column: $table.socialStatus,
           builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<String> get familybookNumber => $composableBuilder(
-      column: $table.familybookNumber,
-      builder: (column) => ColumnFilters(column));
+  ColumnFilters<DateTime> get birthDate => $composableBuilder(
+      column: $table.birthDate, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get familyMembersNumber => $composableBuilder(
-      column: $table.familyMembersNumber,
-      builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get contactNumber => $composableBuilder(
+      column: $table.contactNumber, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get familyMedicalStatus => $composableBuilder(
-      column: $table.familyMedicalStatus,
-      builder: (column) => ColumnFilters(column));
+  ColumnWithTypeConverterFilters<MedicalStatus?, MedicalStatus, String>
+      get medicalStatus => $composableBuilder(
+          column: $table.medicalStatus,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<bool> get familyHasDisability => $composableBuilder(
-      column: $table.familyHasDisability,
-      builder: (column) => ColumnFilters(column));
+  ColumnWithTypeConverterFilters<DisabilityStatus?, DisabilityStatus, String>
+      get disabilityStatus => $composableBuilder(
+          column: $table.disabilityStatus,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
   ColumnFilters<String> get partnerName => $composableBuilder(
       column: $table.partnerName, builder: (column) => ColumnFilters(column));
@@ -1520,30 +2059,87 @@ class $$BeneficiarysTableFilterComposer
       column: $table.partnerNationalNum,
       builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get partnerBirthDate => $composableBuilder(
-      column: $table.partnerBirthDate,
-      builder: (column) => ColumnFilters(column));
-
   ColumnFilters<String> get partnerPhoneNum => $composableBuilder(
       column: $table.partnerPhoneNum,
       builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get mainResidence => $composableBuilder(
-      column: $table.mainResidence, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get currentResidence => $composableBuilder(
-      column: $table.currentResidence,
+  ColumnFilters<DateTime> get partnerBirthDate => $composableBuilder(
+      column: $table.partnerBirthDate,
       builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get residenceType => $composableBuilder(
-      column: $table.residenceType, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get residenceStatus => $composableBuilder(
-      column: $table.residenceStatus,
+  ColumnFilters<String> get familybookNumber => $composableBuilder(
+      column: $table.familybookNumber,
       builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get shelterName => $composableBuilder(
-      column: $table.shelterName, builder: (column) => ColumnFilters(column));
+  ColumnFilters<int> get familyMembersNumber => $composableBuilder(
+      column: $table.familyMembersNumber,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get familyChildrenNumber => $composableBuilder(
+      column: $table.familyChildrenNumber,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get familyHasMedicalStatus => $composableBuilder(
+      column: $table.familyHasMedicalStatus,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get familyHasDisability => $composableBuilder(
+      column: $table.familyHasDisability,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnWithTypeConverterFilters<ResidenceType?, ResidenceType, String>
+      get originalResidenceType => $composableBuilder(
+          column: $table.originalResidenceType,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnFilters<String> get originalResidenceAddress => $composableBuilder(
+      column: $table.originalResidenceAddress,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get originalResidenceRegion => $composableBuilder(
+      column: $table.originalResidenceRegion,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnWithTypeConverterFilters<ResidenceStatus?, ResidenceStatus, String>
+      get originalResidenceStatus => $composableBuilder(
+          column: $table.originalResidenceStatus,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnFilters<String> get currentResidenceRegion => $composableBuilder(
+      column: $table.currentResidenceRegion,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get currentResidenceAddress => $composableBuilder(
+      column: $table.currentResidenceAddress,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnWithTypeConverterFilters<CurrentResidenceType?, CurrentResidenceType,
+          String>
+      get currentResidenceType => $composableBuilder(
+          column: $table.currentResidenceType,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnWithTypeConverterFilters<AcadimicLevel?, AcadimicLevel, String>
+      get acadimicLevel => $composableBuilder(
+          column: $table.acadimicLevel,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnFilters<String> get certification => $composableBuilder(
+      column: $table.certification, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get studyAddress => $composableBuilder(
+      column: $table.studyAddress, builder: (column) => ColumnFilters(column));
+
+  ColumnWithTypeConverterFilters<JobType?, JobType, String> get jobType =>
+      $composableBuilder(
+          column: $table.jobType,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnFilters<String> get jobDecription => $composableBuilder(
+      column: $table.jobDecription, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get monthlySalary => $composableBuilder(
+      column: $table.monthlySalary, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get notes => $composableBuilder(
       column: $table.notes, builder: (column) => ColumnFilters(column));
@@ -1577,49 +2173,33 @@ class $$BeneficiarysTableOrderingComposer
   ColumnOrderings<String> get lastName => $composableBuilder(
       column: $table.lastName, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get nationalNumber => $composableBuilder(
-      column: $table.nationalNumber,
-      builder: (column) => ColumnOrderings(column));
-
   ColumnOrderings<String> get motherName => $composableBuilder(
       column: $table.motherName, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get contactNumber => $composableBuilder(
-      column: $table.contactNumber,
+  ColumnOrderings<String> get nationalNumber => $composableBuilder(
+      column: $table.nationalNumber,
       builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get gender => $composableBuilder(
       column: $table.gender, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get socialStatus => $composableBuilder(
+      column: $table.socialStatus,
+      builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<DateTime> get birthDate => $composableBuilder(
       column: $table.birthDate, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get contactNumber => $composableBuilder(
+      column: $table.contactNumber,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get medicalStatus => $composableBuilder(
       column: $table.medicalStatus,
       builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<bool> get hasDisability => $composableBuilder(
-      column: $table.hasDisability,
-      builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get socialStatus => $composableBuilder(
-      column: $table.socialStatus,
-      builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get familybookNumber => $composableBuilder(
-      column: $table.familybookNumber,
-      builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get familyMembersNumber => $composableBuilder(
-      column: $table.familyMembersNumber,
-      builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get familyMedicalStatus => $composableBuilder(
-      column: $table.familyMedicalStatus,
-      builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<bool> get familyHasDisability => $composableBuilder(
-      column: $table.familyHasDisability,
+  ColumnOrderings<String> get disabilityStatus => $composableBuilder(
+      column: $table.disabilityStatus,
       builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get partnerName => $composableBuilder(
@@ -1629,32 +2209,84 @@ class $$BeneficiarysTableOrderingComposer
       column: $table.partnerNationalNum,
       builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get partnerBirthDate => $composableBuilder(
-      column: $table.partnerBirthDate,
-      builder: (column) => ColumnOrderings(column));
-
   ColumnOrderings<String> get partnerPhoneNum => $composableBuilder(
       column: $table.partnerPhoneNum,
       builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get mainResidence => $composableBuilder(
-      column: $table.mainResidence,
+  ColumnOrderings<DateTime> get partnerBirthDate => $composableBuilder(
+      column: $table.partnerBirthDate,
       builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get currentResidence => $composableBuilder(
-      column: $table.currentResidence,
+  ColumnOrderings<String> get familybookNumber => $composableBuilder(
+      column: $table.familybookNumber,
       builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get residenceType => $composableBuilder(
-      column: $table.residenceType,
+  ColumnOrderings<int> get familyMembersNumber => $composableBuilder(
+      column: $table.familyMembersNumber,
       builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get residenceStatus => $composableBuilder(
-      column: $table.residenceStatus,
+  ColumnOrderings<int> get familyChildrenNumber => $composableBuilder(
+      column: $table.familyChildrenNumber,
       builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get shelterName => $composableBuilder(
-      column: $table.shelterName, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<bool> get familyHasMedicalStatus => $composableBuilder(
+      column: $table.familyHasMedicalStatus,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get familyHasDisability => $composableBuilder(
+      column: $table.familyHasDisability,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get originalResidenceType => $composableBuilder(
+      column: $table.originalResidenceType,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get originalResidenceAddress => $composableBuilder(
+      column: $table.originalResidenceAddress,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get originalResidenceRegion => $composableBuilder(
+      column: $table.originalResidenceRegion,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get originalResidenceStatus => $composableBuilder(
+      column: $table.originalResidenceStatus,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get currentResidenceRegion => $composableBuilder(
+      column: $table.currentResidenceRegion,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get currentResidenceAddress => $composableBuilder(
+      column: $table.currentResidenceAddress,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get currentResidenceType => $composableBuilder(
+      column: $table.currentResidenceType,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get acadimicLevel => $composableBuilder(
+      column: $table.acadimicLevel,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get certification => $composableBuilder(
+      column: $table.certification,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get studyAddress => $composableBuilder(
+      column: $table.studyAddress,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get jobType => $composableBuilder(
+      column: $table.jobType, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get jobDecription => $composableBuilder(
+      column: $table.jobDecription,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get monthlySalary => $composableBuilder(
+      column: $table.monthlySalary,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get notes => $composableBuilder(
       column: $table.notes, builder: (column) => ColumnOrderings(column));
@@ -1689,42 +2321,32 @@ class $$BeneficiarysTableAnnotationComposer
   GeneratedColumn<String> get lastName =>
       $composableBuilder(column: $table.lastName, builder: (column) => column);
 
-  GeneratedColumn<String> get nationalNumber => $composableBuilder(
-      column: $table.nationalNumber, builder: (column) => column);
-
   GeneratedColumn<String> get motherName => $composableBuilder(
       column: $table.motherName, builder: (column) => column);
 
-  GeneratedColumn<String> get contactNumber => $composableBuilder(
-      column: $table.contactNumber, builder: (column) => column);
+  GeneratedColumn<String> get nationalNumber => $composableBuilder(
+      column: $table.nationalNumber, builder: (column) => column);
 
   GeneratedColumnWithTypeConverter<Gender?, String> get gender =>
       $composableBuilder(column: $table.gender, builder: (column) => column);
-
-  GeneratedColumn<DateTime> get birthDate =>
-      $composableBuilder(column: $table.birthDate, builder: (column) => column);
-
-  GeneratedColumn<String> get medicalStatus => $composableBuilder(
-      column: $table.medicalStatus, builder: (column) => column);
-
-  GeneratedColumn<bool> get hasDisability => $composableBuilder(
-      column: $table.hasDisability, builder: (column) => column);
 
   GeneratedColumnWithTypeConverter<SocialStatus, String> get socialStatus =>
       $composableBuilder(
           column: $table.socialStatus, builder: (column) => column);
 
-  GeneratedColumn<String> get familybookNumber => $composableBuilder(
-      column: $table.familybookNumber, builder: (column) => column);
+  GeneratedColumn<DateTime> get birthDate =>
+      $composableBuilder(column: $table.birthDate, builder: (column) => column);
 
-  GeneratedColumn<String> get familyMembersNumber => $composableBuilder(
-      column: $table.familyMembersNumber, builder: (column) => column);
+  GeneratedColumn<String> get contactNumber => $composableBuilder(
+      column: $table.contactNumber, builder: (column) => column);
 
-  GeneratedColumn<String> get familyMedicalStatus => $composableBuilder(
-      column: $table.familyMedicalStatus, builder: (column) => column);
+  GeneratedColumnWithTypeConverter<MedicalStatus?, String> get medicalStatus =>
+      $composableBuilder(
+          column: $table.medicalStatus, builder: (column) => column);
 
-  GeneratedColumn<bool> get familyHasDisability => $composableBuilder(
-      column: $table.familyHasDisability, builder: (column) => column);
+  GeneratedColumnWithTypeConverter<DisabilityStatus?, String>
+      get disabilityStatus => $composableBuilder(
+          column: $table.disabilityStatus, builder: (column) => column);
 
   GeneratedColumn<String> get partnerName => $composableBuilder(
       column: $table.partnerName, builder: (column) => column);
@@ -1732,26 +2354,69 @@ class $$BeneficiarysTableAnnotationComposer
   GeneratedColumn<String> get partnerNationalNum => $composableBuilder(
       column: $table.partnerNationalNum, builder: (column) => column);
 
-  GeneratedColumn<DateTime> get partnerBirthDate => $composableBuilder(
-      column: $table.partnerBirthDate, builder: (column) => column);
-
   GeneratedColumn<String> get partnerPhoneNum => $composableBuilder(
       column: $table.partnerPhoneNum, builder: (column) => column);
 
-  GeneratedColumn<String> get mainResidence => $composableBuilder(
-      column: $table.mainResidence, builder: (column) => column);
+  GeneratedColumn<DateTime> get partnerBirthDate => $composableBuilder(
+      column: $table.partnerBirthDate, builder: (column) => column);
 
-  GeneratedColumn<String> get currentResidence => $composableBuilder(
-      column: $table.currentResidence, builder: (column) => column);
+  GeneratedColumn<String> get familybookNumber => $composableBuilder(
+      column: $table.familybookNumber, builder: (column) => column);
 
-  GeneratedColumn<String> get residenceType => $composableBuilder(
-      column: $table.residenceType, builder: (column) => column);
+  GeneratedColumn<int> get familyMembersNumber => $composableBuilder(
+      column: $table.familyMembersNumber, builder: (column) => column);
 
-  GeneratedColumn<String> get residenceStatus => $composableBuilder(
-      column: $table.residenceStatus, builder: (column) => column);
+  GeneratedColumn<int> get familyChildrenNumber => $composableBuilder(
+      column: $table.familyChildrenNumber, builder: (column) => column);
 
-  GeneratedColumn<String> get shelterName => $composableBuilder(
-      column: $table.shelterName, builder: (column) => column);
+  GeneratedColumn<bool> get familyHasMedicalStatus => $composableBuilder(
+      column: $table.familyHasMedicalStatus, builder: (column) => column);
+
+  GeneratedColumn<bool> get familyHasDisability => $composableBuilder(
+      column: $table.familyHasDisability, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<ResidenceType?, String>
+      get originalResidenceType => $composableBuilder(
+          column: $table.originalResidenceType, builder: (column) => column);
+
+  GeneratedColumn<String> get originalResidenceAddress => $composableBuilder(
+      column: $table.originalResidenceAddress, builder: (column) => column);
+
+  GeneratedColumn<String> get originalResidenceRegion => $composableBuilder(
+      column: $table.originalResidenceRegion, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<ResidenceStatus?, String>
+      get originalResidenceStatus => $composableBuilder(
+          column: $table.originalResidenceStatus, builder: (column) => column);
+
+  GeneratedColumn<String> get currentResidenceRegion => $composableBuilder(
+      column: $table.currentResidenceRegion, builder: (column) => column);
+
+  GeneratedColumn<String> get currentResidenceAddress => $composableBuilder(
+      column: $table.currentResidenceAddress, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<CurrentResidenceType?, String>
+      get currentResidenceType => $composableBuilder(
+          column: $table.currentResidenceType, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<AcadimicLevel?, String> get acadimicLevel =>
+      $composableBuilder(
+          column: $table.acadimicLevel, builder: (column) => column);
+
+  GeneratedColumn<String> get certification => $composableBuilder(
+      column: $table.certification, builder: (column) => column);
+
+  GeneratedColumn<String> get studyAddress => $composableBuilder(
+      column: $table.studyAddress, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<JobType?, String> get jobType =>
+      $composableBuilder(column: $table.jobType, builder: (column) => column);
+
+  GeneratedColumn<String> get jobDecription => $composableBuilder(
+      column: $table.jobDecription, builder: (column) => column);
+
+  GeneratedColumn<String> get monthlySalary => $composableBuilder(
+      column: $table.monthlySalary, builder: (column) => column);
 
   GeneratedColumn<String> get notes =>
       $composableBuilder(column: $table.notes, builder: (column) => column);
@@ -1793,27 +2458,38 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
             Value<String> firstName = const Value.absent(),
             Value<String> fatherName = const Value.absent(),
             Value<String> lastName = const Value.absent(),
-            Value<String?> nationalNumber = const Value.absent(),
             Value<String?> motherName = const Value.absent(),
-            Value<String?> contactNumber = const Value.absent(),
+            Value<String?> nationalNumber = const Value.absent(),
             Value<Gender?> gender = const Value.absent(),
-            Value<DateTime?> birthDate = const Value.absent(),
-            Value<String?> medicalStatus = const Value.absent(),
-            Value<bool?> hasDisability = const Value.absent(),
             Value<SocialStatus> socialStatus = const Value.absent(),
-            Value<String?> familybookNumber = const Value.absent(),
-            Value<String?> familyMembersNumber = const Value.absent(),
-            Value<String?> familyMedicalStatus = const Value.absent(),
-            Value<bool?> familyHasDisability = const Value.absent(),
+            Value<DateTime?> birthDate = const Value.absent(),
+            Value<String?> contactNumber = const Value.absent(),
+            Value<MedicalStatus?> medicalStatus = const Value.absent(),
+            Value<DisabilityStatus?> disabilityStatus = const Value.absent(),
             Value<String?> partnerName = const Value.absent(),
             Value<String?> partnerNationalNum = const Value.absent(),
-            Value<DateTime?> partnerBirthDate = const Value.absent(),
             Value<String?> partnerPhoneNum = const Value.absent(),
-            Value<String?> mainResidence = const Value.absent(),
-            Value<String?> currentResidence = const Value.absent(),
-            Value<String?> residenceType = const Value.absent(),
-            Value<String?> residenceStatus = const Value.absent(),
-            Value<String?> shelterName = const Value.absent(),
+            Value<DateTime?> partnerBirthDate = const Value.absent(),
+            Value<String?> familybookNumber = const Value.absent(),
+            Value<int?> familyMembersNumber = const Value.absent(),
+            Value<int?> familyChildrenNumber = const Value.absent(),
+            Value<bool?> familyHasMedicalStatus = const Value.absent(),
+            Value<bool?> familyHasDisability = const Value.absent(),
+            Value<ResidenceType?> originalResidenceType = const Value.absent(),
+            Value<String?> originalResidenceAddress = const Value.absent(),
+            Value<String?> originalResidenceRegion = const Value.absent(),
+            Value<ResidenceStatus?> originalResidenceStatus =
+                const Value.absent(),
+            Value<String?> currentResidenceRegion = const Value.absent(),
+            Value<String?> currentResidenceAddress = const Value.absent(),
+            Value<CurrentResidenceType?> currentResidenceType =
+                const Value.absent(),
+            Value<AcadimicLevel?> acadimicLevel = const Value.absent(),
+            Value<String?> certification = const Value.absent(),
+            Value<String?> studyAddress = const Value.absent(),
+            Value<JobType?> jobType = const Value.absent(),
+            Value<String?> jobDecription = const Value.absent(),
+            Value<String?> monthlySalary = const Value.absent(),
             Value<String?> notes = const Value.absent(),
             Value<DateTime?> creationTime = const Value.absent(),
             Value<String?> creationLocation = const Value.absent(),
@@ -1823,27 +2499,36 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
             firstName: firstName,
             fatherName: fatherName,
             lastName: lastName,
-            nationalNumber: nationalNumber,
             motherName: motherName,
-            contactNumber: contactNumber,
+            nationalNumber: nationalNumber,
             gender: gender,
-            birthDate: birthDate,
-            medicalStatus: medicalStatus,
-            hasDisability: hasDisability,
             socialStatus: socialStatus,
-            familybookNumber: familybookNumber,
-            familyMembersNumber: familyMembersNumber,
-            familyMedicalStatus: familyMedicalStatus,
-            familyHasDisability: familyHasDisability,
+            birthDate: birthDate,
+            contactNumber: contactNumber,
+            medicalStatus: medicalStatus,
+            disabilityStatus: disabilityStatus,
             partnerName: partnerName,
             partnerNationalNum: partnerNationalNum,
-            partnerBirthDate: partnerBirthDate,
             partnerPhoneNum: partnerPhoneNum,
-            mainResidence: mainResidence,
-            currentResidence: currentResidence,
-            residenceType: residenceType,
-            residenceStatus: residenceStatus,
-            shelterName: shelterName,
+            partnerBirthDate: partnerBirthDate,
+            familybookNumber: familybookNumber,
+            familyMembersNumber: familyMembersNumber,
+            familyChildrenNumber: familyChildrenNumber,
+            familyHasMedicalStatus: familyHasMedicalStatus,
+            familyHasDisability: familyHasDisability,
+            originalResidenceType: originalResidenceType,
+            originalResidenceAddress: originalResidenceAddress,
+            originalResidenceRegion: originalResidenceRegion,
+            originalResidenceStatus: originalResidenceStatus,
+            currentResidenceRegion: currentResidenceRegion,
+            currentResidenceAddress: currentResidenceAddress,
+            currentResidenceType: currentResidenceType,
+            acadimicLevel: acadimicLevel,
+            certification: certification,
+            studyAddress: studyAddress,
+            jobType: jobType,
+            jobDecription: jobDecription,
+            monthlySalary: monthlySalary,
             notes: notes,
             creationTime: creationTime,
             creationLocation: creationLocation,
@@ -1853,27 +2538,38 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
             required String firstName,
             required String fatherName,
             required String lastName,
-            Value<String?> nationalNumber = const Value.absent(),
             Value<String?> motherName = const Value.absent(),
-            Value<String?> contactNumber = const Value.absent(),
+            Value<String?> nationalNumber = const Value.absent(),
             Value<Gender?> gender = const Value.absent(),
-            Value<DateTime?> birthDate = const Value.absent(),
-            Value<String?> medicalStatus = const Value.absent(),
-            Value<bool?> hasDisability = const Value.absent(),
             required SocialStatus socialStatus,
-            Value<String?> familybookNumber = const Value.absent(),
-            Value<String?> familyMembersNumber = const Value.absent(),
-            Value<String?> familyMedicalStatus = const Value.absent(),
-            Value<bool?> familyHasDisability = const Value.absent(),
+            Value<DateTime?> birthDate = const Value.absent(),
+            Value<String?> contactNumber = const Value.absent(),
+            Value<MedicalStatus?> medicalStatus = const Value.absent(),
+            Value<DisabilityStatus?> disabilityStatus = const Value.absent(),
             Value<String?> partnerName = const Value.absent(),
             Value<String?> partnerNationalNum = const Value.absent(),
-            Value<DateTime?> partnerBirthDate = const Value.absent(),
             Value<String?> partnerPhoneNum = const Value.absent(),
-            Value<String?> mainResidence = const Value.absent(),
-            Value<String?> currentResidence = const Value.absent(),
-            Value<String?> residenceType = const Value.absent(),
-            Value<String?> residenceStatus = const Value.absent(),
-            Value<String?> shelterName = const Value.absent(),
+            Value<DateTime?> partnerBirthDate = const Value.absent(),
+            Value<String?> familybookNumber = const Value.absent(),
+            Value<int?> familyMembersNumber = const Value.absent(),
+            Value<int?> familyChildrenNumber = const Value.absent(),
+            Value<bool?> familyHasMedicalStatus = const Value.absent(),
+            Value<bool?> familyHasDisability = const Value.absent(),
+            Value<ResidenceType?> originalResidenceType = const Value.absent(),
+            Value<String?> originalResidenceAddress = const Value.absent(),
+            Value<String?> originalResidenceRegion = const Value.absent(),
+            Value<ResidenceStatus?> originalResidenceStatus =
+                const Value.absent(),
+            Value<String?> currentResidenceRegion = const Value.absent(),
+            Value<String?> currentResidenceAddress = const Value.absent(),
+            Value<CurrentResidenceType?> currentResidenceType =
+                const Value.absent(),
+            Value<AcadimicLevel?> acadimicLevel = const Value.absent(),
+            Value<String?> certification = const Value.absent(),
+            Value<String?> studyAddress = const Value.absent(),
+            Value<JobType?> jobType = const Value.absent(),
+            Value<String?> jobDecription = const Value.absent(),
+            Value<String?> monthlySalary = const Value.absent(),
             Value<String?> notes = const Value.absent(),
             Value<DateTime?> creationTime = const Value.absent(),
             Value<String?> creationLocation = const Value.absent(),
@@ -1883,27 +2579,36 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
             firstName: firstName,
             fatherName: fatherName,
             lastName: lastName,
-            nationalNumber: nationalNumber,
             motherName: motherName,
-            contactNumber: contactNumber,
+            nationalNumber: nationalNumber,
             gender: gender,
-            birthDate: birthDate,
-            medicalStatus: medicalStatus,
-            hasDisability: hasDisability,
             socialStatus: socialStatus,
-            familybookNumber: familybookNumber,
-            familyMembersNumber: familyMembersNumber,
-            familyMedicalStatus: familyMedicalStatus,
-            familyHasDisability: familyHasDisability,
+            birthDate: birthDate,
+            contactNumber: contactNumber,
+            medicalStatus: medicalStatus,
+            disabilityStatus: disabilityStatus,
             partnerName: partnerName,
             partnerNationalNum: partnerNationalNum,
-            partnerBirthDate: partnerBirthDate,
             partnerPhoneNum: partnerPhoneNum,
-            mainResidence: mainResidence,
-            currentResidence: currentResidence,
-            residenceType: residenceType,
-            residenceStatus: residenceStatus,
-            shelterName: shelterName,
+            partnerBirthDate: partnerBirthDate,
+            familybookNumber: familybookNumber,
+            familyMembersNumber: familyMembersNumber,
+            familyChildrenNumber: familyChildrenNumber,
+            familyHasMedicalStatus: familyHasMedicalStatus,
+            familyHasDisability: familyHasDisability,
+            originalResidenceType: originalResidenceType,
+            originalResidenceAddress: originalResidenceAddress,
+            originalResidenceRegion: originalResidenceRegion,
+            originalResidenceStatus: originalResidenceStatus,
+            currentResidenceRegion: currentResidenceRegion,
+            currentResidenceAddress: currentResidenceAddress,
+            currentResidenceType: currentResidenceType,
+            acadimicLevel: acadimicLevel,
+            certification: certification,
+            studyAddress: studyAddress,
+            jobType: jobType,
+            jobDecription: jobDecription,
+            monthlySalary: monthlySalary,
             notes: notes,
             creationTime: creationTime,
             creationLocation: creationLocation,

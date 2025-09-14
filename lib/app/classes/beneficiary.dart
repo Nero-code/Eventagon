@@ -49,21 +49,20 @@ part 'beneficiary.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class BeneficiaryEntity {
+  // final List<AidType> aidRequired; TODO
   // Personal Section
   final String firstName;
   final String fatherName;
   final String lastName;
   final String? motherName;
   final String? nationalNumber;
+  final String? contactNumber;
   final Gender gender;
   final SocialStatus socialStatus;
   final DateTime? birthDate;
-  final String? contactNumber;
-
   // Medical-personal Section
   final MedicalStatus? medicalStatus;
-  final DisabilityStatus hasDisability;
-
+  final DisabilityStatus disabilityStatus;
   // Partner Section
   final String? partnerName;
   final String? partnerNationalNum;
@@ -74,17 +73,18 @@ class BeneficiaryEntity {
   final String? familybookNumber;
   final int? familyMembersNumber;
   final int? familyChildrenNumber;
-
   // Medical-family Section
   final bool? familyHasMedicalStatus;
   final bool? familyHasDisability;
 
   // Residence Section
-  final String? mainResidence;
-  final String? currentResidence;
-  final String? residenceType;
-  final String? residenceStatus;
-  final String? shelterName;
+  final String? originalResidenceRegion; //           region? "code # name"
+  final String? currentResidenceRegion; //
+  final String? originalResidenceAddress; //          his home address
+  final String? currentResidenceAddress;
+  final ResidenceStatus originalResidenceStatus; //   is it still standing?
+  final ResidenceType? originalResidenceType; //      was he an owner?
+  final CurrentResidenceType? currentResidenceType; //
 
   // StudiesInformation Section
   final AcadimicLevel? acadimicLevel;
@@ -93,8 +93,8 @@ class BeneficiaryEntity {
 
   // JobInformation
   final JobType? jobType;
-  final String? jobDecription;
   final String? monthlySalary;
+  final String? jobDescription;
 
   // AUX
   final String? notes;
@@ -107,7 +107,6 @@ class BeneficiaryEntity {
       _$BeneficiaryEntityFromJson(json);
 
   const BeneficiaryEntity({
-    // Personal Section
     required this.firstName,
     required this.fatherName,
     required this.lastName,
@@ -117,44 +116,30 @@ class BeneficiaryEntity {
     required this.socialStatus,
     required this.birthDate,
     required this.contactNumber,
-
-    // Medical-personal Section
     required this.medicalStatus,
-    required this.hasDisability,
-
-    // Partner Section
+    required this.disabilityStatus,
     required this.partnerName,
     required this.partnerNationalNum,
     required this.partnerPhoneNum,
     required this.partnerBirthDate,
-
-    // Family Section
     required this.familybookNumber,
     required this.familyMembersNumber,
     required this.familyChildrenNumber,
-
-    // Medical-family Section
     required this.familyHasMedicalStatus,
     required this.familyHasDisability,
-
-    // Residence Section
-    required this.mainResidence,
-    required this.currentResidence,
-    required this.residenceType,
-    required this.residenceStatus,
-    required this.shelterName,
-
-    // StudiesInformation Section
+    required this.originalResidenceType,
+    required this.originalResidenceAddress,
+    required this.originalResidenceRegion,
+    required this.originalResidenceStatus,
+    required this.currentResidenceRegion,
+    required this.currentResidenceAddress,
+    required this.currentResidenceType,
     required this.acadimicLevel,
     required this.certification,
     required this.studyAddress,
-
-    // JobInformation
     required this.jobType,
-    required this.jobDecription,
+    required this.jobDescription,
     required this.monthlySalary,
-
-    // AUX
     required this.notes,
     required this.creationTime,
     required this.creationLocation,
@@ -162,27 +147,72 @@ class BeneficiaryEntity {
 
   Map<String, dynamic> toJson() => _$BeneficiaryEntityToJson(this);
 
-  List<TextCellValue> toExcelRow() =>
-      toJson().values.map((v) => TextCellValue(v?.toString() ?? '')).toList();
+  // List<TextCellValue> toExcelRow() =>
+  //     toJson().values.map((v) => TextCellValue(v?.toString() ?? '')).toList();
+
+  @Deprecated('This method doesn\'t support custom headers')
+  List<TextCellValue> getExcelRowHeaders() =>
+      toJson().keys.map((k) => TextCellValue(k)).toList();
 
   static List<TextCellValue> getExcelHeader() => [
+        // Personal
         TextCellValue('firstName'),
         TextCellValue('fatherName'),
         TextCellValue('lastName'),
+        TextCellValue('motherName'),
         TextCellValue('nationalNumber'),
-        TextCellValue('familybookNumber'),
+        TextCellValue('gender_code'),
+        TextCellValue('gender'),
+        // TextCellValue('aidType'),
+
+        TextCellValue('socialStatus_code'), // code
         TextCellValue('socialStatus'),
+        TextCellValue('birthDate'),
         TextCellValue('contactNumber'),
-        TextCellValue('partnerName'),
-        TextCellValue('familyMembersNumber'),
-        TextCellValue('mainResidence'),
-        TextCellValue('currentResidence'),
-        TextCellValue('residenceType'),
-        TextCellValue('residenceStatus'),
-        TextCellValue('shelterName'),
+
+        // p-m
+        TextCellValue('medicalStatus_code'), // code
         TextCellValue('medicalStatus'),
+        TextCellValue('disabilityStatus_code'), // code
+        TextCellValue('disabilityStatus'),
+
+        // partner
+        TextCellValue('partnerName'),
+        TextCellValue('partnerNationalNum'),
+        TextCellValue('partnerPhoneNum'),
+        TextCellValue('partnerBirthDate'),
+
+        // family
+        TextCellValue('familybookNumber'),
+        TextCellValue('familyMembersNumber'),
+        TextCellValue('familyChildrenNumber'),
+        TextCellValue('familyHasMedicalStatus'),
+        TextCellValue('familyHasDisability'),
+
+        // residence
+        TextCellValue('originalResidenceType_code'), // code
+        TextCellValue('originalResidenceType'),
+        TextCellValue('originalResidenceAddress'),
+        TextCellValue('originalResidenceRegion'),
+        TextCellValue('originalResidenceStatus_code'), // code
+        TextCellValue('originalResidenceStatus'),
+        TextCellValue('currentResidenceRegion'),
+        TextCellValue('currentResidenceAddress'),
+        TextCellValue('currentResidenceType_code'), // code
+        TextCellValue('currentResidenceType'),
+
+        TextCellValue('acadimicLevel_code'), // code
+        TextCellValue('acadimicLevel'),
+        TextCellValue('certification'),
+        TextCellValue('studyAddress'),
+
+        TextCellValue('jobType_code'), // code
+        TextCellValue('jobType'),
+        TextCellValue('jobDescription'),
+        TextCellValue('monthlySalary'),
         TextCellValue('notes'),
-        TextCellValue('createdAt'),
+        TextCellValue('creationTime'),
+        TextCellValue('creationLocation'),
       ];
 }
 

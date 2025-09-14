@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide(color: Colors.grey.shade200),
             ),
+            floatingLabelStyle:
+                TextStyle(fontSize: 16, color: Colors.grey.shade800),
           ),
           // -----------------------
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),

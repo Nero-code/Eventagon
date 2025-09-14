@@ -21,8 +21,8 @@ BeneficiaryEntity _$BeneficiaryEntityFromJson(Map<String, dynamic> json) =>
       contactNumber: json['contactNumber'] as String?,
       medicalStatus:
           $enumDecodeNullable(_$MedicalStatusEnumMap, json['medicalStatus']),
-      hasDisability:
-          $enumDecode(_$DisabilityStatusEnumMap, json['hasDisability']),
+      disabilityStatus:
+          $enumDecode(_$DisabilityStatusEnumMap, json['disabilityStatus']),
       partnerName: json['partnerName'] as String?,
       partnerNationalNum: json['partnerNationalNum'] as String?,
       partnerPhoneNum: json['partnerPhoneNum'] as String?,
@@ -34,17 +34,22 @@ BeneficiaryEntity _$BeneficiaryEntityFromJson(Map<String, dynamic> json) =>
       familyChildrenNumber: (json['familyChildrenNumber'] as num?)?.toInt(),
       familyHasMedicalStatus: json['familyHasMedicalStatus'] as bool?,
       familyHasDisability: json['familyHasDisability'] as bool?,
-      mainResidence: json['mainResidence'] as String?,
-      currentResidence: json['currentResidence'] as String?,
-      residenceType: json['residenceType'] as String?,
-      residenceStatus: json['residenceStatus'] as String?,
-      shelterName: json['shelterName'] as String?,
+      originalResidenceType: $enumDecodeNullable(
+          _$ResidenceTypeEnumMap, json['originalResidenceType']),
+      originalResidenceAddress: json['originalResidenceAddress'] as String?,
+      originalResidenceRegion: json['originalResidenceRegion'] as String?,
+      originalResidenceStatus: $enumDecode(
+          _$ResidenceStatusEnumMap, json['originalResidenceStatus']),
+      currentResidenceRegion: json['currentResidenceRegion'] as String?,
+      currentResidenceAddress: json['currentResidenceAddress'] as String?,
+      currentResidenceType: $enumDecodeNullable(
+          _$CurrentResidenceTypeEnumMap, json['currentResidenceType']),
       acadimicLevel:
           $enumDecodeNullable(_$AcadimicLevelEnumMap, json['acadimicLevel']),
       certification: json['certification'] as String?,
       studyAddress: json['studyAddress'] as String?,
       jobType: $enumDecodeNullable(_$JobTypeEnumMap, json['jobType']),
-      jobDecription: json['jobDecription'] as String?,
+      jobDescription: json['jobDescription'] as String?,
       monthlySalary: json['monthlySalary'] as String?,
       notes: json['notes'] as String?,
       creationTime: json['creationTime'] == null
@@ -65,7 +70,7 @@ Map<String, dynamic> _$BeneficiaryEntityToJson(BeneficiaryEntity instance) =>
       'birthDate': instance.birthDate?.toIso8601String(),
       'contactNumber': instance.contactNumber,
       'medicalStatus': _$MedicalStatusEnumMap[instance.medicalStatus],
-      'hasDisability': _$DisabilityStatusEnumMap[instance.hasDisability]!,
+      'disabilityStatus': _$DisabilityStatusEnumMap[instance.disabilityStatus]!,
       'partnerName': instance.partnerName,
       'partnerNationalNum': instance.partnerNationalNum,
       'partnerPhoneNum': instance.partnerPhoneNum,
@@ -75,16 +80,21 @@ Map<String, dynamic> _$BeneficiaryEntityToJson(BeneficiaryEntity instance) =>
       'familyChildrenNumber': instance.familyChildrenNumber,
       'familyHasMedicalStatus': instance.familyHasMedicalStatus,
       'familyHasDisability': instance.familyHasDisability,
-      'mainResidence': instance.mainResidence,
-      'currentResidence': instance.currentResidence,
-      'residenceType': instance.residenceType,
-      'residenceStatus': instance.residenceStatus,
-      'shelterName': instance.shelterName,
+      'originalResidenceType':
+          _$ResidenceTypeEnumMap[instance.originalResidenceType],
+      'originalResidenceAddress': instance.originalResidenceAddress,
+      'originalResidenceRegion': instance.originalResidenceRegion,
+      'originalResidenceStatus':
+          _$ResidenceStatusEnumMap[instance.originalResidenceStatus]!,
+      'currentResidenceRegion': instance.currentResidenceRegion,
+      'currentResidenceAddress': instance.currentResidenceAddress,
+      'currentResidenceType':
+          _$CurrentResidenceTypeEnumMap[instance.currentResidenceType],
       'acadimicLevel': _$AcadimicLevelEnumMap[instance.acadimicLevel],
       'certification': instance.certification,
       'studyAddress': instance.studyAddress,
       'jobType': _$JobTypeEnumMap[instance.jobType],
-      'jobDecription': instance.jobDecription,
+      'jobDescription': instance.jobDescription,
       'monthlySalary': instance.monthlySalary,
       'notes': instance.notes,
       'creationTime': instance.creationTime?.toIso8601String(),
@@ -116,6 +126,28 @@ const _$DisabilityStatusEnumMap = {
   DisabilityStatus.mildOrTemporaryDisability: 'mildOrTemporaryDisability',
   DisabilityStatus.moderateDisability: 'moderateDisability',
   DisabilityStatus.severeDisability: 'severeDisability',
+};
+
+const _$ResidenceTypeEnumMap = {
+  ResidenceType.owned: 'owned',
+  ResidenceType.rent: 'rent',
+};
+
+const _$ResidenceStatusEnumMap = {
+  ResidenceStatus.safeAndSuitableHousing: 'safeAndSuitableHousing',
+  ResidenceStatus.minorRepairsNeeded: 'minorRepairsNeeded',
+  ResidenceStatus.uncomfortableOrCrowded: 'uncomfortableOrCrowded',
+  ResidenceStatus.unsafeOrStructurallyUnstable: 'unsafeOrStructurallyUnstable',
+  ResidenceStatus.destroyedOrUninhabitable: 'destroyedOrUninhabitable',
+};
+
+const _$CurrentResidenceTypeEnumMap = {
+  CurrentResidenceType.originalPlace: 'originalPlace',
+  CurrentResidenceType.shelter: 'shelter',
+  CurrentResidenceType.withRelative: 'withRelative',
+  CurrentResidenceType.temporary: 'temporary',
+  CurrentResidenceType.owned: 'owned',
+  CurrentResidenceType.rent: 'rent',
 };
 
 const _$AcadimicLevelEnumMap = {
