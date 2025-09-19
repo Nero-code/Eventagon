@@ -4,6 +4,8 @@ import 'package:vollect/core/enums.dart';
 class Beneficiarys extends Table {
   late final id = integer().autoIncrement()();
 
+  late final aidRequired = text().nullable()();
+
   // Personal
   late final firstName = text()();
   late final fatherName = text()();
@@ -51,11 +53,21 @@ class Beneficiarys extends Table {
 
   // JobInformation
   late final jobType = textEnum<JobType>().nullable()();
-  late final jobDecription = text().nullable()();
+  late final jobDescription = text().nullable()();
   late final monthlySalary = text().nullable()();
 
   // AUX
   late final notes = text().nullable()();
   late final creationTime = dateTime().nullable().clientDefault(DateTime.now)();
   late final creationLocation = text().nullable()();
+}
+
+class DateTimeConverter extends TypeConverter<DateTime, String> {
+  const DateTimeConverter();
+
+  @override
+  DateTime fromSql(String fromDb) => DateTime.parse(fromDb);
+
+  @override
+  String toSql(DateTime value) => value.toIso8601String();
 }

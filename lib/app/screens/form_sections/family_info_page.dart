@@ -15,11 +15,18 @@ class _FamilyInfoPageState extends State<FamilyInfoPage>
   static const _gap = 10.0;
 
   final familyBookNumC = TextEditingController();
+  String counterText = '0';
 
   bool familyHasMedicalStatus = false;
   bool familyHasDisability = false;
 
-  String counterText = '0';
+  @override
+  void initState() {
+    super.initState();
+
+    familyHasMedicalStatus = widget.report['familyHasMedicalStatus'] ?? false;
+    familyHasDisability = widget.report['familyHasDisability'] ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +63,7 @@ class _FamilyInfoPageState extends State<FamilyInfoPage>
           // -----------------------------------
           TextFormField(
             controller: null,
-            initialValue: widget.report['familyMembersNumber'],
+            initialValue: widget.report['familyMembersNumber']?.toString(),
             textInputAction: TextInputAction.next,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             keyboardType: TextInputType.phone,
@@ -75,7 +82,7 @@ class _FamilyInfoPageState extends State<FamilyInfoPage>
           // -----------------------------------
           TextFormField(
             controller: null,
-            initialValue: widget.report['familyChildrenNumber'],
+            initialValue: widget.report['familyChildrenNumber']?.toString(),
             textInputAction: TextInputAction.next,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             keyboardType: TextInputType.phone,

@@ -19,43 +19,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: MaterialApp(
-        title: 'Vollect',
-        debugShowCheckedModeBanner: kDebugMode,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        theme: ThemeData(
-          // ----------------------
-          // TextField Global Theme
-          inputDecorationTheme: InputDecorationTheme(
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            filled: true,
-            fillColor: const Color.fromARGB(255, 255, 255, 255),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.grey.shade200),
-            ),
-            floatingLabelStyle:
-                TextStyle(fontSize: 16, color: Colors.grey.shade800),
+    return MaterialApp(
+      title: 'Vollect',
+      debugShowCheckedModeBanner: kDebugMode,
+      locale: const Locale('ar'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      theme: ThemeData(
+        // ----------------------
+        // TextField Global Theme
+        inputDecorationTheme: InputDecorationTheme(
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          filled: true,
+          fillColor: const Color.fromARGB(255, 255, 255, 255),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.grey.shade200),
           ),
-          // -----------------------
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          useMaterial3: true,
-          // useMaterial3: false,
         ),
-        initialRoute: AppRoutes.splash,
-        routes: {
-          AppRoutes.splash: (context) => const StartScreen(),
-          AppRoutes.login: (context) => LoginScreen(
-                userController: di.ServiceLocator.userController,
-              ),
-          AppRoutes.home: (context) => HomeScreen(
-                repository: di.ServiceLocator.repository,
-              ),
-        },
+        // -----------------------
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+        // useMaterial3: false,
       ),
+      initialRoute: AppRoutes.splash,
+      routes: {
+        AppRoutes.splash: (context) => const StartScreen(),
+        AppRoutes.login: (context) => LoginScreen(
+              userController: di.ServiceLocator.userController,
+            ),
+        AppRoutes.home: (context) => HomeScreen(
+              repository: di.ServiceLocator.repository,
+            ),
+      },
     );
   }
 }

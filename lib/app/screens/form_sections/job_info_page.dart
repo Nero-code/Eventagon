@@ -19,6 +19,17 @@ class _JobInfoPageState extends State<JobInfoPage>
   final salaryC = TextEditingController();
 
   JobType? jobType;
+
+  @override
+  void initState() {
+    super.initState();
+    jobType = JobType.values
+        .where((jt) => jt.name == widget.report['jobType'])
+        .firstOrNull;
+
+    salaryC.text = widget.report['monthlySalary'] ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -41,8 +52,10 @@ class _JobInfoPageState extends State<JobInfoPage>
                     ))
                 .toList(),
             onChanged: (value) => setState(() => jobType = value ?? jobType),
-            onSaved: (newValue) =>
-                widget.report.addAll({"jobType": newValue?.name}),
+            onSaved: (newValue) => widget.report.addAll({
+              "jobType_code": newValue?.code, // USELESS
+              "jobType": newValue?.arName,
+            }),
           ),
           const SizedBox(height: _gap),
 
@@ -53,7 +66,6 @@ class _JobInfoPageState extends State<JobInfoPage>
           // -----------------------------------
           TextFormField(
             controller: salaryC,
-            initialValue: widget.report['monthlySalary'],
             textInputAction: TextInputAction.next,
             decoration: const InputDecoration(labelText: "الراتب (ليرة)"),
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -75,7 +87,6 @@ class _JobInfoPageState extends State<JobInfoPage>
 
           // -----------------------------------
           TextFormField(
-            controller: null,
             initialValue: widget.report['jobDescription'],
             textInputAction: TextInputAction.next,
             decoration: const InputDecoration(labelText: "شرح الوظيفة"),

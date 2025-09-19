@@ -32,6 +32,12 @@ class _EditScreenState extends State<EditScreen> {
 
     if (widget.beneficiary != null) {
       report.addAll(widget.beneficiary!.toJson());
+      // report.addAll({
+      //   "birthDate": DateFormat.yMd()
+      //       .format(DateTime.fromMillisecondsSinceEpoch(report['birthDate'])),
+      //   "partnerBirthDate": DateFormat.yMd().format(
+      //       DateTime.fromMillisecondsSinceEpoch(report['partnerBirthDate']))
+      // });
     }
   }
 
@@ -106,6 +112,15 @@ class _EditScreenState extends State<EditScreen> {
                       style: const TextStyle(fontWeight: FontWeight.bold)))
                   .toList()),
           actions: [
+            // IconButton(
+            //   onPressed: () async {
+            //     final result = await Navigator.push<Map<String, String>>(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (_) => const BarcodeScannerScreen()));
+            //   },
+            //   icon: const Icon(Icons.qr_code_scanner_sharp),
+            // ),
             TextButton.icon(
               label: const Text("حفظ"),
               icon: const Icon(Icons.done),

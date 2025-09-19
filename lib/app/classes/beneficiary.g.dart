@@ -8,6 +8,9 @@ part of 'beneficiary.dart';
 
 BeneficiaryEntity _$BeneficiaryEntityFromJson(Map<String, dynamic> json) =>
     BeneficiaryEntity(
+      aidRequired: (json['aidRequired'] as List<dynamic>)
+          .map((e) => $enumDecode(_$AidTypeEnumMap, e))
+          .toList(),
       firstName: json['firstName'] as String,
       fatherName: json['fatherName'] as String,
       lastName: json['lastName'] as String,
@@ -60,15 +63,17 @@ BeneficiaryEntity _$BeneficiaryEntityFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$BeneficiaryEntityToJson(BeneficiaryEntity instance) =>
     <String, dynamic>{
+      'aidRequired':
+          instance.aidRequired.map((e) => _$AidTypeEnumMap[e]!).toList(),
       'firstName': instance.firstName,
       'fatherName': instance.fatherName,
       'lastName': instance.lastName,
       'motherName': instance.motherName,
       'nationalNumber': instance.nationalNumber,
+      'contactNumber': instance.contactNumber,
       'gender': _$GenderEnumMap[instance.gender]!,
       'socialStatus': _$SocialStatusEnumMap[instance.socialStatus]!,
       'birthDate': instance.birthDate?.toIso8601String(),
-      'contactNumber': instance.contactNumber,
       'medicalStatus': _$MedicalStatusEnumMap[instance.medicalStatus],
       'disabilityStatus': _$DisabilityStatusEnumMap[instance.disabilityStatus]!,
       'partnerName': instance.partnerName,
@@ -80,26 +85,36 @@ Map<String, dynamic> _$BeneficiaryEntityToJson(BeneficiaryEntity instance) =>
       'familyChildrenNumber': instance.familyChildrenNumber,
       'familyHasMedicalStatus': instance.familyHasMedicalStatus,
       'familyHasDisability': instance.familyHasDisability,
-      'originalResidenceType':
-          _$ResidenceTypeEnumMap[instance.originalResidenceType],
-      'originalResidenceAddress': instance.originalResidenceAddress,
       'originalResidenceRegion': instance.originalResidenceRegion,
+      'currentResidenceRegion': instance.currentResidenceRegion,
+      'originalResidenceAddress': instance.originalResidenceAddress,
+      'currentResidenceAddress': instance.currentResidenceAddress,
       'originalResidenceStatus':
           _$ResidenceStatusEnumMap[instance.originalResidenceStatus]!,
-      'currentResidenceRegion': instance.currentResidenceRegion,
-      'currentResidenceAddress': instance.currentResidenceAddress,
+      'originalResidenceType':
+          _$ResidenceTypeEnumMap[instance.originalResidenceType],
       'currentResidenceType':
           _$CurrentResidenceTypeEnumMap[instance.currentResidenceType],
       'acadimicLevel': _$AcadimicLevelEnumMap[instance.acadimicLevel],
       'certification': instance.certification,
       'studyAddress': instance.studyAddress,
       'jobType': _$JobTypeEnumMap[instance.jobType],
-      'jobDescription': instance.jobDescription,
       'monthlySalary': instance.monthlySalary,
+      'jobDescription': instance.jobDescription,
       'notes': instance.notes,
       'creationTime': instance.creationTime?.toIso8601String(),
       'creationLocation': instance.creationLocation,
     };
+
+const _$AidTypeEnumMap = {
+  AidType.foodAid: 'foodAid',
+  AidType.medicalAid: 'medicalAid',
+  AidType.educationalAid: 'educationalAid',
+  AidType.psychAid: 'psychAid',
+  AidType.residenceAid: 'residenceAid',
+  AidType.clothingAid: 'clothingAid',
+  AidType.financialAid: 'financialAid',
+};
 
 const _$GenderEnumMap = {
   Gender.male: 'male',

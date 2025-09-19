@@ -13,6 +13,16 @@ class _EducationInfoPageState extends State<EducationInfoPage>
     with AutomaticKeepAliveClientMixin {
   static const _gap = 10.0;
   AcadimicLevel? acadimicLevel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    acadimicLevel = AcadimicLevel.values
+        .where((al) => al.name == widget.report['acadimicLevel'])
+        .firstOrNull;
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -38,8 +48,10 @@ class _EducationInfoPageState extends State<EducationInfoPage>
             ),
             onChanged: (value) =>
                 setState(() => acadimicLevel = value ?? acadimicLevel),
-            onSaved: (newValue) =>
-                widget.report.addAll({"acadimicLevel": newValue?.name}),
+            onSaved: (newValue) => widget.report.addAll({
+              "acadimicLevel_code": newValue?.code, // USELESS
+              "acadimicLevel": newValue?.arName,
+            }),
           ),
           const SizedBox(height: _gap),
 

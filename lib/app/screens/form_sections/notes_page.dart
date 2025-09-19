@@ -17,6 +17,7 @@ class _NotesPageState extends State<NotesPage>
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10.0),
       child: TextFormField(
+        initialValue: widget.report['notes'],
         decoration: const InputDecoration(labelText: "ملاحظات"),
         minLines: 5,
         maxLines: null,

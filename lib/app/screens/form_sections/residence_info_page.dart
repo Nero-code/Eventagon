@@ -1,5 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:vollect/app/classes/beneficiary.dart';
 import 'package:vollect/core/enums.dart';
 import 'package:vollect/di.dart';
 
@@ -23,13 +24,38 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
   static const _gap = 10.0;
 
   ResidenceType? originalResidenceType;
-  String? originalResidenceAddress;
-  String? originalResidenceRegion;
+  // String? originalResidenceAddress;
+  Village? originalResidenceRegion;
   ResidenceStatus? originalResidenceStatus;
 
-  String? currentResidenceRegion;
-  String? currentResidenceAddress;
   CurrentResidenceType? currentResidenceType;
+  // String? currentResidenceAddress;
+  Village? currentResidenceRegion;
+
+  @override
+  void initState() {
+    super.initState();
+
+    originalResidenceRegion = ServiceLocator.villages
+        .where((v) => v.name == widget.report['originalResidenceRegion'])
+        .firstOrNull;
+
+    currentResidenceRegion = ServiceLocator.villages
+        .where((v) => v.name == widget.report['currentResidenceRegion'])
+        .firstOrNull;
+
+    originalResidenceType = ResidenceType.values
+        .where((rt) => rt.name == widget.report['originalResidenceType'])
+        .firstOrNull;
+
+    originalResidenceStatus = ResidenceStatus.values
+        .where((rt) => rt.name == widget.report['originalResidenceStatus'])
+        .firstOrNull;
+
+    currentResidenceType = CurrentResidenceType.values
+        .where((rt) => rt.name == widget.report['currentResidenceType'])
+        .firstOrNull;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +76,7 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
                   children: [
                     FocusScope(
                       node: ddfn1,
-                      child: DropdownSearch<String>(
+                      child: DropdownSearch<Village>(
                         key: _dropDownSearchKey1,
                         suffixProps: const DropdownSuffixProps(
                             clearButtonProps: ClearButtonProps()),
@@ -61,8 +87,7 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
                           ),
                         ),
                         selectedItem: originalResidenceRegion,
-                        items: (s, l) =>
-                            ServiceLocator.villages.map((v) => v.name).toList(),
+                        items: (s, l) => ServiceLocator.villages,
                         popupProps: const PopupProps.menu(
                           title: Text("مكان الاقامة الاصلي"),
                           searchDelay: Duration.zero,
@@ -74,8 +99,14 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
                           });
                           ddfn1.requestFocus();
                         },
-                        onSaved: (newValue) => widget.report
-                            .addAll({"originalResidenceRegion": newValue}),
+                        onSaved: (newValue) => widget.report.addAll(
+                          {
+                            "originalResidenceRegion_code": newValue?.code,
+                            // "originalResidenceRegion": newValue?.name,
+                          },
+                        ),
+                        compareFn: (item1, item2) => item1.code == item2.code,
+                        itemAsString: (item) => item.name,
                       ),
                     ),
                   ],
@@ -93,7 +124,7 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
                   children: [
                     FocusScope(
                       node: ddfn2,
-                      child: DropdownSearch<String>(
+                      child: DropdownSearch<Village>(
                         key: _dropDownSearchKey2,
                         decoratorProps: const DropDownDecoratorProps(
                           decoration: InputDecoration(
@@ -102,8 +133,7 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
                           ),
                         ),
                         selectedItem: currentResidenceRegion,
-                        items: (s, l) =>
-                            ServiceLocator.villages.map((v) => v.name).toList(),
+                        items: (s, l) => ServiceLocator.villages,
                         popupProps: const PopupProps.menu(
                           title: Center(child: Text("مكان الاقامة الحالي")),
                           searchDelay: Duration.zero,
@@ -115,8 +145,12 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
                           });
                           ddfn2.requestFocus();
                         },
-                        onSaved: (newValue) => widget.report
-                            .addAll({"currentResidenceRegion": newValue}),
+                        onSaved: (newValue) => widget.report.addAll({
+                          "currentResidenceRegion_code": newValue?.code,
+                          // "currentResidenceRegion": newValue?.name,
+                        }),
+                        compareFn: (item1, item2) => item1.code == item2.code,
+                        itemAsString: (item) => item.name,
                       ),
                     ),
                   ],
@@ -181,8 +215,10 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
             ),
             onChanged: (value) => setState(
                 () => originalResidenceType = value ?? originalResidenceType),
-            onSaved: (newValue) =>
-                widget.report.addAll({"originalResidenceType": newValue?.name}),
+            onSaved: (newValue) => widget.report.addAll({
+              "originalResidenceType_code": newValue?.code,
+              // "originalResidenceType": newValue?.arName, // USELESS
+            }),
           ),
           const SizedBox(height: _gap),
 
@@ -204,8 +240,10 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
             ),
             onChanged: (value) => setState(() =>
                 originalResidenceStatus = value ?? originalResidenceStatus),
-            onSaved: (newValue) => widget.report
-                .addAll({"originalResidenceStatus": newValue?.name}),
+            onSaved: (newValue) => widget.report.addAll({
+              "originalResidenceStatus_code": newValue?.code,
+              // "originalResidenceStatus": newValue?.arName, // USELESS
+            }),
           ),
           const SizedBox(height: _gap),
 
@@ -227,8 +265,10 @@ class _ResidenceInfoPageState extends State<ResidenceInfoPage>
             ),
             onChanged: (value) => setState(
                 () => currentResidenceType = value ?? currentResidenceType),
-            onSaved: (newValue) =>
-                widget.report.addAll({"currentResidenceType": newValue?.name}),
+            onSaved: (newValue) => widget.report.addAll({
+              "currentResidenceType_code": newValue?.code,
+              // "currentResidenceType": newValue?.name, // USELESS
+            }),
           ),
         ],
       ),

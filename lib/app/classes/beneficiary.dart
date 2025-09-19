@@ -4,52 +4,9 @@ import 'package:vollect/core/enums.dart';
 
 part 'beneficiary.g.dart';
 
-// {
-//     "PersonalInformation": {
-//         "Id": "int",
-//         "Name1": "string?",
-//         "Name2": "string?",
-//         "Name3": "string?",
-//         "MotherName": "string?",
-//         "Gender": "GenderType {  Male = 0, Female = 1 }",
-//         "DateOfBirth": "date",
-//         "NationalNumber": "string?",
-//         "ContactNumber": "string?",
-//         "SocialStatus": "SocialStatus { single, married, divorced, widowed }"
-//     },
-//     "JobInformation": {
-//         "JobType": "JobType { StableEmployment = 1 , TemporaryJob = 2, Freelance = 3, UnemployedWithQualifications = 4, UnemployedWithoutQualifications = 5 }",
-//         "JobDecription": "string?",
-//         "MonthlySalary": "string?"
-//     },
-//     "StudiesInformation": {
-//         "AcadimicLevel": "AcadimicLevel { Primary = 0, PreSecondary = 1, UpperSecondary = 2, HigherEducation = 3 }",
-//         "Certification": "string?",
-//         "StudyAddress": "string?"
-//     },
-//     "ResidenceInformation": {
-//         "OriginalResidenceType": "ResidenceType { Owend = 0, Rent = 1 }",
-//         "OriginalResidenceAddress": "string?",
-//         "OriginalResidenceRegion": "Region? / Village?"
-//         "OriginalResidenceStatus": "ResidenceStatus { SafeAndSuitableHousing = 1, MinorRepairsNeeded = 2, UncomfortableOrCrowded = 3, UnsafeOrStructurallyUnstable = 4, DestroyedOrUninhabitable= 5 }",
-//         "CurrentResidenceRegion": "Region? / Village?"
-//         "CurrentResidenceType": "CurrentResidence { OriginalPlace = 1 , Shelter = 2, WithRelative = 3, Temporary = 4 }",
-//         "CurrentResidenceAddress": "string?",
-//     },
-//     "FamilyInformation": {
-//         "FamilyBookNumber": "string?",
-//         "FamilyMemberCount": "int",
-//         "ChildernCount": "int"
-//     },
-//     "MedicalInformation": {
-//         "MediaclStatus": "MedicalStatus { Healthy = 1, MinorOrSeasonalIllnesses = 2, ChronicDiseases = 3, SeriousDiseases = 4, EmergencyCondition = 5 }",
-//         "DisabilityStatus": "DisabilityStatus { Healthy = 1, MildOrTemporaryDisability = 2, ModerateDisability = 3, SevereDisability = 4 }"
-//     }
-// }
-
 @JsonSerializable(explicitToJson: true)
 class BeneficiaryEntity {
-  // final List<AidType> aidRequired; TODO
+  final List<AidType> aidRequired;
   // Personal Section
   final String firstName;
   final String fatherName;
@@ -107,6 +64,7 @@ class BeneficiaryEntity {
       _$BeneficiaryEntityFromJson(json);
 
   const BeneficiaryEntity({
+    required this.aidRequired,
     required this.firstName,
     required this.fatherName,
     required this.lastName,
@@ -163,7 +121,9 @@ class BeneficiaryEntity {
         TextCellValue('nationalNumber'),
         TextCellValue('gender_code'),
         TextCellValue('gender'),
-        // TextCellValue('aidType'),
+
+        TextCellValue('aidRequired_codes'),
+        TextCellValue('aidRequired'),
 
         TextCellValue('socialStatus_code'), // code
         TextCellValue('socialStatus'),
@@ -193,9 +153,11 @@ class BeneficiaryEntity {
         TextCellValue('originalResidenceType_code'), // code
         TextCellValue('originalResidenceType'),
         TextCellValue('originalResidenceAddress'),
+        TextCellValue('originalResidenceRegion_code'),
         TextCellValue('originalResidenceRegion'),
         TextCellValue('originalResidenceStatus_code'), // code
         TextCellValue('originalResidenceStatus'),
+        TextCellValue('currentResidenceRegion_code'),
         TextCellValue('currentResidenceRegion'),
         TextCellValue('currentResidenceAddress'),
         TextCellValue('currentResidenceType_code'), // code
@@ -210,6 +172,7 @@ class BeneficiaryEntity {
         TextCellValue('jobType'),
         TextCellValue('jobDescription'),
         TextCellValue('monthlySalary'),
+
         TextCellValue('notes'),
         TextCellValue('creationTime'),
         TextCellValue('creationLocation'),

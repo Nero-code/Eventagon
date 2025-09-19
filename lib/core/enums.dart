@@ -64,7 +64,7 @@ enum AidType {
 
 enum ResidenceType {
   owned(1, 'owned', 'ملك'),
-  rent(1, 'rent', 'اجار');
+  rent(2, 'rent', 'اجار');
 
   final int code;
   final String enName, arName;
@@ -117,9 +117,9 @@ enum JobType {
   temporaryJob(2, 'temporaryJob', 'موظف جزئي او مؤقت'),
   freelance(3, 'freelance', 'عمل حر او غير رسمي'),
   unemployedWithQualifications(
-      3, 'unemployedWithQualifications', 'عاطل عن العمل مع مؤهلات'),
+      4, 'unemployedWithQualifications', 'عاطل عن العمل مع مؤهلات'),
   unemployedWithoutQualifications(
-      4, 'unemployedWithoutQualifications', 'عاطل عن العمل بدون مؤهلات');
+      5, 'unemployedWithoutQualifications', 'عاطل عن العمل بدون مؤهلات');
 
   final int code;
   final String enName, arName;

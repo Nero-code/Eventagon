@@ -18,6 +18,12 @@ class $BeneficiarysTable extends Beneficiarys
       requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _aidRequiredMeta =
+      const VerificationMeta('aidRequired');
+  @override
+  late final GeneratedColumn<String> aidRequired = GeneratedColumn<String>(
+      'aid_required', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _firstNameMeta =
       const VerificationMeta('firstName');
   @override
@@ -232,11 +238,11 @@ class $BeneficiarysTable extends Beneficiarys
       GeneratedColumn<String>('job_type', aliasedName, true,
               type: DriftSqlType.string, requiredDuringInsert: false)
           .withConverter<JobType?>($BeneficiarysTable.$converterjobTypen);
-  static const VerificationMeta _jobDecriptionMeta =
-      const VerificationMeta('jobDecription');
+  static const VerificationMeta _jobDescriptionMeta =
+      const VerificationMeta('jobDescription');
   @override
-  late final GeneratedColumn<String> jobDecription = GeneratedColumn<String>(
-      'job_decription', aliasedName, true,
+  late final GeneratedColumn<String> jobDescription = GeneratedColumn<String>(
+      'job_description', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _monthlySalaryMeta =
       const VerificationMeta('monthlySalary');
@@ -266,6 +272,7 @@ class $BeneficiarysTable extends Beneficiarys
   @override
   List<GeneratedColumn> get $columns => [
         id,
+        aidRequired,
         firstName,
         fatherName,
         lastName,
@@ -297,7 +304,7 @@ class $BeneficiarysTable extends Beneficiarys
         certification,
         studyAddress,
         jobType,
-        jobDecription,
+        jobDescription,
         monthlySalary,
         notes,
         creationTime,
@@ -315,6 +322,12 @@ class $BeneficiarysTable extends Beneficiarys
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('aid_required')) {
+      context.handle(
+          _aidRequiredMeta,
+          aidRequired.isAcceptableOrUnknown(
+              data['aid_required']!, _aidRequiredMeta));
     }
     if (data.containsKey('first_name')) {
       context.handle(_firstNameMeta,
@@ -463,11 +476,11 @@ class $BeneficiarysTable extends Beneficiarys
               data['study_address']!, _studyAddressMeta));
     }
     context.handle(_jobTypeMeta, const VerificationResult.success());
-    if (data.containsKey('job_decription')) {
+    if (data.containsKey('job_description')) {
       context.handle(
-          _jobDecriptionMeta,
-          jobDecription.isAcceptableOrUnknown(
-              data['job_decription']!, _jobDecriptionMeta));
+          _jobDescriptionMeta,
+          jobDescription.isAcceptableOrUnknown(
+              data['job_description']!, _jobDescriptionMeta));
     }
     if (data.containsKey('monthly_salary')) {
       context.handle(
@@ -502,6 +515,8 @@ class $BeneficiarysTable extends Beneficiarys
     return Beneficiary(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      aidRequired: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}aid_required']),
       firstName: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}first_name'])!,
       fatherName: attachedDatabase.typeMapping
@@ -579,8 +594,8 @@ class $BeneficiarysTable extends Beneficiarys
       jobType: $BeneficiarysTable.$converterjobTypen.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}job_type'])),
-      jobDecription: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}job_decription']),
+      jobDescription: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}job_description']),
       monthlySalary: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}monthly_salary']),
       notes: attachedDatabase.typeMapping
@@ -649,6 +664,7 @@ class $BeneficiarysTable extends Beneficiarys
 
 class Beneficiary extends DataClass implements Insertable<Beneficiary> {
   final int id;
+  final String? aidRequired;
   final String firstName;
   final String fatherName;
   final String lastName;
@@ -680,13 +696,14 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
   final String? certification;
   final String? studyAddress;
   final JobType? jobType;
-  final String? jobDecription;
+  final String? jobDescription;
   final String? monthlySalary;
   final String? notes;
   final DateTime? creationTime;
   final String? creationLocation;
   const Beneficiary(
       {required this.id,
+      this.aidRequired,
       required this.firstName,
       required this.fatherName,
       required this.lastName,
@@ -718,7 +735,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       this.certification,
       this.studyAddress,
       this.jobType,
-      this.jobDecription,
+      this.jobDescription,
       this.monthlySalary,
       this.notes,
       this.creationTime,
@@ -727,6 +744,9 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
+    if (!nullToAbsent || aidRequired != null) {
+      map['aid_required'] = Variable<String>(aidRequired);
+    }
     map['first_name'] = Variable<String>(firstName);
     map['father_name'] = Variable<String>(fatherName);
     map['last_name'] = Variable<String>(lastName);
@@ -831,8 +851,8 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       map['job_type'] = Variable<String>(
           $BeneficiarysTable.$converterjobTypen.toSql(jobType));
     }
-    if (!nullToAbsent || jobDecription != null) {
-      map['job_decription'] = Variable<String>(jobDecription);
+    if (!nullToAbsent || jobDescription != null) {
+      map['job_description'] = Variable<String>(jobDescription);
     }
     if (!nullToAbsent || monthlySalary != null) {
       map['monthly_salary'] = Variable<String>(monthlySalary);
@@ -852,6 +872,9 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
   BeneficiarysCompanion toCompanion(bool nullToAbsent) {
     return BeneficiarysCompanion(
       id: Value(id),
+      aidRequired: aidRequired == null && nullToAbsent
+          ? const Value.absent()
+          : Value(aidRequired),
       firstName: Value(firstName),
       fatherName: Value(fatherName),
       lastName: Value(lastName),
@@ -936,9 +959,9 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       jobType: jobType == null && nullToAbsent
           ? const Value.absent()
           : Value(jobType),
-      jobDecription: jobDecription == null && nullToAbsent
+      jobDescription: jobDescription == null && nullToAbsent
           ? const Value.absent()
-          : Value(jobDecription),
+          : Value(jobDescription),
       monthlySalary: monthlySalary == null && nullToAbsent
           ? const Value.absent()
           : Value(monthlySalary),
@@ -958,6 +981,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Beneficiary(
       id: serializer.fromJson<int>(json['id']),
+      aidRequired: serializer.fromJson<String?>(json['aidRequired']),
       firstName: serializer.fromJson<String>(json['firstName']),
       fatherName: serializer.fromJson<String>(json['fatherName']),
       lastName: serializer.fromJson<String>(json['lastName']),
@@ -1010,7 +1034,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       studyAddress: serializer.fromJson<String?>(json['studyAddress']),
       jobType: $BeneficiarysTable.$converterjobTypen
           .fromJson(serializer.fromJson<String?>(json['jobType'])),
-      jobDecription: serializer.fromJson<String?>(json['jobDecription']),
+      jobDescription: serializer.fromJson<String?>(json['jobDescription']),
       monthlySalary: serializer.fromJson<String?>(json['monthlySalary']),
       notes: serializer.fromJson<String?>(json['notes']),
       creationTime: serializer.fromJson<DateTime?>(json['creationTime']),
@@ -1022,6 +1046,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
+      'aidRequired': serializer.toJson<String?>(aidRequired),
       'firstName': serializer.toJson<String>(firstName),
       'fatherName': serializer.toJson<String>(fatherName),
       'lastName': serializer.toJson<String>(lastName),
@@ -1071,7 +1096,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       'studyAddress': serializer.toJson<String?>(studyAddress),
       'jobType': serializer.toJson<String?>(
           $BeneficiarysTable.$converterjobTypen.toJson(jobType)),
-      'jobDecription': serializer.toJson<String?>(jobDecription),
+      'jobDescription': serializer.toJson<String?>(jobDescription),
       'monthlySalary': serializer.toJson<String?>(monthlySalary),
       'notes': serializer.toJson<String?>(notes),
       'creationTime': serializer.toJson<DateTime?>(creationTime),
@@ -1081,6 +1106,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
 
   Beneficiary copyWith(
           {int? id,
+          Value<String?> aidRequired = const Value.absent(),
           String? firstName,
           String? fatherName,
           String? lastName,
@@ -1114,13 +1140,14 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
           Value<String?> certification = const Value.absent(),
           Value<String?> studyAddress = const Value.absent(),
           Value<JobType?> jobType = const Value.absent(),
-          Value<String?> jobDecription = const Value.absent(),
+          Value<String?> jobDescription = const Value.absent(),
           Value<String?> monthlySalary = const Value.absent(),
           Value<String?> notes = const Value.absent(),
           Value<DateTime?> creationTime = const Value.absent(),
           Value<String?> creationLocation = const Value.absent()}) =>
       Beneficiary(
         id: id ?? this.id,
+        aidRequired: aidRequired.present ? aidRequired.value : this.aidRequired,
         firstName: firstName ?? this.firstName,
         fatherName: fatherName ?? this.fatherName,
         lastName: lastName ?? this.lastName,
@@ -1190,8 +1217,8 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
         studyAddress:
             studyAddress.present ? studyAddress.value : this.studyAddress,
         jobType: jobType.present ? jobType.value : this.jobType,
-        jobDecription:
-            jobDecription.present ? jobDecription.value : this.jobDecription,
+        jobDescription:
+            jobDescription.present ? jobDescription.value : this.jobDescription,
         monthlySalary:
             monthlySalary.present ? monthlySalary.value : this.monthlySalary,
         notes: notes.present ? notes.value : this.notes,
@@ -1204,6 +1231,8 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
   Beneficiary copyWithCompanion(BeneficiarysCompanion data) {
     return Beneficiary(
       id: data.id.present ? data.id.value : this.id,
+      aidRequired:
+          data.aidRequired.present ? data.aidRequired.value : this.aidRequired,
       firstName: data.firstName.present ? data.firstName.value : this.firstName,
       fatherName:
           data.fatherName.present ? data.fatherName.value : this.fatherName,
@@ -1284,9 +1313,9 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
           ? data.studyAddress.value
           : this.studyAddress,
       jobType: data.jobType.present ? data.jobType.value : this.jobType,
-      jobDecription: data.jobDecription.present
-          ? data.jobDecription.value
-          : this.jobDecription,
+      jobDescription: data.jobDescription.present
+          ? data.jobDescription.value
+          : this.jobDescription,
       monthlySalary: data.monthlySalary.present
           ? data.monthlySalary.value
           : this.monthlySalary,
@@ -1304,6 +1333,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
   String toString() {
     return (StringBuffer('Beneficiary(')
           ..write('id: $id, ')
+          ..write('aidRequired: $aidRequired, ')
           ..write('firstName: $firstName, ')
           ..write('fatherName: $fatherName, ')
           ..write('lastName: $lastName, ')
@@ -1335,7 +1365,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
           ..write('certification: $certification, ')
           ..write('studyAddress: $studyAddress, ')
           ..write('jobType: $jobType, ')
-          ..write('jobDecription: $jobDecription, ')
+          ..write('jobDescription: $jobDescription, ')
           ..write('monthlySalary: $monthlySalary, ')
           ..write('notes: $notes, ')
           ..write('creationTime: $creationTime, ')
@@ -1347,6 +1377,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
   @override
   int get hashCode => Object.hashAll([
         id,
+        aidRequired,
         firstName,
         fatherName,
         lastName,
@@ -1378,7 +1409,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
         certification,
         studyAddress,
         jobType,
-        jobDecription,
+        jobDescription,
         monthlySalary,
         notes,
         creationTime,
@@ -1389,6 +1420,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
       identical(this, other) ||
       (other is Beneficiary &&
           other.id == this.id &&
+          other.aidRequired == this.aidRequired &&
           other.firstName == this.firstName &&
           other.fatherName == this.fatherName &&
           other.lastName == this.lastName &&
@@ -1420,7 +1452,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
           other.certification == this.certification &&
           other.studyAddress == this.studyAddress &&
           other.jobType == this.jobType &&
-          other.jobDecription == this.jobDecription &&
+          other.jobDescription == this.jobDescription &&
           other.monthlySalary == this.monthlySalary &&
           other.notes == this.notes &&
           other.creationTime == this.creationTime &&
@@ -1429,6 +1461,7 @@ class Beneficiary extends DataClass implements Insertable<Beneficiary> {
 
 class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
   final Value<int> id;
+  final Value<String?> aidRequired;
   final Value<String> firstName;
   final Value<String> fatherName;
   final Value<String> lastName;
@@ -1460,13 +1493,14 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
   final Value<String?> certification;
   final Value<String?> studyAddress;
   final Value<JobType?> jobType;
-  final Value<String?> jobDecription;
+  final Value<String?> jobDescription;
   final Value<String?> monthlySalary;
   final Value<String?> notes;
   final Value<DateTime?> creationTime;
   final Value<String?> creationLocation;
   const BeneficiarysCompanion({
     this.id = const Value.absent(),
+    this.aidRequired = const Value.absent(),
     this.firstName = const Value.absent(),
     this.fatherName = const Value.absent(),
     this.lastName = const Value.absent(),
@@ -1498,7 +1532,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     this.certification = const Value.absent(),
     this.studyAddress = const Value.absent(),
     this.jobType = const Value.absent(),
-    this.jobDecription = const Value.absent(),
+    this.jobDescription = const Value.absent(),
     this.monthlySalary = const Value.absent(),
     this.notes = const Value.absent(),
     this.creationTime = const Value.absent(),
@@ -1506,6 +1540,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
   });
   BeneficiarysCompanion.insert({
     this.id = const Value.absent(),
+    this.aidRequired = const Value.absent(),
     required String firstName,
     required String fatherName,
     required String lastName,
@@ -1537,7 +1572,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     this.certification = const Value.absent(),
     this.studyAddress = const Value.absent(),
     this.jobType = const Value.absent(),
-    this.jobDecription = const Value.absent(),
+    this.jobDescription = const Value.absent(),
     this.monthlySalary = const Value.absent(),
     this.notes = const Value.absent(),
     this.creationTime = const Value.absent(),
@@ -1548,6 +1583,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
         socialStatus = Value(socialStatus);
   static Insertable<Beneficiary> custom({
     Expression<int>? id,
+    Expression<String>? aidRequired,
     Expression<String>? firstName,
     Expression<String>? fatherName,
     Expression<String>? lastName,
@@ -1579,7 +1615,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     Expression<String>? certification,
     Expression<String>? studyAddress,
     Expression<String>? jobType,
-    Expression<String>? jobDecription,
+    Expression<String>? jobDescription,
     Expression<String>? monthlySalary,
     Expression<String>? notes,
     Expression<DateTime>? creationTime,
@@ -1587,6 +1623,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (aidRequired != null) 'aid_required': aidRequired,
       if (firstName != null) 'first_name': firstName,
       if (fatherName != null) 'father_name': fatherName,
       if (lastName != null) 'last_name': lastName,
@@ -1630,7 +1667,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
       if (certification != null) 'certification': certification,
       if (studyAddress != null) 'study_address': studyAddress,
       if (jobType != null) 'job_type': jobType,
-      if (jobDecription != null) 'job_decription': jobDecription,
+      if (jobDescription != null) 'job_description': jobDescription,
       if (monthlySalary != null) 'monthly_salary': monthlySalary,
       if (notes != null) 'notes': notes,
       if (creationTime != null) 'creation_time': creationTime,
@@ -1640,6 +1677,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
 
   BeneficiarysCompanion copyWith(
       {Value<int>? id,
+      Value<String?>? aidRequired,
       Value<String>? firstName,
       Value<String>? fatherName,
       Value<String>? lastName,
@@ -1671,13 +1709,14 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
       Value<String?>? certification,
       Value<String?>? studyAddress,
       Value<JobType?>? jobType,
-      Value<String?>? jobDecription,
+      Value<String?>? jobDescription,
       Value<String?>? monthlySalary,
       Value<String?>? notes,
       Value<DateTime?>? creationTime,
       Value<String?>? creationLocation}) {
     return BeneficiarysCompanion(
       id: id ?? this.id,
+      aidRequired: aidRequired ?? this.aidRequired,
       firstName: firstName ?? this.firstName,
       fatherName: fatherName ?? this.fatherName,
       lastName: lastName ?? this.lastName,
@@ -1716,7 +1755,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
       certification: certification ?? this.certification,
       studyAddress: studyAddress ?? this.studyAddress,
       jobType: jobType ?? this.jobType,
-      jobDecription: jobDecription ?? this.jobDecription,
+      jobDescription: jobDescription ?? this.jobDescription,
       monthlySalary: monthlySalary ?? this.monthlySalary,
       notes: notes ?? this.notes,
       creationTime: creationTime ?? this.creationTime,
@@ -1729,6 +1768,9 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
     final map = <String, Expression>{};
     if (id.present) {
       map['id'] = Variable<int>(id.value);
+    }
+    if (aidRequired.present) {
+      map['aid_required'] = Variable<String>(aidRequired.value);
     }
     if (firstName.present) {
       map['first_name'] = Variable<String>(firstName.value);
@@ -1843,8 +1885,8 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
       map['job_type'] = Variable<String>(
           $BeneficiarysTable.$converterjobTypen.toSql(jobType.value));
     }
-    if (jobDecription.present) {
-      map['job_decription'] = Variable<String>(jobDecription.value);
+    if (jobDescription.present) {
+      map['job_description'] = Variable<String>(jobDescription.value);
     }
     if (monthlySalary.present) {
       map['monthly_salary'] = Variable<String>(monthlySalary.value);
@@ -1865,6 +1907,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
   String toString() {
     return (StringBuffer('BeneficiarysCompanion(')
           ..write('id: $id, ')
+          ..write('aidRequired: $aidRequired, ')
           ..write('firstName: $firstName, ')
           ..write('fatherName: $fatherName, ')
           ..write('lastName: $lastName, ')
@@ -1896,7 +1939,7 @@ class BeneficiarysCompanion extends UpdateCompanion<Beneficiary> {
           ..write('certification: $certification, ')
           ..write('studyAddress: $studyAddress, ')
           ..write('jobType: $jobType, ')
-          ..write('jobDecription: $jobDecription, ')
+          ..write('jobDescription: $jobDescription, ')
           ..write('monthlySalary: $monthlySalary, ')
           ..write('notes: $notes, ')
           ..write('creationTime: $creationTime, ')
@@ -1915,11 +1958,15 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [beneficiarys];
+  @override
+  DriftDatabaseOptions get options =>
+      const DriftDatabaseOptions(storeDateTimeAsText: true);
 }
 
 typedef $$BeneficiarysTableCreateCompanionBuilder = BeneficiarysCompanion
     Function({
   Value<int> id,
+  Value<String?> aidRequired,
   required String firstName,
   required String fatherName,
   required String lastName,
@@ -1951,7 +1998,7 @@ typedef $$BeneficiarysTableCreateCompanionBuilder = BeneficiarysCompanion
   Value<String?> certification,
   Value<String?> studyAddress,
   Value<JobType?> jobType,
-  Value<String?> jobDecription,
+  Value<String?> jobDescription,
   Value<String?> monthlySalary,
   Value<String?> notes,
   Value<DateTime?> creationTime,
@@ -1960,6 +2007,7 @@ typedef $$BeneficiarysTableCreateCompanionBuilder = BeneficiarysCompanion
 typedef $$BeneficiarysTableUpdateCompanionBuilder = BeneficiarysCompanion
     Function({
   Value<int> id,
+  Value<String?> aidRequired,
   Value<String> firstName,
   Value<String> fatherName,
   Value<String> lastName,
@@ -1991,7 +2039,7 @@ typedef $$BeneficiarysTableUpdateCompanionBuilder = BeneficiarysCompanion
   Value<String?> certification,
   Value<String?> studyAddress,
   Value<JobType?> jobType,
-  Value<String?> jobDecription,
+  Value<String?> jobDescription,
   Value<String?> monthlySalary,
   Value<String?> notes,
   Value<DateTime?> creationTime,
@@ -2009,6 +2057,9 @@ class $$BeneficiarysTableFilterComposer
   });
   ColumnFilters<int> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get aidRequired => $composableBuilder(
+      column: $table.aidRequired, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get firstName => $composableBuilder(
       column: $table.firstName, builder: (column) => ColumnFilters(column));
@@ -2135,8 +2186,9 @@ class $$BeneficiarysTableFilterComposer
           column: $table.jobType,
           builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<String> get jobDecription => $composableBuilder(
-      column: $table.jobDecription, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get jobDescription => $composableBuilder(
+      column: $table.jobDescription,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get monthlySalary => $composableBuilder(
       column: $table.monthlySalary, builder: (column) => ColumnFilters(column));
@@ -2163,6 +2215,9 @@ class $$BeneficiarysTableOrderingComposer
   });
   ColumnOrderings<int> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get aidRequired => $composableBuilder(
+      column: $table.aidRequired, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get firstName => $composableBuilder(
       column: $table.firstName, builder: (column) => ColumnOrderings(column));
@@ -2280,8 +2335,8 @@ class $$BeneficiarysTableOrderingComposer
   ColumnOrderings<String> get jobType => $composableBuilder(
       column: $table.jobType, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get jobDecription => $composableBuilder(
-      column: $table.jobDecription,
+  ColumnOrderings<String> get jobDescription => $composableBuilder(
+      column: $table.jobDescription,
       builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get monthlySalary => $composableBuilder(
@@ -2311,6 +2366,9 @@ class $$BeneficiarysTableAnnotationComposer
   });
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get aidRequired => $composableBuilder(
+      column: $table.aidRequired, builder: (column) => column);
 
   GeneratedColumn<String> get firstName =>
       $composableBuilder(column: $table.firstName, builder: (column) => column);
@@ -2412,8 +2470,8 @@ class $$BeneficiarysTableAnnotationComposer
   GeneratedColumnWithTypeConverter<JobType?, String> get jobType =>
       $composableBuilder(column: $table.jobType, builder: (column) => column);
 
-  GeneratedColumn<String> get jobDecription => $composableBuilder(
-      column: $table.jobDecription, builder: (column) => column);
+  GeneratedColumn<String> get jobDescription => $composableBuilder(
+      column: $table.jobDescription, builder: (column) => column);
 
   GeneratedColumn<String> get monthlySalary => $composableBuilder(
       column: $table.monthlySalary, builder: (column) => column);
@@ -2455,6 +2513,7 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
               $$BeneficiarysTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
+            Value<String?> aidRequired = const Value.absent(),
             Value<String> firstName = const Value.absent(),
             Value<String> fatherName = const Value.absent(),
             Value<String> lastName = const Value.absent(),
@@ -2488,7 +2547,7 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
             Value<String?> certification = const Value.absent(),
             Value<String?> studyAddress = const Value.absent(),
             Value<JobType?> jobType = const Value.absent(),
-            Value<String?> jobDecription = const Value.absent(),
+            Value<String?> jobDescription = const Value.absent(),
             Value<String?> monthlySalary = const Value.absent(),
             Value<String?> notes = const Value.absent(),
             Value<DateTime?> creationTime = const Value.absent(),
@@ -2496,6 +2555,7 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
           }) =>
               BeneficiarysCompanion(
             id: id,
+            aidRequired: aidRequired,
             firstName: firstName,
             fatherName: fatherName,
             lastName: lastName,
@@ -2527,7 +2587,7 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
             certification: certification,
             studyAddress: studyAddress,
             jobType: jobType,
-            jobDecription: jobDecription,
+            jobDescription: jobDescription,
             monthlySalary: monthlySalary,
             notes: notes,
             creationTime: creationTime,
@@ -2535,6 +2595,7 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
+            Value<String?> aidRequired = const Value.absent(),
             required String firstName,
             required String fatherName,
             required String lastName,
@@ -2568,7 +2629,7 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
             Value<String?> certification = const Value.absent(),
             Value<String?> studyAddress = const Value.absent(),
             Value<JobType?> jobType = const Value.absent(),
-            Value<String?> jobDecription = const Value.absent(),
+            Value<String?> jobDescription = const Value.absent(),
             Value<String?> monthlySalary = const Value.absent(),
             Value<String?> notes = const Value.absent(),
             Value<DateTime?> creationTime = const Value.absent(),
@@ -2576,6 +2637,7 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
           }) =>
               BeneficiarysCompanion.insert(
             id: id,
+            aidRequired: aidRequired,
             firstName: firstName,
             fatherName: fatherName,
             lastName: lastName,
@@ -2607,7 +2669,7 @@ class $$BeneficiarysTableTableManager extends RootTableManager<
             certification: certification,
             studyAddress: studyAddress,
             jobType: jobType,
-            jobDecription: jobDecription,
+            jobDescription: jobDescription,
             monthlySalary: monthlySalary,
             notes: notes,
             creationTime: creationTime,
