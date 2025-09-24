@@ -9,4 +9,4 @@ abstract class AppRoutes {
 
 const APP_NAME = 'Vollect';
 
-const APP_VERSION = '1.6.0+2';
+const APP_VERSION = '1.6.1+3';

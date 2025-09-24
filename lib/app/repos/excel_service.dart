@@ -56,7 +56,7 @@ class ExcelService {
         print('cell $i ${cell?.cellIndex} | ${cell?.value.toString()}');
         // return "${cell?.value}".replaceAll(RegExp(r'[^\x00-\x7F]+'), '');
 
-        return "${cell?.value}";
+        return cell?.value?.toString();
       }).toList();
 
       for (int j = 0; j < header.length; j++) {
@@ -64,7 +64,7 @@ class ExcelService {
       }
       final Map<String, dynamic> json = {
         for (int j = 0; j < header.length; j++)
-          header[j]!: row[j].isEmpty ? null : row[j],
+          header[j]!: row[j]?.isEmpty ?? true ? null : row[j],
       };
       print(validateUserData(json));
       reports.add(DatabaseCompanionExtension.insertFromJson(json));

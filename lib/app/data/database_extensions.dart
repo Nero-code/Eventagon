@@ -119,14 +119,14 @@ abstract class DatabaseCompanionExtension {
       firstName: json['firstName'],
       fatherName: json['fatherName'],
       lastName: json['lastName'],
-      nationalNumber: Value<String?>(json['nationalNumber']), //
-      motherName: Value<String?>(json['motherName']), //
+      nationalNumber: Value<String?>(json['nationalNumber'] ?? ''), //
+      motherName: Value<String?>(json['motherName'] ?? ''), //
       birthDate: Value<DateTime?>(
           DateFormat.yMd().tryParse(json['birthDate'].toString())),
       gender: Value<Gender?>(
           EnumMappers.toGender(int.parse(json['gender_code'].toString()))),
 
-      aidRequired: Value<String?>(json['aidRequired_codes']),
+      aidRequired: Value<String?>(json['aidRequired_codes'] ?? ''),
 
       socialStatus: EnumMappers.toSocialStatus(
           int.parse(json['socialStatus_code'].toString())),
@@ -139,14 +139,14 @@ abstract class DatabaseCompanionExtension {
           int.tryParse(json['disabilityStatus_code'].toString()))),
 
       // Partner Section
-      partnerName: Value<String?>(json['partnerName']),
-      partnerNationalNum: Value<String?>(json['partnerNationalNum']),
+      partnerName: Value<String?>(json['partnerName'] ?? ''),
+      partnerNationalNum: Value<String?>(json['partnerNationalNum'] ?? ''),
       partnerBirthDate: Value<DateTime?>(
           DateFormat.yMd().tryParse(json['partnerBirthDate'].toString())),
-      partnerPhoneNum: Value<String?>(json['partnerPhoneNum']),
+      partnerPhoneNum: Value<String?>(json['partnerPhoneNum'] ?? ''),
 
       // Family Section
-      familybookNumber: Value<String?>(json['familybookNumber']), //
+      familybookNumber: Value<String?>(json['familybookNumber'] ?? ''), //
       familyMembersNumber:
           Value<int?>(int.tryParse(json['familyMembersNumber'].toString())), //
       familyChildrenNumber:
@@ -162,7 +162,7 @@ abstract class DatabaseCompanionExtension {
       originalResidenceType: Value<ResidenceType?>(EnumMappers.toResidenceType(
           int.tryParse(json['originalResidenceType_code'].toString()))),
       originalResidenceAddress:
-          Value<String?>(json['originalResidenceAddress']),
+          Value<String?>(json['originalResidenceAddress'] ?? ''),
       originalResidenceRegion: Value<String?>(ServiceLocator.villages
           .where((v) => v.code == json['originalResidenceRegion_code'])
           .firstOrNull
@@ -174,7 +174,8 @@ abstract class DatabaseCompanionExtension {
           .where((v) => v.code == json['currentResidenceRegion_code'])
           .firstOrNull
           ?.name),
-      currentResidenceAddress: Value<String?>(json['currentResidenceAddress']),
+      currentResidenceAddress:
+          Value<String?>(json['currentResidenceAddress'] ?? ''),
       currentResidenceType: Value<CurrentResidenceType?>(
           EnumMappers.toCurrentResidenceType(
               int.tryParse(json['currentResidenceType_code'].toString()))),
@@ -182,20 +183,20 @@ abstract class DatabaseCompanionExtension {
       // StudiesInformation Section
       acadimicLevel: Value<AcadimicLevel?>(EnumMappers.toAcadimicLevel(
           int.tryParse(json['acadimicLevel_code'].toString()))),
-      certification: Value<String?>(json['certification']),
-      studyAddress: Value<String?>(json['studyAddress']),
+      certification: Value<String?>(json['certification'] ?? ""),
+      studyAddress: Value<String?>(json['studyAddress'] ?? ''),
 
       // JobInformation
       jobType: Value<JobType?>(
           EnumMappers.toJobType(int.tryParse(json['jobType_code'].toString()))),
-      monthlySalary: Value<String?>(json['monthlySalary']),
-      jobDescription: Value<String?>(json['jobDescription']),
+      monthlySalary: Value<String?>(json['monthlySalary'] ?? ""),
+      jobDescription: Value<String?>(json['jobDescription'] ?? ''),
 
       // AUX
-      notes: Value<String?>(json['notes']),
+      notes: Value<String?>(json['notes'] ?? ''),
       // creationTime: Value<DateTime?>(
       //     DateFormat.yMd().tryParse(json['creationTime'].toString())),
-      creationLocation: Value<String?>(json['creationLocation']),
+      creationLocation: Value<String?>(json['creationLocation'] ?? ''),
     );
   }
 

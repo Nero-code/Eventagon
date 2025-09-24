@@ -47,12 +47,10 @@ class _PersonalInfoPageState extends State<PersonalInfoPage>
         : DisabilityStatus.healthy;
 
     if (widget.report.containsKey('aidRequired')) {
-      final aid = (widget.report['aidRequired'] as String).split(',');
-      if (aid.isNotEmpty) {
-        selectedAid.addAll(AidType.values
-            .where((a) => aid.contains(a.code.toString()))
-            .toSet());
-      }
+      final aid = '${widget.report['aidRequired']}'.split(',');
+
+      selectedAid.addAll(
+          AidType.values.where((a) => aid.contains(a.code.toString())).toSet());
     }
   }
 
