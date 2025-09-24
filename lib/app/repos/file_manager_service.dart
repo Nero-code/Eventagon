@@ -14,18 +14,18 @@ class FileManagerService {
   }
 
   /// Save a file to a chosen location
-  // Future<String?> saveFile({
-  //   required String fileName,
-  //   required List<int> bytes,
-  //   String? mimeType,
-  // }) async {
-  //   final params = SaveFileDialogParams(
-  //     data: Uint8List.fromList(bytes),
-  //     fileName: fileName,
-  //     mimeTypesFilter: [mimeType ?? ''],
-  //   );
-  //   return await FlutterFileDialog.saveFile(params: params);
-  // }
+  Future<String?> saveFile({
+    required String fileName,
+    required List<int> bytes,
+    String? mimeType,
+  }) async {
+    final params = SaveFileDialogParams(
+      data: Uint8List.fromList(bytes),
+      fileName: fileName,
+      mimeTypesFilter: [mimeType ?? ''],
+    );
+    return await FlutterFileDialog.saveFile(params: params);
+  }
 
   /// Save directly to a picked directory
   Future<String?> saveToDirectory({
@@ -33,16 +33,16 @@ class FileManagerService {
     required String fileName,
     required List<int> bytes,
     String? mimeType,
-    bool replace = true,
+    bool replace = false,
   }) async {
     final directory = await FlutterFileDialog.pickDirectory();
     return await FlutterFileDialog.saveFileToDirectory(
       directory: directory!,
       data: Uint8List.fromList(bytes),
       fileName: fileName,
+      replace: replace,
       mimeType:
           'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      replace: replace,
     );
   }
 }

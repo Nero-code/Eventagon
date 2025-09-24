@@ -11,7 +11,7 @@ class User {
     return User(name: user['name'], org: user['org']);
   }
 
-  /// "{name: `user`, org: `ORG`}"
+  /// "{name: `user`, org: `org`}"
   String serialize() => jsonEncode({"name": name, "org": org});
   String get userStamp => "${org}_${name}_${DateTime.now()}";
 }

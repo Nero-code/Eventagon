@@ -1,6 +1,7 @@
 import 'package:excel/excel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:vollect/app/classes/beneficiary.dart';
+import 'package:vollect/app/data/beneficiary_validator.dart';
 import 'package:vollect/app/data/database.dart';
 import 'package:vollect/app/data/database_extensions.dart';
 
@@ -50,21 +51,22 @@ class ExcelService {
     // Data
     final List<BeneficiarysCompanion> reports = [];
     for (int i = 1; i < sheet.rows.length; i++) {
-      // print("Rows-$i: ${sheet.rows[i]}");
+      print("Rows-$i: ${sheet.rows[i]}");
       final row = sheet.rows[i].map((cell) {
         print('cell $i ${cell?.cellIndex} | ${cell?.value.toString()}');
         // return "${cell?.value}".replaceAll(RegExp(r'[^\x00-\x7F]+'), '');
 
-        return "${cell?.value}";
+        return cell?.value?.toString();
       }).toList();
 
       for (int j = 0; j < header.length; j++) {
-        print({header[j]!: row[j].runtimeType});
+        print("${header[j]} Type(${row[j].runtimeType})");
       }
       final Map<String, dynamic> json = {
         for (int j = 0; j < header.length; j++)
-          header[j]!: row[j].isEmpty ? null : row[j],
+          header[j]!: row[j]?.isEmpty ?? true ? null : row[j],
       };
+      print(validateUserData(json));
       reports.add(DatabaseCompanionExtension.insertFromJson(json));
     }
 
