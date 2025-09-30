@@ -4,3 +4,7 @@ targets:
       drift_dev:
         options:
           store_date_time_values_as_text: true
+
+          databases:
+            # Required: A name for the database and its path
+            my_database: lib/app/data/database.dart

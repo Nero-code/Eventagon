@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 
 import 'package:vollect/app/data/beneficiary_table.dart';
 import 'package:vollect/core/enums.dart';
@@ -21,10 +21,10 @@ class AppDatabase extends _$AppDatabase {
     return driftDatabase(
       name: 'my_database',
       native: const DriftNativeOptions(
-        // By default, `driftDatabase` from `package:drift_flutter` stores the
-        // database files in `getApplicationDocumentsDirectory()`.
-        databaseDirectory: getApplicationSupportDirectory,
-      ),
+          // By default, `driftDatabase` from `package:drift_flutter` stores the
+          // database files in `getApplicationDocumentsDirectory()`.
+          // databaseDirectory: getApplicationSupportDirectory,
+          ),
       // If you need web support, see https://drift.simonbinder.eu/platforms/web/
     );
   }
