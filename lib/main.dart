@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:vollect/core/constants.dart';
+import 'package:vollect/core/l10n/app_localizations.dart';
 import 'package:vollect/di.dart' as di;
 import 'package:vollect/app/screens/home.dart';
 import 'package:vollect/app/screens/login.dart';
@@ -83,8 +83,7 @@ class StartScreen extends StatelessWidget {
         bottomSheet: SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: 15,
-          child: const Center(
-              child: Text('v$APP_VERSION', style: TextStyle(fontSize: 10))),
+          child: const Center(child: Text('v$APP_VERSION', style: TextStyle(fontSize: 10))),
         ),
         body: const Center(
             child: CircularProgressIndicator(

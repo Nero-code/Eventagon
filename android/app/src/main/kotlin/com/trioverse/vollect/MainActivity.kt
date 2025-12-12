@@ -1,4 +1,4 @@
-package com.example.vollect
+package com.trioverse.vollect
 
 import io.flutter.embedding.android.FlutterActivity
 
